@@ -1,0 +1,276 @@
+using System.Collections.Frozen;
+using System.Collections.Immutable;
+using Content.Shared.Chat;
+using Content.Shared.Chat.Prototypes;
+using Content.Shared.Speech;
+using Content.Shared._HL.Traits.Assorted;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+
+namespace Content.Server.Chat.Systems;
+
+// emotes using emote prototype
+public partial class ChatSystem
+{
+    private FrozenDictionary<string, ImmutableList<EmotePrototype>> _wordEmoteDict = FrozenDictionary<string, ImmutableList<EmotePrototype>>.Empty; // DeltaV - Multiple emotes
+
+    protected override void OnPrototypeReload(PrototypesReloadedEventArgs obj)
+    {
+        base.OnPrototypeReload(obj);
+        if (obj.WasModified<EmotePrototype>())
+            CacheEmotes();
+    }
+
+    private void CacheEmotes()
+    {
+        var dict = new Dictionary<string, ImmutableList<EmotePrototype>>(); // DeltaV - Multiple triggers for the same emote
+        var emotes = _prototypeManager.EnumeratePrototypes<EmotePrototype>();
+        foreach (var emote in emotes)
+        {
+            foreach (var word in emote.ChatTriggers)
+            {
+                var lowerWord = word.ToLower();
+                if (dict.TryGetValue(lowerWord, out var value))
+                {
+                    // Begin DeltaV modification - Multiple emotes for the same words
+                    dict[lowerWord] = value.Add(emote);
+
+                    var errMsg = $"Duplicate of emote word {lowerWord}";
+                    Log.Warning(errMsg);
+
+                    continue;
+                }
+
+                dict.Add(lowerWord, ImmutableList.Create(emote)); // End DeltaV modification
+            }
+        }
+
+        _wordEmoteDict = dict.ToFrozenDictionary();
+    }
+
+    /// <summary>
+    ///     Makes selected entity to emote using <see cref="EmotePrototype"/> and sends message to chat.
+    /// </summary>
+    public void TryEmoteWithChat(
+        EntityUid source,
+        string emoteId,
+        ChatTransmitRange range = ChatTransmitRange.Normal,
+        bool hideLog = false,
+        string? nameOverride = null,
+        bool ignoreActionBlocker = false,
+        bool forceEmote = false
+        )
+    {
+        if (!_prototypeManager.TryIndex<EmotePrototype>(emoteId, out var proto))
+            return;
+        TryEmoteWithChat(source, proto, range, hideLog: hideLog, nameOverride, ignoreActionBlocker: ignoreActionBlocker, forceEmote: forceEmote);
+    }
+
+    /// <summary>
+    ///     Makes selected entity to emote using <see cref="EmotePrototype"/> and sends message to chat.
+    /// </summary>
+    public void TryEmoteWithChat(
+        EntityUid source,
+        EmotePrototype emote,
+        ChatTransmitRange range = ChatTransmitRange.Normal,
+        bool hideLog = false,
+        string? nameOverride = null,
+        bool ignoreActionBlocker = false,
+        bool forceEmote = false
+        )
+    {
+        if (!forceEmote && !AllowedToUseEmote(source, emote))
+            return;
+
+        // HardLight start: kobold yap easter egg - a yip sometimes comes out as a yap instead,
+        // swapping both the chat message and the emote sound so the two stay in sync.
+        if (emote.ID == KoboldYipEmote.Id
+            && _random.Prob(KoboldYapProbability)
+            && _prototypeManager.TryIndex(KoboldYapEmote, out var yapProto))
+        {
+            emote = yapProto;
+        }
+        // HardLight end
+
+        // check if proto has valid message for chat
+        if (emote.ChatMessages.Count != 0)
+        {
+            // not all emotes are loc'd, but for the ones that are we pass in entity
+            var action = Loc.GetString(_random.Pick(emote.ChatMessages), ("entity", source));
+            var language = _language.GetLanguage(source); // Starlight-edit: Languages
+            SendEntityEmote(source, action, range, nameOverride, language, hideLog: hideLog, checkEmote: false, ignoreActionBlocker: ignoreActionBlocker); // Starlight-edit: Languages
+        }
+
+        // do the rest of emote event logic here
+        TryEmoteWithoutChat(source, emote, ignoreActionBlocker);
+    }
+
+    /// <summary>
+    ///     Makes selected entity to emote using <see cref="EmotePrototype"/> without sending any messages to chat.
+    /// </summary>
+    public void TryEmoteWithoutChat(EntityUid uid, string emoteId, bool ignoreActionBlocker = false)
+    {
+        if (!_prototypeManager.TryIndex<EmotePrototype>(emoteId, out var proto))
+            return;
+
+        TryEmoteWithoutChat(uid, proto, ignoreActionBlocker);
+    }
+
+    /// <summary>
+    ///     Makes selected entity to emote using <see cref="EmotePrototype"/> without sending any messages to chat.
+    /// </summary>
+    public void TryEmoteWithoutChat(EntityUid uid, EmotePrototype proto, bool ignoreActionBlocker = false)
+    {
+        if (!_actionBlocker.CanEmote(uid) && !ignoreActionBlocker)
+            return;
+
+        InvokeEmoteEvent(uid, proto);
+    }
+
+    /// <summary>
+    ///     Tries to find and play relevant emote sound in emote sounds collection.
+    /// </summary>
+    /// <returns>True if emote sound was played.</returns>
+    public bool TryPlayEmoteSound(EntityUid uid, EmoteSoundsPrototype? proto, EmotePrototype emote)
+    {
+        return TryPlayEmoteSound(uid, proto, emote.ID);
+    }
+
+    /// <summary>
+    ///     Tries to find and play relevant emote sound in emote sounds collection.
+    /// </summary>
+    /// <returns>True if emote sound was played.</returns>
+    public bool TryPlayEmoteSound(EntityUid uid, EmoteSoundsPrototype? proto, string emoteId)
+    {
+        if (proto == null)
+            return false;
+
+        // try to get specific sound for this emote
+        if (!proto.Sounds.TryGetValue(emoteId, out var sound))
+        {
+            // no specific sound - check fallback
+            sound = proto.FallbackSound;
+            if (sound == null)
+                return false;
+        }
+
+        // if general params for all sounds set - use them
+        var param = proto.GeneralParams ?? sound.Params;
+
+        // HardLight start: voice-pitch trait shifts emote sound pitch.
+        // Halve the random pitch spread so trait-based pitch shifts read clearly against it.
+        if (param.Variation is { } variation)
+            param = param.WithVariation(variation * EmoteVariationMultiplier);
+
+        // Shift pitch by any voice-pitch trait the entity has.
+        if (TryComp<EmotePitchComponent>(uid, out var pitch) && pitch.Semitones != 0f)
+            param = param.WithPitchScale(param.Pitch * MathF.Pow(2f, pitch.Semitones / 12f));
+        // HardLight end
+
+        _audio.PlayPvs(sound, uid, param);
+        return true;
+    }
+
+    private const float EmoteVariationMultiplier = 0.5f; // HardLight: halve every emote's random pitch spread
+
+    // HardLight: kobold yap easter egg
+    private static readonly ProtoId<EmotePrototype> KoboldYipEmote = "KoboldYip";
+    private static readonly ProtoId<EmotePrototype> KoboldYapEmote = "KoboldYap";
+    private const float KoboldYapProbability = 0.2f;
+
+    /// <summary>
+    /// Checks if a valid emote was typed, to play sounds and etc and invokes an event.
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="textInput"></param>
+    private bool TryEmoteChatInput(EntityUid uid, string textInput) // Frontier: void<bool
+    {
+        var actionTrimmedLower = TrimPunctuation(textInput.ToLower());
+        if (!_wordEmoteDict.TryGetValue(actionTrimmedLower, out var emotes)) // DeltaV, renames to emotes
+            return false; // Frontier: add false
+
+        bool validEmote = false; // DeltaV - Multiple emotes for the same trigger
+        foreach (var emote in emotes)
+        {
+            if (!AllowedToUseEmote(uid, emote))
+                continue;
+
+            InvokeEmoteEvent(uid, emote);
+            validEmote = true; // DeltaV
+            break; // Frontier: break on first emote (avoid playing multiple sounds at once)
+        }
+
+        return validEmote; // Frontier
+
+        static string TrimPunctuation(string textInput)
+        {
+            var trimEnd = textInput.Length;
+            while (trimEnd > 0 && char.IsPunctuation(textInput[trimEnd - 1]))
+            {
+                trimEnd--;
+            }
+
+            var trimStart = 0;
+            while (trimStart < trimEnd && char.IsPunctuation(textInput[trimStart]))
+            {
+                trimStart++;
+            }
+
+            return textInput[trimStart..trimEnd];
+        }
+    }
+    /// <summary>
+    /// Checks if we can use this emote based on the emotes whitelist, blacklist, and availibility to the entity.
+    /// </summary>
+    /// <param name="source">The entity that is speaking</param>
+    /// <param name="emote">The emote being used</param>
+    /// <returns></returns>
+    private bool AllowedToUseEmote(EntityUid source, EmotePrototype emote)
+    {
+        // If emote is in AllowedEmotes, it will bypass whitelist and blacklist
+        if (TryComp<SpeechComponent>(source, out var speech) &&
+            speech.AllowedEmotes.Contains(emote.ID))
+        {
+            return true;
+        }
+
+        // Check the whitelist and blacklist
+        if (_whitelistSystem.IsWhitelistFail(emote.Whitelist, source) ||
+            _whitelistSystem.IsBlacklistPass(emote.Blacklist, source))
+        {
+            return false;
+        }
+
+        // Check if the emote is available for all
+        if (!emote.Available)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private void InvokeEmoteEvent(EntityUid uid, EmotePrototype proto)
+    {
+        var ev = new EmoteEvent(proto);
+        RaiseLocalEvent(uid, ref ev);
+    }
+}
+
+/// <summary>
+///     Raised by chat system when entity made some emote.
+///     Use it to play sound, change sprite or something else.
+/// </summary>
+[ByRefEvent]
+public struct EmoteEvent
+{
+    public bool Handled;
+    public readonly EmotePrototype Emote;
+
+    public EmoteEvent(EmotePrototype emote)
+    {
+        Emote = emote;
+        Handled = false;
+    }
+}

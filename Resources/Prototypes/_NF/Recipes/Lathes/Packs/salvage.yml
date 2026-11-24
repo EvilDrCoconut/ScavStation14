@@ -1,0 +1,17 @@
+- type: latheRecipePack
+  id: NFSalvageStatic
+  recipes:
+  - BoxDispenserFlare # Frontier
+
+- type: latheRecipePack
+  id: NFSalvageBoardsStatic
+  recipes:
+  - SalvageTechFabCircuitboardNF
+  - NFScrapProcessorCircuitboard
+  - ShuttleGunKineticCircuitboard
+
+- type: latheRecipePack
+  id: NFSalvage
+  recipes:
+  - BluespaceAirTank
+  - SmallBluespaceAirTank

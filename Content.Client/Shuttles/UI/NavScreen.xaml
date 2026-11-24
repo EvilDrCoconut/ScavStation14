@@ -1,0 +1,255 @@
+<controls:BoxContainer Visible="False"
+              HorizontalExpand="True"
+              xmlns:controls="https://spacestation14.io"
+              xmlns:ui="clr-namespace:Content.Client.Shuttles.UI"
+              xmlns:controls1="clr-namespace:Content.Client.UserInterface.Controls">
+                <!-- Mono - wrap -->
+                <controls:LayoutContainer Margin="5 4 10 5">
+                    <ui:ShuttleNavControl Name="NavRadar"
+                                     MouseFilter="Stop"
+                                     VerticalAlignment="Stretch"
+                                     VerticalExpand="True"
+                                     HorizontalExpand="True"/>
+                </controls:LayoutContainer>
+                <!-- Nav controls -->
+                <controls:ScrollContainer Name="RightDisplayNavScroll"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Right"
+                      VerticalExpand="True"
+                      HScrollEnabled="False"
+                      VScrollEnabled="True"
+                      MinWidth="256"
+                      MaxWidth="256"
+                      Margin="5 0 5 5">
+                <controls:BoxContainer Name="RightDisplayNav"
+                      HorizontalExpand="True"
+                      Orientation="Vertical">
+                    <controls1:StripeBack
+                        MinSize="48 48">
+                        <controls:Label Name="NavDisplayLabel" Text="{controls:Loc 'shuttle-console-display-label'}"
+                               VerticalExpand="True"
+                               HorizontalAlignment="Center"/>
+                    </controls1:StripeBack>
+                    <controls:GridContainer Columns="2"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Top"
+                                   HorizontalExpand="True"
+                                   Margin="3"
+                                   Name="ReadonlyDisplay">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-designation'}"/>
+                        <controls:Label Name="ShuttleDesignation"
+                               Text="{controls:Loc 'shuttle-console-designation-unknown'}"
+                               HorizontalExpand="True"
+                               Align="Right"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-position'}"/>
+                        <controls:Label Name="GridPosition"
+                               Text="0.0, 0.0"
+                               HorizontalExpand="True"
+                               Align="Right"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-orientation'}"/>
+                        <controls:Label Name="GridOrientation"
+                               Text="0.0"
+                               HorizontalExpand="True"
+                               Align="Right"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-linear-velocity'}"/>
+                        <controls:Label Name="GridLinearVelocity"
+                               Text="0.0, 0.0"
+                               HorizontalExpand="True"
+                               Align="Right"/>
+                        <controls:Label Text="{controls:Loc 'shuttle-console-angular-velocity'}"/>
+                        <controls:Label Name="GridAngularVelocity"
+                               Text="0.0"
+                               HorizontalExpand="True"
+                               Align="Right"/>
+                    </controls:GridContainer>
+                    <controls1:StripeBack
+                        MinSize="48 48">
+                        <controls:Label Name="NavSettingsLabel" Text="{controls:Loc 'shuttle-console-nav-settings'}"
+                               VerticalExpand="True"
+                               HorizontalAlignment="Center"/>
+                    </controls1:StripeBack>
+                    <!-- HL - WEP / IFF / Dampener 3x3 grid -->
+                    <controls:GridContainer Columns="3"
+                                           HorizontalAlignment="Stretch"
+                                           HorizontalExpand="True"
+                                           Margin="0 0 0 0">
+                        <!-- Row 1: _ _ WEP -->
+                        <controls:Control HorizontalExpand="True"/>
+                        <controls:Control HorizontalExpand="True"/>
+                        <controls:Button Name="WEPButton"
+                                Text="{controls:Loc 'shuttle-console-wep-activate'}"
+                                TextAlign="Center"
+                                HorizontalExpand="True"
+                                ToolTip="{controls:Loc 'shuttle-console-wep-tooltip'}"
+                                Margin="0"/>
+                        <!-- Row 2: Show IFF | Shuttles | Docks -->
+                        <controls:Button Name="IFFToggle"
+                                Text="{controls:Loc 'shuttle-console-iff-toggle'}"
+                                TextAlign="Center"
+                                ToggleMode="True"
+                                HorizontalExpand="True"
+                                StyleClasses="OpenRight"
+                                Margin="0"/>
+                        <!-- Frontier: hide player shuttles -->
+                        <controls:Button Name="IFFShuttleToggle"
+                                Text="{controls:Loc 'shuttle-console-iffshuttles-toggle'}"
+                                TextAlign="Center"
+                                ToggleMode="True"
+                                HorizontalExpand="True"
+                                StyleClasses="OpenBoth"
+                                Margin="0"/>
+                        <!-- End Frontier: hide player shuttles -->
+                        <controls:Button Name="DockToggle"
+                                Text="{controls:Loc 'shuttle-console-dock-toggle'}"
+                                TextAlign="Center"
+                                ToggleMode="True"
+                                HorizontalExpand="True"
+                                StyleClasses="OpenLeft"
+                                Margin="0"/>
+                        <!-- Row 3: Cruise | Drive | Park -->
+                        <controls:Button Name="DampenerOff"
+                                Text="{controls:Loc 'shuttle-console-inertia-dampener-off'}"
+                                TextAlign="Center"
+                                ToggleMode="True"
+                                HorizontalExpand="True"
+                                StyleClasses="OpenRight"
+                                Margin="0"/>
+                        <controls:Button Name="DampenerOn"
+                                Text="{controls:Loc 'shuttle-console-inertia-dampener-dampen'}"
+                                TextAlign="Center"
+                                ToggleMode="True"
+                                HorizontalExpand="True"
+                                StyleClasses="OpenBoth"
+                                Margin="0"/>
+                        <controls:Button Name="AnchorOn"
+                                Text="{controls:Loc 'shuttle-console-inertia-dampener-anchor'}"
+                                TextAlign="Center"
+                                ToggleMode="True"
+                                HorizontalExpand="True"
+                                StyleClasses="OpenLeft"
+                                Margin="0"/>
+                    </controls:GridContainer>
+                    <!-- End HL - WEP / IFF / Dampener 3x3 grid -->
+                    <!-- HL - Console navigation orientation -->
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="NavigationAngleBox">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-navigation-angle'}"/>
+                        <controls:GridContainer Columns="3"
+                                                HorizontalAlignment="Stretch"
+                                                HorizontalExpand="True">
+                            <controls:Control HorizontalExpand="True"/>
+                            <controls:Button Name="NavigationAngleNorth"
+                                             Text="{controls:Loc 'shuttle-console-navigation-angle-north'}"
+                                             TextAlign="Center"
+                                             ToggleMode="True"
+                                             HorizontalExpand="True"
+                                             Margin="0"/>
+                            <controls:Control HorizontalExpand="True"/>
+                            <controls:Button Name="NavigationAngleWest"
+                                             Text="{controls:Loc 'shuttle-console-navigation-angle-west'}"
+                                             TextAlign="Center"
+                                             ToggleMode="True"
+                                             HorizontalExpand="True"
+                                             Margin="0"/>
+                            <controls:Control HorizontalExpand="True"/>
+                            <controls:Button Name="NavigationAngleEast"
+                                             Text="{controls:Loc 'shuttle-console-navigation-angle-east'}"
+                                             TextAlign="Center"
+                                             ToggleMode="True"
+                                             HorizontalExpand="True"
+                                             Margin="0"/>
+                            <controls:Control HorizontalExpand="True"/>
+                            <controls:Button Name="NavigationAngleSouth"
+                                             Text="{controls:Loc 'shuttle-console-navigation-angle-south'}"
+                                             TextAlign="Center"
+                                             ToggleMode="True"
+                                             HorizontalExpand="True"
+                                             Margin="0"/>
+                            <controls:Control HorizontalExpand="True"/>
+                        </controls:GridContainer>
+                    </controls:BoxContainer>
+                    <!-- End HL - Console navigation orientation -->
+                    <!-- Frontier - IFF search -->
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="IffSearchBox">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-iff-search'}"/>
+                        <controls:LineEdit Name="IffSearchCriteria" Access="Public" HorizontalExpand="True"/>
+                    </controls:BoxContainer>
+                    <!-- End Frontier - IFF search -->
+
+                    <!-- Frontier - Maximum IFF Distance -->
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumIFFDistanceBox">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-maximum-iff-distance'}"/>
+                        <controls:SliderIntInput Name="MaximumIFFDistanceValue"
+                                                 Access="Public"
+                                                 MinValue="0"
+                                                 MaxValue="7500"
+                                                 Value="7500"
+                                                 HorizontalExpand="True"/>
+                    </controls:BoxContainer>
+                    <!-- End Frontier - Maximum IFF Distance -->
+
+                    <!-- Frontier - Service Flags -->
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="ServiceFlagsBox">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-service-flags'}"/>
+                        <controls:BoxContainer Orientation="Horizontal"
+                                               HorizontalExpand="True"
+                                               Align="Center"
+                                               Margin="0 0 0 3">
+                            <controls:Button Name="ServiceFlagServices"
+                                             Text="{controls:Loc 'shuttle-console-service-flag-Services-label'}"
+                                             TextAlign="Center"
+                                             ToggleMode="True"
+                                             MinWidth="30"
+                                             ToolTip="{controls:Loc 'shuttle-console-service-flag-Services-description'}"
+                                             StyleClasses="OpenRight"
+                                             Margin="0"/>
+                            <controls:Button Name="ServiceFlagTrade"
+                                             Text="{controls:Loc 'shuttle-console-service-flag-Trade-label'}"
+                                             TextAlign="Center"
+                                             ToggleMode="True"
+                                             MinWidth="30"
+                                             ToolTip="{controls:Loc 'shuttle-console-service-flag-Trade-description'}"
+                                             StyleClasses="OpenBoth"
+                                             Margin="0"/>
+                            <controls:Button Name="ServiceFlagSocial"
+                                             Text="{controls:Loc 'shuttle-console-service-flag-Social-label'}"
+                                             TextAlign="Center"
+                                             ToggleMode="True"
+                                             MinWidth="30"
+                                             ToolTip="{controls:Loc 'shuttle-console-service-flag-Social-description'}"
+                                             StyleClasses="OpenLeft"
+                                             Margin="0"/>
+                        </controls:BoxContainer>
+                    </controls:BoxContainer>
+                    <!-- End Frontier - Service Flags -->
+
+                    <!-- Frontier - Maximum Shuttle Speed -->
+                    <controls:BoxContainer Orientation="Vertical" HorizontalExpand="True" Name="MaximumShuttleSpeedBox" Margin="4 4 4 4">
+                        <controls:Label Text="{controls:Loc 'shuttle-console-maximum-speed'}"/>
+                        <controls:SliderIntInput Name="MaximumShuttleSpeedValue"
+                                                 Access="Public"
+                                                 MinValue="0"
+                                                 MaxValue="140"
+                                                 Value="140"
+                                                 HorizontalExpand="True"/>
+                    </controls:BoxContainer>
+                    <controls1:StripeBack
+                        MinSize="48 48">
+                        <controls:Label Name="ExpeditionDiskLabel" Text="{controls:Loc 'shuttle-console-expedition-disk-label'}"
+                               VerticalExpand="True"
+                               HorizontalAlignment="Center"/>
+                    </controls1:StripeBack>
+                    <controls:Label Name="ExpeditionDiskDetails"
+                           Text="{controls:Loc 'shuttle-console-expedition-disk-none'}"
+                           HorizontalAlignment="Left"
+                           Margin="4 2 4 6"/>
+                    <controls:Button Name="ExpeditionDiskActivate"
+                            Text="{controls:Loc 'shuttle-console-expedition-disk-activate'}"
+                            TextAlign="Center"
+                            Disabled="True"/>
+                    <controls:Button Name="ExpeditionEnd"
+                            Text="{controls:Loc 'shuttle-console-expedition-end'}"
+                            TextAlign="Center"
+                            Disabled="True"/>
+                </controls:BoxContainer>
+                </controls:ScrollContainer>
+</controls:BoxContainer>

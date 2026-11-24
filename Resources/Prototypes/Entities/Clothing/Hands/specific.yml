@@ -1,0 +1,44 @@
+- type: entity
+  parent: ClothingHandsButcherable
+  id: ClothingHandsChameleon # doesn't protect from electricity or heat
+  name: black gloves
+  description: Regular black gloves that do not keep you from frying.
+  suffix: Chameleon
+  components:
+    - type: Tag
+      tags: [] # ignore "WhitelistChameleon" tag
+    - type: Sprite
+      sprite: Clothing/Hands/Gloves/Color/black.rsi
+    - type: Clothing
+      sprite: Clothing/Hands/Gloves/Color/black.rsi
+    - type: ChameleonClothing
+      slot: [gloves]
+      default: ClothingHandsGlovesColorBlack
+    - type: Fiber
+      fiberMaterial: fibers-chameleon
+    - type: FingerprintMask
+    - type: UserInterface
+      interfaces:
+        enum.ChameleonUiKey.Key:
+          type: ChameleonBoundUserInterface
+
+- type: entity
+  parent: ClothingHandsChameleon
+  id: ClothingHandsChameleonThief
+  suffix: Chameleon, Thieving
+  components:
+  - type: Thieving
+    stripTimeReduction: 2
+    stealthy: true
+
+# Dummy gloves for chameleon gloves to be invisible when worn
+- type: entity
+  parent: ClothingHandsGlovesSyntheticBase
+  id: DummyGloveInvisible
+  name: emperor's new gloves
+  description: The finest gloves you'll never see. Insulated.
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/emper_new.rsi
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/emper_new.rsi

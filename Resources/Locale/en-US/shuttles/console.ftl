@@ -1,0 +1,77 @@
+shuttle-pilot-start = Piloting ship
+shuttle-pilot-end = Stopped piloting
+
+shuttle-console-in-ftl = Currently in FTL
+shuttle-console-mass = Too large to FTL
+shuttle-console-prevent = You are unable to pilot this ship
+
+# NAV
+
+shuttle-console-display-label = Display
+
+shuttle-console-position = Position:
+shuttle-console-position-value = {$X}, {$Y}
+shuttle-console-orientation = Orientation:
+shuttle-console-orientation-value  = {$angle}
+shuttle-console-linear-velocity = Linear velocity:
+shuttle-console-linear-velocity-value = {$X}, {$Y}
+shuttle-console-angular-velocity = Angular velocity:
+shuttle-console-angular-velocity-value = {$angularVelocity}
+
+shuttle-console-unknown = Unknown
+shuttle-console-iff-label = {$name} ({$distance}m)
+shuttle-console-exclusion = Exclusion area
+
+# Buttons
+shuttle-console-strafing = Strafing mode
+shuttle-console-nav-settings = Settings
+shuttle-console-iff-toggle = Show IFF
+shuttle-console-dock-toggle = Docks
+shuttle-console-iffshuttles-toggle = Shuttles
+shuttle-console-maximum-speed = Max speed
+shuttle-console-wep-activate = WEP
+shuttle-console-wep-active = !!WEP!!
+shuttle-console-wep-cooldown = WEP
+shuttle-console-wep-tooltip = War Emergency Power (Z key), consumes a lot of power to recharge
+shuttle-console-navigation-angle = Rotation
+shuttle-console-navigation-angle-north = N
+shuttle-console-navigation-angle-east = E
+shuttle-console-navigation-angle-south = S
+shuttle-console-navigation-angle-west = W
+
+# MAP
+
+shuttle-console-ftl-label = FTL Status
+shuttle-console-ftl-state-Available = Available
+shuttle-console-ftl-state-Starting = Starting
+shuttle-console-ftl-state-Travelling = Travelling
+shuttle-console-ftl-state-Arriving = Arriving
+shuttle-console-ftl-state-Cooldown = Cooldown
+shuttle-console-ftl-state-Invalid = Invalid
+
+shuttle-console-map-settings = Settings
+shuttle-console-ftl-button = FTL
+shuttle-console-map-rebuild = Scan for objects
+shuttle-console-map-beacons = Show beacons
+
+shuttle-console-no-signal = No signal
+
+shuttle-console-map-objects = Sector objects
+
+# DOCK
+shuttle-console-docked = Docked objects
+
+shuttle-console-view = View
+shuttle-console-undock = Undock
+shuttle-console-undock-all = Undock All
+shuttle-console-dock = Dock
+shuttle-console-docks-label = Docks
+shuttle-console-expedition-disk-label = Expedition
+shuttle-console-expedition-disk-none = No Disk
+shuttle-console-expedition-disk-details = {$planet}{$difficulty}{$objective}
+shuttle-console-expedition-disk-cooldown = Cooldown: {$time}
+shuttle-console-expedition-disk-activate = Jump to expedition
+shuttle-console-expedition-end = End expedition early
+
+shuttle-console-undock-fail = Undocking failed
+shuttle-console-dock-fail = Docking failed

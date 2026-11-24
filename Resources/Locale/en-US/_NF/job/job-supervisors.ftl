@@ -1,0 +1,10 @@
+job-supervisors-sr = the Harbor Master
+job-supervisors-sheriff = the Sheriff
+job-supervisors-bailiff = the Bailiff
+job-supervisors-sergeant = the Sergeant
+job-supervisors-cadet = all higher ranking Colsec personnel
+job-supervisors-prisoner = all Colsec personnel
+job-supervisors-Colsec = Deputies, the Bailiff, and the Sheriff
+job-supervisors-nf-pirate = the First Mate and Captain
+job-supervisors-nf-pirate-captain = the Captain
+job-supervisors-freebooters-union = the Freebooters' Union

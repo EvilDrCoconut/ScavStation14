@@ -1,0 +1,68 @@
+using Content.Server.Chat.Systems;
+using Content.Server.Speech.Components;
+using Content.Shared._Starlight.Language; // Starlight
+
+namespace Content.Server.Speech.EntitySystems;
+
+/// <summary>
+///     This system redirects local chat messages to listening entities (e.g., radio microphones).
+/// </summary>
+public sealed class ListeningSystem : EntitySystem
+{
+    [Dependency] private readonly SharedTransformSystem _xforms = default!;
+    [Dependency] private readonly ChatSystem _chat = default!; // Starlight
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<EntitySpokeEvent>(OnSpeak);
+    }
+
+    private void OnSpeak(EntitySpokeEvent ev)
+    {
+        PingListeners(ev.Source, ev.Message, ev.IsWhisper, ev.Language, ev.OriginalMessage, ev.OriginalObfuscatedMessage); // Starlight
+    }
+
+    public void PingListeners(EntityUid source, string message, bool isWhisper, LanguagePrototype? language = null, string? originalMessage = null, string? originalObfuscatedMessage = null) // Starlight
+    {
+        // TODO whispering / audio volume? Microphone sensitivity?
+        // for now, whispering just arbitrarily reduces the listener's max range.
+
+        var xformQuery = GetEntityQuery<TransformComponent>();
+        var sourceXform = xformQuery.GetComponent(source);
+        var sourcePos = _xforms.GetWorldPosition(sourceXform, xformQuery);
+
+        var attemptEv = new ListenAttemptEvent(source);
+        var ev = new ListenEvent(message, originalMessage, source, language);
+        // HardLight-edit start
+        ListenEvent? obfuscatedEv = isWhisper
+            ? null
+            : new ListenEvent(_chat.ObfuscateMessageReadability(message), originalObfuscatedMessage, source, language); // Starlight
+        // HardLight-edit end
+        var query = EntityQueryEnumerator<ActiveListenerComponent, TransformComponent>();
+
+        while (query.MoveNext(out var listenerUid, out var listener, out var xform))
+        {
+            if (xform.MapID != sourceXform.MapID)
+                continue;
+
+            // range checks
+            // TODO proper speech occlusion
+            var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).LengthSquared();
+            if (distance > listener.Range * listener.Range)
+                continue;
+
+            RaiseLocalEvent(listenerUid, attemptEv);
+            if (attemptEv.Cancelled)
+            {
+                attemptEv.Uncancel();
+                continue;
+            }
+
+            if (obfuscatedEv != null && distance > ChatSystem.WhisperClearRange)
+                RaiseLocalEvent(listenerUid, obfuscatedEv);
+            else
+                RaiseLocalEvent(listenerUid, ev);
+        }
+    }
+}

@@ -1,0 +1,34 @@
+- type: job
+  id: Botanist
+  name: job-name-botanist
+  description: job-description-botanist
+  playTimeTracker: JobBotanist
+  setPreference: true # Frontier
+  weight: 50 # HardLight
+  startingGear: BotanistGear
+  icon: "JobIconBotanist"
+  supervisors: job-supervisors-hop
+  access:
+  - Service
+  - Maintenance
+  - Hydroponics
+  extendedAccess:
+  - Kitchen
+  - Bar
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FourTwenty
+    prototype: CannabisSeeds
+
+- type: startingGear
+  id: BotanistGear
+  equipment:
+    # shoes: ClothingShoesColorBrown # HardLight: Add NF-style departmental loadouts
+    id: BotanistPDA
+    ears: ClothingHeadsetService
+    belt: ClothingBeltPlantFilled
+  # storage:
+  #   back:
+  #   - Stuff

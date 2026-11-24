@@ -1,0 +1,107 @@
+## Static recipes
+
+- type: latheRecipePack
+  id: SecurityEquipmentStatic
+  recipes:  # Frontier
+  - ClothingEyesHudSecurity # Frontier
+  - ForensicPad # Frontier
+  - Handcuffs # Frontier
+  - TargetClown # Frontier
+  - TargetHuman # Frontier
+  - TargetSyndicate # Frontier
+  - Zipties # Frontier
+
+# Practice ammo/mags and practice weapons
+- type: latheRecipePack
+  id: SecurityPracticeStatic
+  recipes:
+  - WeaponDisablerPractice
+  - WeaponLaserCarbinePractice
+  # - WeaponFlareGunSecurity # Frontier
+
+# Shared between secfab and emagged autolathe
+- type: latheRecipePack
+  id: SecurityAmmoStatic
+  recipes:
+  - Wirecutter
+  - MagazineRiotGunTearGas
+  - MagazineRiotGunStinger
+  - BaseMagazineRiotgun
+
+- type: latheRecipePack
+  id: SecurityWeaponsStatic
+  recipes:  # Frontier
+  - Flash # Frontier
+  - Stunbaton # Frontier
+  - CombatKnife # Frontier
+  - RiotShield # Frontier
+
+## Dynamic recipes
+
+- type: latheRecipePack
+  id: SecurityEquipment
+  recipes:
+  - NFClothingBackpackElectropack # Frontier: use NF prefix
+  - HoloprojectorSecurity # Frontier
+  - NFPortableRecharger # Frontier: use NF prefix
+  - PowerCageHigh
+  - PowerCageMedium
+  - PowerCageSmall
+  - NFTelescopicShield # Frontier: use NF prefix
+  - EnergyDomeDirectionalTurtle #HL
+  - ClothingBackpackTactical #HL
+  - ClothingBackpackExplorer #HL
+  - ClothingRucksack #HL
+
+- type: latheRecipePack
+  id: SecurityBoards
+  # abstract: true # Frontier: finally, spammable shuttle guns
+  recipes:
+  - ShuttleGunDusterCircuitboard
+  - ShuttleGunFriendshipCircuitboard
+  - ShuttleGunPerforatorCircuitboard
+  - ShuttleGunSvalinnMachineGunCircuitboard
+
+- type: latheRecipePack
+  parent:
+  - ScienceExplosives # sec gets everything for modular grenade making that sci does
+  id: SecurityExplosives
+  recipes:
+  - ExplosivePayload
+
+# Shared between secfab and emagged protolathe
+- type: latheRecipePack
+  id: SecurityAmmo
+  recipes:
+  - Wirecutter
+
+- type: latheRecipePack # Frontier
+  id: SecurityWeapons # Frontier
+  recipes: # Frontier
+  - Truncheon # Frontier
+  - WeaponAdvancedLaser # Frontier
+  - WeaponLaserCannon # Frontier
+  - WeaponLaserCarbine # Frontier
+  - WeaponXrayCannon # Frontier
+  - WeaponTemperatureGun # Frontier
+  - WeaponShotgunKammerer # Frontier
+  - NFWeaponEnergyPistolLaserSvalinn # Frontier
+  - WeaponSubMachineSmart # Goobstation
+  - WeaponLMGRatel # Mono
+  - WeaponShotgunEnforcerMerc # Mono
+  - WeaponRifleVulcanMerc # Mono
+  - WeaponSubMachineGunVector9x19mm # Mono
+  - WeaponSubMachineGunFirestarter # Mono
+  - WeaponRifleAk # Mono
+  - WeaponSubMachineGunWt550 # Mono
+  - WeaponRiflePrometheus # Mono
+  - WeaponRifleVulcanFCMC # Mono
+  - WeaponRadAx # Mono
+  - HardlightShield # Mono
+  - WeaponShockMaul # Mono
+
+- type: latheRecipePack # Frontier
+  id: SecurityDisablers # Frontier
+  recipes: # Frontier
+  - WeaponDisabler # Frontier
+  - WeaponDisablerSMG # Frontier

@@ -1,0 +1,54 @@
+# Best job.
+
+- type: job
+  id: ChiefMedicalOfficer
+  name: job-name-cmo
+  description: job-description-cmo
+  playTimeTracker: JobChiefMedicalOfficer
+  setPreference: true
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobChemist
+    time: 18000 # 5 hrs
+  - !type:RoleTimeRequirement
+    role: JobMedicalDoctor
+    time: 18000 # 5 hrs
+  weight: 50 # HardLight: 10<50
+  startingGear: CMOGear
+  icon: "JobIconChiefMedicalOfficer"
+  supervisors: job-supervisors-captain
+  canBeAntag: false
+  requireAdminNotify: true
+  access:
+  - Medical
+  - Command
+  - Maintenance
+  - Chemistry
+  - ChiefMedicalOfficer
+  - Brig
+  - Cryogenics
+  - Paramedic # Hardlight: Add Paramedic access
+  - Genetics # Funkystation: Add Genetics access
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: SurgerySpeedModifier
+      SpeedModifier: 2.5
+    - type: CommandStaff
+    - type: PsionicBonusChance # Nyano: Makes it more likely to become psionic.
+      flatBonus: 0.025
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+
+- type: startingGear
+  id: CMOGear
+  equipment:
+    id: CMOPDA
+    ears: ClothingHeadsetCMO
+    belt: ClothingBeltMedicalFilled
+    pocket2: NFHyperlinkBookCommandSOP # HardLight
+  storage:
+    back:
+    - Flash

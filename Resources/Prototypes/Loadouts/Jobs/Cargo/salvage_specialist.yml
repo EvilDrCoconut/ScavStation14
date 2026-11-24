@@ -1,0 +1,43 @@
+# Back
+- type: loadout
+  id: SalvageSpecialistBackpack
+  equipment:
+    back: ClothingBackpackSalvage
+
+- type: loadout
+  id: SalvageSpecialistSatchel
+  equipment:
+    back: ClothingBackpackSatchelSalvage
+
+- type: loadout
+  id: SalvageSpecialistDuffel
+  equipment:
+    back: ClothingBackpackDuffelSalvage
+
+# OuterClothing
+- type: loadout
+  id: SalvageSpecialistWintercoat
+  equipment:
+    outerClothing: ClothingOuterWinterMiner
+
+# Shoes
+- type: loadout
+  id: SalvageBoots
+  equipment:
+    shoes: ClothingShoesBootsSalvage
+
+# starlight start
+- type: loadout
+  id: ClothingUniformJumpskirtCargoSalvage
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtCargoSalvage
+
+- type: loadout
+  id: ClothingUniformJumpskirtCargoSalvageFormal
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtCargoSalvageFormal
+
+- type: loadout
+  id: ClothingUniformJumpsuitSalvageFormal
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageFormal

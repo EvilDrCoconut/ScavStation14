@@ -1,0 +1,134 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Client",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/Content.Client/Content.Client.dll",
+            "args": [],
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Client (Compatibility renderer)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/Content.Client/Content.Client.dll",
+            "args": "--cvar display.compat=true",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Server",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/Content.Server/Content.Server.dll",
+            "args": [],
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "YAML Linter",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-yaml-linter",
+            "program": "${workspaceFolder}/bin/Content.YAMLLinter/Content.YAMLLinter.dll",
+            "cwd": "${workspaceFolder}/Content.YAMLLinter",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        // HL Start
+        {
+            "name": "Integration Tests",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "dotnet",
+            "args": [
+                "test",
+                "--configuration",
+                "DebugOpt",
+                "Content.IntegrationTests/Content.IntegrationTests.csproj",
+                "--logger",
+                "\"console;verbosity=normal\"",
+                "--",
+                "NUnit.ConsoleOut=0",
+                "NUnit.MapWarningTo=Failed"
+            ],
+            "env": {
+                "DOTNET_gcServer": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Game Tests",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "dotnet",
+            "args": [
+                "test",
+                "--configuration",
+                "DebugOpt",
+                "Content.Tests/Content.Tests.csproj",
+                "--",
+                "NUnit.ConsoleOut=0"
+            ],
+            "env": {
+                "DOTNET_gcServer": "1"
+            },
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Formatter",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "dotnet",
+            "args": [
+                "format",
+                "--verify-no-changes",
+                "--severity warn",
+                "--exclude",
+                "RobustToolbox"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        }
+        // HL End
+    ],
+    "compounds": [
+        {
+            "name": "Server/Client",
+            "configurations": [
+                "Server",
+                "Client"
+            ],
+            "preLaunchTask": "build"
+        },
+        // Frontier begin
+        {
+
+            "name": "Server/Client (Release)",
+            "configurations": [
+                "Server",
+                "Client"
+            ],
+            "preLaunchTask": "build-release"
+        },
+        {
+            "name": "Server/Client (No Build)",
+            "configurations": [
+                "Server",
+                "Client"
+            ]
+        }
+        // Frontier end
+    ]
+}

@@ -1,0 +1,69 @@
+- type: entity
+  id: Bullet556x45mmFMJ
+  name: bullet (556x45mm FMJ)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 19
+
+- type: entity
+  id: Bullet556x45mmImprovised
+  name: bullet (5.56x45mm improvised)
+  parent: BaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types: #Improvised ammo damage is based on normal, * 0.85, rounded to the nearest whole number that clearly divides by 2, with half of the damage being percing and half being blunt
+        Piercing: 8
+        Blunt: 8
+
+- type: entity
+  id: Bullet556x45mmPractice
+  name: bullet (5.56x45mm practice)
+  parent: BaseBulletPractice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 2
+
+- type: entity
+  id: Bullet556x45mmRubber
+  name: bullet (556x45mm rubber)
+  parent: BaseBulletRubber
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 3
+
+- type: entity
+  id: Bullet556x45mmIncendiary
+  parent: BaseBulletIncendiary
+  name: bullet (556x45mm incendiary)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 2
+        Heat: 15
+
+- type: entity
+  id: Bullet556x45mmUranium
+  parent: BaseBulletUranium
+  name: bullet (556x45mm uranium)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Radiation: 7
+        Piercing: 8
+

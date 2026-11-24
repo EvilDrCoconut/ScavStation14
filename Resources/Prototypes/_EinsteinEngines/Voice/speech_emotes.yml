@@ -1,0 +1,37 @@
+- type: emote
+  id: SiliconDeathgasp
+  name: chat-emote-name-deathgasp
+  icon: Interface/Emotes/deathgasp.png
+  chatMessages: ["chat-emote-msg-deathgasp-silicon"]
+  whitelist: # Hardlight
+    tags:
+    - SiliconMob
+    - SiliconEmotes
+  blacklist: # HardLight
+    tags:
+    - Synth
+  chatTriggers:
+  - sdeathgasp
+
+- type: emote
+  id: Boop
+  name: chat-emote-name-boop
+  category: Vocal
+  chatMessages: ["chat-emote-msg-boop"] # HardLight
+  whitelist: # Hardlight
+    tags:
+    - SiliconMob
+    - SiliconEmotes
+  chatTriggers:
+    - boops
+
+- type: emote
+  id: Whirr # uncategorized as it is generic
+  name: chat-emote-name-whirr
+  chatMessages: ["chat-emote-msg-whirr"] # HardLight
+  whitelist: # Hardlight
+    tags:
+    - SiliconMob
+    - SiliconEmotes
+  chatTriggers:
+    - whirrs

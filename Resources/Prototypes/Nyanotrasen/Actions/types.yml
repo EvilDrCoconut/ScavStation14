@@ -1,0 +1,19 @@
+- type: entity
+  id: ActionEatMouse
+  name: action-name-eat-mouse
+  description: action-description-eat-mouse
+  abstract: true
+  components:
+  - type: InstantAction
+    icon: Nyanotrasen/Icons/verbiconfangs.png
+    event: !type:EatMouseActionEvent
+
+- type: entity
+  id: ActionHairball
+  name: action-name-hairball
+  description: action-description-hairball
+  components:
+  - type: InstantAction
+    icon: { sprite: Nyanotrasen/Objects/Specific/Species/felinid.rsi, state: icon }
+    useDelay: 30
+    event: !type:HairballActionEvent

@@ -1,0 +1,280 @@
+- type: entity
+  parent: [BaseWeaponBallisticTurret, BaseC3SyndicateContraband] # Frontier: BaseSyndicateContraband<BaseC3SyndicateContraband
+  id: WeaponTurretSyndicate
+  suffix: Syndicate
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretSyndicateDisposable
+  name: disposable ballistic turret
+  suffix: Syndicate, Disposable
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:TriggerBehavior
+  - type: Gun
+    fireRate: 2
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+  - type: BallisticAmmoProvider
+    proto: Cartridge9x19mmFMJ
+    capacity: 50
+  - type: Construction
+    deconstructionTarget: null
+    graph: WeaponTurretSyndicateDisposable
+    node: disposableTurret
+  - type: Repairable
+    qualityNeeded: "Anchoring"
+    doAfterDelay: 3
+  - type: TriggerWhenEmpty
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 10
+    intensitySlope: 1.5
+    totalIntensity: 30
+    canCreateVacuum: false
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretNanoTrasen
+  suffix: NanoTrasen
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretHostile
+  suffix: Hostile
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretAllHostile
+  suffix: All hostile
+  components:
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+
+- type: entity
+  parent: BaseWeaponBallisticTurret
+  id: WeaponTurretXeno
+  name: xeno turret
+  suffix: Xeno
+  description: Shoots 9mm acid projectiles.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Xeno
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Turrets/xenoturret.rsi
+    noRot: true
+    layers:
+    - state: acid_turret
+  - type: BallisticAmmoProvider
+    proto: NFBulletAcid # Frontier: BulletAcid<NFBulletAcid
+    capacity: 500
+  - type: Gun
+    fireRate: 1
+    selectedMode: FullAuto
+    soundGunshot: /Audio/Weapons/Xeno/alien_spitacid.ogg
+  - type: Construction
+    graph: ResinStructures
+    node: XenoTurret
+  - type: HTN
+    rootTask:
+      task: TurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Animals/snake_hiss.ogg
+  - type: Damageable
+    damageContainer: Biological
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/gib1.ogg
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          FoodMeatXeno:
+            min: 3
+            max: 5
+  - type: InteractionPopup
+    interactDelay: 1.0
+    successChance: 0.8
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Animals/snake_hiss.ogg
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: WeaponTurretLightbulb
+  name: automated searchlight
+  description: A combined flashlight and disabler mounted to a turret frame, can be unanchored and repacked into the smaller form for transport. A note on the side reads "if uncooperative, drag it around".
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: Sprite
+    sprite: _NF/Objects/Weapons/Guns/Turrets/disabler.rsi
+    drawdepth: Mobs
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: unshaded
+      shader: unshaded
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+      shader: unshaded
+  - type: Gun
+    fireRate: 10
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/lasersight.ogg
+  - type: HitscanBatteryAmmoProvider
+    proto: lasersight # Frontier: use NF variant
+    fireCost: 1
+  - type: PointLight
+    enabled: true
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    radius: 10
+    energy: 10
+    netsync: false
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 50
+  - type: Flatpack
+    entity: SearchlightBoxDeployable
+  - type: Anchorable
+  - type: StaticPrice # HL: Price balancing
+    price: 30
+
+- type: entity
+  parent: BaseItem
+  id: SearchlightBoxDeployable
+  name: stowed automated searchlight
+  description: A toolbox used to conveniently store automated searchlights.
+  components:
+  - type: Flatpack
+    entity: WeaponTurretLightbulb
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
+    size: Large
+  - type: Appearance
+  - type: StaticPrice
+    price: 500
+    vendPrice: 12000
+
+- type: entity
+  parent: BaseWeaponTurret
+  id: WeaponTurretGestio
+  name: automated gestio turret
+  description: A modified gestio bolted to a turret mounting, don't forget to feed and change its magazines. Can be unanchored and repacked into the smaller form for transport. A note on the side reads "if uncooperative, drag it around".
+  components:
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: Gun
+    fireRate: 3.5
+    burstFireRate: 8
+    shotsPerBurst: 3
+    burstCooldown: 0.4
+    selectedMode: Burst
+    availableModes:
+      - Burst
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/_NF/Weapons/Guns/Gunshots/rifle.ogg
+      params:
+        volume: -5
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - Magazine762x39mmLowCapacityFMJ
+            - Magazine762x39mmFMJ
+            - Magazine762x39mmBox
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        startingItem: Cartridge762x39mmFMJ
+        priority: 1
+        whitelist:
+          tags:
+            - Cartridge762x39mmFMJ
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Flatpack
+    entity: GestioBoxDeployable
+  - type: Anchorable
+  - type: ChamberMagazineAmmoProvider
+    soundRack:
+      path: /Audio/Weapons/Guns/Cock/sf_rifle_cock.ogg
+
+- type: entity
+  parent: BaseItem
+  id: GestioBoxDeployable
+  name: stowed automated gestio
+  description: A toolbox used to conveniently store automated gestio turrets.
+  components:
+  - type: Flatpack
+    entity: WeaponTurretGestio
+  - type: Sprite
+    sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Tools/Toolboxes/toolbox_red.rsi
+    size: Large
+  - type: Appearance
+  - type: StaticPrice
+    price: 5000
+    vendPrice: 32000

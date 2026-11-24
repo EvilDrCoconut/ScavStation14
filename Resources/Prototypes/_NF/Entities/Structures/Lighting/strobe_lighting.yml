@@ -1,0 +1,124 @@
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeIncandescent
+  suffix: Incandescent
+  components:
+  - type: PointLight
+    enabled: true
+    color: "#FFD1A3" # 4000K color temp
+    energy: 1.0
+    radius: 6
+    softness: 1.1
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LightBulb ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeLed
+  suffix: LED
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LedLightBulb ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeService
+  suffix: Service
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ ServiceLightBulb ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeSodium
+  suffix: Sodium
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ SodiumLightBulb ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeExterior
+  suffix: Exterior
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ ExteriorLightBulb ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeCyan
+  suffix: Cyan
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LightBulbCrystalCyan ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeBlue
+  suffix: Blue
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LightBulbCrystalBlue ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobePink
+  suffix: Pink
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LightBulbCrystalPink ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeOrange
+  suffix: Orange
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LightBulbCrystalOrange ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeRed
+  suffix: Red
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LightBulbCrystalRed ]
+
+- type: entity
+  parent: PoweredStrobeLightEmpty
+  id: PoweredStrobeGreen
+  suffix: Green
+  components:
+  - type: PointLight
+    enabled: true
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LightBulbCrystalGreen ]

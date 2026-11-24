@@ -1,0 +1,189 @@
+- type: species
+  id: Reptilian
+  name: species-name-reptilian
+  roundStart: true
+  prototype: MobReptilian
+  sprites: MobReptilianSprites
+  defaultSkinTone: "#34a223"
+  markingLimits: MobReptilianMarkingLimits
+  dollPrototype: MobReptilianDummy
+  skinColoration: AnyColour # Hardlight
+  maleFirstNames: NamesReptilianMale
+  femaleFirstNames: NamesReptilianFemale
+  naming: FirstDashFirst
+
+- type: speciesBaseSprites
+  id: MobReptilianSprites
+  sprites:
+    TailBehind: MobHumanoidAnyMarking
+    TailOversuit: MobHumanoidAnyMarking
+    Head: MobReptilianHead
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Snout: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
+    Chest: MobReptilianTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Eyes: MobHumanoidEyes
+    LArm: MobReptilianLArm
+    RArm: MobReptilianRArm
+    LHand: MobReptilianLHand
+    RHand: MobReptilianRHand
+    LLeg: MobReptilianLLegDigi # Hardlight: digi legs
+    RLeg: MobReptilianRLegDigi # Hardlight: digi legs
+    LFoot: MobReptilianLFootDigi # Hardlight: digi legs
+    RFoot: MobReptilianRFootDigi # Hardlight: digi legs
+    RArmExtension: MobHumanoidAnyMarking # Frontier
+
+- type: markingPoints
+  id: MobReptilianMarkingLimits
+  onlyWhitelisted: false
+  points:
+    Hair:
+      points: 1
+      required: false
+    FacialHair:
+      points: 1
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ LizardTailSmooth ]
+    Snout:
+      points: 1
+      required: true
+      defaultMarkings: [ LizardSnoutRound ]
+    HeadTop:
+      points: 2
+      required: false
+    HeadSide:
+      points: 2
+      required: false
+    UndergarmentTop:
+      points: 3
+      required: false
+    UndergarmentBottom:
+      points: 3
+      required: false
+    Chest:
+      points: 4 # imp 3<4
+      required: false
+    Legs:
+      points: 8 # imp 2<8
+      required: false
+    Arms:
+      points: 8 # imp 2<8
+      required: false
+
+- type: humanoidBaseSprite
+  id: MobReptilianHead
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobReptilianHeadMale
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobReptilianHeadFemale
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: head_f
+
+- type: humanoidBaseSprite
+  id: MobReptilianTorso
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobReptilianTorsoMale
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobReptilianTorsoFemale
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: torso_f
+
+- type: humanoidBaseSprite
+  id: MobReptilianLLeg
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobReptilianLHand
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobReptilianLArm
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobReptilianLFoot
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobReptilianRLeg
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobReptilianRHand
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobReptilianRArm
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobReptilianRFoot
+  baseSprite:
+    sprite: _HL/Mobs/Species/Reptilian/parts.rsi # Hardlight
+    state: r_foot
+
+# White Dream - Digitigrade base legs
+
+- type: humanoidBaseSprite
+  id: MobReptilianLLegDigi
+  baseSprite:
+    sprite: _White/Mobs/Species/Reptilian/parts.rsi
+    state: l_leg_digi
+
+- type: humanoidBaseSprite
+  id: MobReptilianRLegDigi
+  baseSprite:
+    sprite: _White/Mobs/Species/Reptilian/parts.rsi
+    state: r_leg_digi
+
+- type: humanoidBaseSprite
+  id: MobReptilianLFootDigi
+  baseSprite:
+    sprite: _White/Mobs/Species/Reptilian/parts.rsi
+    state: l_foot_digi
+
+- type: humanoidBaseSprite
+  id: MobReptilianRFootDigi
+  baseSprite:
+    sprite: _White/Mobs/Species/Reptilian/parts.rsi
+    state: r_foot_digi

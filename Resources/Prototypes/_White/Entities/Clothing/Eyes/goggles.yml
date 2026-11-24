@@ -1,0 +1,43 @@
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesNightVisionGoggles
+  name: night vision goggles
+  description: Now you can see in the dark!
+  components:
+  - type: Sprite
+    sprite: _White/Clothing/Eyes/Goggles/nightvision.rsi
+  - type: Clothing
+    sprite: _White/Clothing/Eyes/Goggles/nightvision.rsi
+  - type: ItemToggle
+    onUse: false
+    soundActivate: /Audio/_RMC14/Binoculars/nightvision.ogg
+    soundDeactivate: /Audio/_RMC14/Binoculars/nightvision.ogg
+  - type: ToggleClothing
+    action: ActionToggleNightVisionGoggles
+    disableOnUnequip: true
+  - type: VisionGoggles
+    vision: Night
+  - type: IdentityBlocker
+    coverage: EYES
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesThermalVisionGoggles
+  name: thermal vision goggles
+  description: Now you can see everyone!
+  components:
+  - type: Sprite
+    sprite: _White/Clothing/Eyes/Goggles/thermal.rsi
+  - type: Clothing
+    sprite: _White/Clothing/Eyes/Goggles/thermal.rsi
+  - type: ActionGrant
+    actions:
+    - ActionPulseThermalVisionGoggles
+  - type: ItemActionGrant
+    actions:
+    - ActionPulseThermalVisionGoggles
+    activeIfWorn: true
+  - type: VisionGoggles
+    vision: Thermal
+    pulseDuration: 1
+  - type: IdentityBlocker
+    coverage: EYES

@@ -1,0 +1,77 @@
+- type: entity
+  name: brass knuckles
+  parent: ClothingHandsBase
+  id: WeaponBrassKnuckles
+  description: When you need to punch just a little harder. Design by SESWC  #Hardlight
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/KnuckleDusters/brassknuckleduster.rsi
+    state: brassknuckleduster
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/KnuckleDusters/brassknuckleduster.rsi
+  - type: MeleeWeapon
+    autoAttack: true
+    attackRate: 2 # ~12 dps
+    damage:
+      types:
+       Blunt: 6
+    soundHit:
+      collection: Punch
+    animation: WeaponArcFist
+    mustBeEquippedToUse: true
+  - type: Armor
+    modifiers:
+      coefficients:
+        Shock: 1.05 # oh no so conductive
+  - type: Insulated
+    coefficient: 1.5
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: PhysicalComposition
+    materialComposition:
+      Brass: 100
+  - type: StaticPrice
+    price: 50 # HL: Price balancing
+
+- type: entity
+  name: crass knuckles
+  parent: WeaponBrassKnuckles
+  id: WeaponBrassKnucklesWhoopie
+  description: Questionably silent, questionably deadly.
+  components:
+  - type: Sprite
+    sprite: _NF/Objects/Weapons/Melee/crassknuckles.rsi
+    state: icon
+  - type: Clothing
+    sprite: _NF/Objects/Weapons/Melee/crassknuckles.rsi
+  - type: MeleeWeapon
+    autoAttack: true
+    attackRate: 2 # ~12 dps
+    damage:
+      types:
+       Blunt: 0 # ~0 dps :^)
+       Structural: 0
+    soundHit:
+      collection: Parp
+    animation: WeaponArcFist
+    mustBeEquippedToUse: true
+  - type: Construction
+    graph: ClothingHandsKnuckleDustersBrass
+    node: crass
+  - type: StaminaDamageOnHit
+    damage: 4 # 8 per second, similar to the toy hammer
+  - type: Armor
+    modifiers:
+      coefficients:
+        Shock: 1.0 # Nothing special.
+  - type: Insulated
+    coefficient: 1 # Nothing special.
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+  - type: PhysicalComposition
+    materialComposition:
+      Brass: 100
+  - type: StaticPrice # HL: Price balancing
+    price: 30

@@ -1,0 +1,49 @@
+- type: job
+  id: Warden
+  name: job-name-warden
+  description: job-description-warden
+  playTimeTracker: JobWarden
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 18000 # 5 hrs
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 36000 # 10 hrs
+  weight: 50 # HardLight: 5<50
+  startingGear: WardenGear
+  icon: "JobIconWarden"
+  supervisors: job-supervisors-hos
+  canBeAntag: false
+  ## Frontier: commented out stuff below
+  access:
+  - Security
+  - Brig
+  - Armory
+  - Maintenance
+  - Service
+  - External
+  - Detective
+  - Cryogenics
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  ## End Frontier: commented out stuff above
+  setPreference: true
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+
+- type: startingGear
+  id: WardenGear
+  equipment:
+#    eyes: ClothingEyesGlassesSecurity # HL - Add departmental NF-style loadouts
+    id: WardenPDA
+    ears: ClothingHeadsetSecurity
+    pocket1: NFWeaponPistolMk58 # Frontier: use NF variant
+    pocket2: NFHyperlinkBookCommandSOP # HardLight
+  storage:
+    back:
+    - Flash
+    - Magazine45_ACPPistolFMJ
+    - FrontierUplinkCoin10
+    - FrontierUplinkCoin5

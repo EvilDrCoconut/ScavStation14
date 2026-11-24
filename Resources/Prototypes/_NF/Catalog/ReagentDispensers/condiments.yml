@@ -1,0 +1,24 @@
+- type: reagentDispenserInventory
+  id: CondimentDispenserInventory
+  inventory:
+  - DrinkAstrotameJug
+  - DrinkBbqSauceJug
+  - DrinkColdsauceJug
+  - DrinkHorseradishSauceJug
+  - DrinkHotsauceJug
+  - DrinkKetchupJug
+  - DrinkMustardJug
+  - DrinkSoysauceJug
+
+- type: reagentDispenserInventory
+  id: ImpCoffeeDispenserInventory
+  inventory:
+  - DrinkCoffeeJug
+  - DrinkCreamCartonXL
+  - DrinkSugarJug
+  - DrinkIceJug
+  - DrinkMilkCarton
+  - DrinkSoyMilkCarton
+  - JugCaramexinin
+  - JugCocoa
+  - JugWater

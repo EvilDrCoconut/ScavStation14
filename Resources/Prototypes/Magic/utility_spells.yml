@@ -1,0 +1,28 @@
+- type: entity
+  id: ActionChargeSpell
+  name: Charge
+  description: Adds a charge back to your wand
+  components:
+  - type: InstantAction
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Weapons/Guns/Basic/wands.rsi
+      state: nothing
+    event: !type:ChargeSpellEvent
+      charge: 1
+      speech: DI'RI CEL!
+
+- type: entity
+  id: ActionPolymorphChapShadow
+  name: Fade to Black
+  description: Turns you into a living shadow, this may be reverted at will.
+  components:
+  - type: InstantAction
+    useDelay: 5
+    event: !type:PolymorphActionEvent
+      protoId: ChapShadowmorph
+    itemIconStyle: NoItem
+    icon:
+      sprite: _HL/Objects/Magic/chaplainIcons.rsi
+      state: shadowicon

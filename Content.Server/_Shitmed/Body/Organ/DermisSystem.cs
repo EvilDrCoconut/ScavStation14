@@ -1,0 +1,26 @@
+using Content.Shared.Body.Events;
+using Content.Shared._Shitmed.Body.Organ;
+
+namespace Content.Server._Shitmed.Body.Organ;
+
+public sealed class DermisSystem : EntitySystem
+{
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<DermisComponent, OrganAddedToBodyEvent>(HandleAddition);
+        SubscribeLocalEvent<DermisComponent, OrganRemovedFromBodyEvent>(HandleRemoval);
+    }
+
+    private void HandleRemoval(EntityUid uid, DermisComponent _, ref OrganRemovedFromBodyEvent args)
+    {
+        // Placeholder: No action taken when removed.
+    }
+
+    private void HandleAddition(EntityUid uid, DermisComponent _, ref OrganAddedToBodyEvent args)
+    {
+        // Placeholder: No action taken when added.
+    }
+}

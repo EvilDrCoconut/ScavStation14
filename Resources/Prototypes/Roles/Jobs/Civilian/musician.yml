@@ -1,0 +1,34 @@
+- type: job
+  id: Musician
+  name: job-name-musician
+  description: job-description-musician
+  playTimeTracker: JobMusician
+  setPreference: true
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 10800
+  weight: -60 # HardLight
+  startingGear: MusicianGear
+  icon: "JobIconMusician"
+  supervisors: job-supervisors-hop # changed from Frontier
+  access:
+  - Maintenance # TODO Remove maint access for all gimmick jobs once access work is completed
+  - Theatre
+  # - Musician # Isn't this called Theatre?
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: MikuDay
+    prototype: BoxPerformer
+
+- type: startingGear
+  id: MusicianGear
+  equipment:
+    # eyes: ClothingEyesGlassesSunglasses # HardLight: Add NF-style departmental loadouts
+    # shoes: ClothingShoesBootsLaceup # HardLight: Add NF-style departmental loadouts
+    id: MusicianPDA
+    ears: ClothingHeadsetService
+  # storage:
+  #   back:
+  #   - Stuff

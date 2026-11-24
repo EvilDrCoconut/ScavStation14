@@ -1,0 +1,39 @@
+using Content.Server.Database;
+using Content.Shared.CCVar;
+using Robust.Server.Upload;
+using Robust.Shared.Configuration;
+
+namespace Content.Server.Administration;
+
+public sealed class ContentNetworkResourceManager
+{
+    [Dependency] private readonly IServerDbManager _serverDb = default!;
+    [Dependency] private readonly NetworkResourceManager _netRes = default!;
+    [Dependency] private readonly IConfigurationManager _cfgManager = default!;
+
+    [ViewVariables] public bool StoreUploaded { get; set; } = true;
+
+    public void Initialize()
+    {
+        _cfgManager.OnValueChanged(CCVars.ResourceUploadingStoreEnabled, value => StoreUploaded = value, true);
+        AutoDelete(_cfgManager.GetCVar(CCVars.ResourceUploadingStoreDeletionDays));
+        _netRes.ResourcesUploaded += OnUploadResource;
+    }
+
+    private async void OnUploadResource(NetworkResourcesUploadedEvent args)
+    {
+        if (!StoreUploaded)
+            return;
+
+        foreach (var (relative, data) in args.Files)
+        {
+            await _serverDb.AddUploadedResourceLogAsync(args.Session.UserId, DateTime.Now, relative.ToString(), data);
+        }
+    }
+
+    private async void AutoDelete(int days)
+    {
+        if (days > 0)
+            await _serverDb.PurgeUploadedResourceLogAsync(days);
+    }
+}

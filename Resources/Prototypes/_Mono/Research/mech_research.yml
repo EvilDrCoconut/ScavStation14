@@ -1,0 +1,171 @@
+- type: technology
+  id: Broadsword
+  name: research-technology-broadsword
+  icon:
+    sprite: _Mono/Objects/Specific/Mech/mechaS2.rsi
+    state: broadsword
+  discipline: Arsenal
+  tier: 2
+  cost: 50000
+
+  recipeUnlocks:
+  - BroadswordHarness
+  - BroadswordHead
+  - BroadswordLArm
+  - BroadswordLLeg
+  - BroadswordRArm
+  - BroadswordRLeg
+  - BroadswordCentralElectronics
+  - BroadswordPeripheralsElectronics
+  - BroadswordTargetingElectronics
+  - LightMechaAutocannon
+  - LightMechaSMG
+  - LightMechaShotgun
+  - PowerCageMech
+  technologyPrerequisites:
+  - Gygax
+  position: 3, 11
+- type: technology
+  id: Halberd
+  name: research-technology-halberd
+  icon:
+    sprite: _Mono/Objects/Specific/Mech/mechaS2.rsi
+    state: broadsword
+  discipline: Arsenal
+  tier: 2
+  cost: 5000
+  recipeUnlocks:
+  - HalberdHarness
+  - MediumMechDMR
+  - MediumMechCoilgun
+  - MediumMechTOW
+  technologyPrerequisites:
+  - Broadsword
+  position: 4, 11
+- type: technology
+  id: Sabre
+  name: research-technology-sabre
+  icon:
+    sprite: _Mono/Objects/Specific/Mech/mechaS2.rsi
+    state: broadsword
+  discipline: Arsenal
+  tier: 2
+  cost: 5000
+  recipeUnlocks:
+  - SabreHarness
+  technologyPrerequisites:
+  - Broadsword
+  position: 3, 12
+- type: technology
+  id: Flail
+  name: research-technology-flail
+  icon:
+    sprite: _Mono/Objects/Specific/Mech/mechaS4.rsi
+    state: flail
+  discipline: Arsenal
+  tier: 3
+  cost: 12000
+  recipeUnlocks:
+  - FlailHarness
+  - FlailHead
+  - FlailLArm
+  - FlailLLeg
+  - FlailRArm
+  - FlailRLeg
+  - FlailCentralElectronics
+  - FlailPeripheralsElectronics
+  - FlailTargetingElectronics
+  - HeavyMechRPG
+  - HeavyMechCannon
+  - HeavyMechProjector
+  technologyPrerequisites:
+  - Broadsword
+  position: 5, 11
+- type: technology
+  id: Spyglass
+  name: research-technology-spyglass
+  icon:
+    sprite: _Mono/Objects/Specific/Mech/mechaS4.rsi
+    state: flail
+  discipline: Arsenal
+  tier: 3
+  cost: 13000
+  recipeUnlocks:
+  - SpyglassHarness
+  - EWACMechaFlares
+  - EWACMechaJammer
+  technologyPrerequisites:
+  - Flail
+  position: 5, 12
+- type: technology
+  id: Mace
+  name: research-technology-mace
+  icon:
+    sprite: _Mono/Objects/Specific/Mech/mechaS4.rsi
+    state: flail
+  discipline: Arsenal
+  tier: 3
+  cost: 9000
+  recipeUnlocks:
+  - MaceHarness
+  technologyPrerequisites:
+  - Flail
+  position: 6, 11
+- type: technology
+  id: MechCombat
+  name: research-technology-mechs-combat
+  icon:
+    sprite: Objects/Specific/Mech/mecha.rsi
+    state: gygax
+  entityIcon: MechGygaxBattery
+  discipline: Arsenal
+  tier: 2
+  cost: 32500
+  recipeUnlocks:
+  - GygaxHarness
+  - GygaxArmor
+  - GygaxHead
+  - GygaxLArm
+  - GygaxLLeg
+  - GygaxRArm
+  - GygaxRLeg
+  - GygaxCentralElectronics
+  - GygaxPeripheralsElectronics
+  - GygaxTargetingElectronics
+  - WeaponMechCombatUltraRifle
+  - WeaponMechCombatMissileRack8
+  - WeaponMechCombatFlashbangLauncher
+  - DurandHarness
+  - DurandArmor
+  - DurandHead
+  - DurandLArm
+  - DurandLLeg
+  - DurandRArm
+  - DurandRLeg
+  - DurandCentralElectronics
+  - DurandPeripheralsElectronics
+  - DurandTargetingElectronics
+  - WeaponMechCombatShotgun
+  - WeaponMechCombatShotgunIncendiary
+  technologyPrerequisites:
+  - SuperParts
+  - MechBasic
+  position: 2, 11
+- type: technology
+  id: BroadswordSubtypes
+  name: research-technology-broadsword-subtypes
+  icon:
+    sprite: _Mono/Objects/Specific/Mech/mechaS2.rsi
+    state: broadsword
+  entityIcon: AFInterceptorM
+  discipline: Arsenal
+  tier: 1
+  cost: 35000
+  recipeUnlocks:
+  - HalberdHarness
+  - MediumMechDMR
+  - MediumMechCoilgun
+  - MediumMechTOW
+  technologyPrerequisites:
+  - Broadsword
+  position: 4, 12

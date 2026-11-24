@@ -1,0 +1,238 @@
+# Generic borg
+- type: borgType
+  id: generic
+
+  # Description
+  dummyPrototype: BorgChassisGeneric
+
+  # Functional
+  extraModuleCount: 5
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleScience # until sciborgs are added
+    - BorgModuleSyndicate # HardLight
+    - BorgModuleSyndicateAssault # HardLight
+    - XenoborgModuleGeneric # HardLight
+
+  defaultModules:
+  - BorgModuleTool
+
+  radioChannels:
+  - Science
+
+  # Visual
+  inventoryTemplateId: borgShortHL # HardLight
+  spritePath: Mobs/Silicon/Chassis/generic/default.rsi
+
+  # Pet
+  petSuccessString: petting-success-generic-cyborg
+  petFailureString: petting-failure-generic-cyborg
+
+
+# Engineering borg
+- type: borgType
+  id: engineering
+
+  # Description
+  dummyPrototype: BorgChassisEngineer
+
+  # Functional
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleEngineering
+    - BorgModuleSyndicate # HardLight
+    - BorgModuleSyndicateAssault # HardLight
+    - XenoborgModuleGeneric # HardLight
+
+  defaultModules:
+  - BorgModuleTool
+  - BorgModuleConstruction
+  - BorgModuleRCD
+  - BorgModuleCable
+
+  radioChannels:
+  - Engineering
+  - Science
+
+  # Visual
+  inventoryTemplateId: borgShortHL # HardLight
+  spritePath: Mobs/Silicon/Chassis/engineering/default.rsi
+
+  # Pet
+  petSuccessString: petting-success-engineer-cyborg
+  petFailureString: petting-failure-engineer-cyborg
+
+
+# Salvage borg
+- type: borgType
+  id: mining
+
+  # Description
+  dummyPrototype: BorgChassisMining
+
+  # Functional
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleCargo
+    - BorgModuleSyndicate # HardLight
+    - BorgModuleSyndicateAssault # HardLight
+    - XenoborgModuleGeneric # HardLight
+
+  defaultModules:
+  - BorgModuleTool
+  - BorgModuleMining
+  - BorgModuleTraversal
+  - BorgModuleAppraisal
+
+  radioChannels:
+  - Supply
+  - Science
+
+  # Visual
+  inventoryTemplateId: borgTallHL # HardLight
+  spritePath: Mobs/Silicon/Chassis/mining/default.rsi
+  spriteBodyMovementState: borg_moving
+
+  # Pet
+  petSuccessString: petting-success-salvage-cyborg
+  petFailureString: petting-failure-salvage-cyborg
+
+
+# Janitor borg
+- type: borgType
+  id: janitor
+
+  # Description
+  dummyPrototype: BorgChassisJanitor
+
+  # Functional
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleJanitor
+    - BorgModuleSyndicate # HardLight
+    - BorgModuleSyndicateAssault # HardLight
+    - XenoborgModuleGeneric # HardLight
+
+  defaultModules:
+  - BorgModuleTool # Starlight
+  - BorgModuleCustodial
+  - BorgModuleCleaning
+
+  radioChannels:
+  - Science
+  - Service
+
+  # Visual
+  inventoryTemplateId: borgShortHL # HardLight
+  spritePath: Mobs/Silicon/Chassis/janitor/default.rsi
+  spriteBodyMovementState: borg_moving
+
+  # Pet
+  petSuccessString: petting-success-janitor-cyborg
+  petFailureString: petting-failure-janitor-cyborg
+
+
+# Medical borg
+- type: borgType
+  id: medical
+
+  # Description
+  dummyPrototype: BorgChassisMedical
+
+  # Functional
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleMedical
+    - BorgModuleSyndicate # HardLight
+    - BorgModuleSyndicateAssault # HardLight
+    - XenoborgModuleGeneric # HardLight
+
+  defaultModules:
+  - BorgModuleTool # Starlight
+  - BorgModuleTopicals
+  - BorgModuleChemical
+  - BorgModuleRescue
+
+  radioChannels:
+  - Science
+  - Medical
+
+  addComponents:
+  - type: SolutionScanner
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+    - Synth # HardLight
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+  # HardLight start
+  - type: SurgerySpeedModifier
+    speedModifier: 1.75
+  - type: Sanitized
+  # HardLight end
+
+  # Visual
+  inventoryTemplateId: borgDutchHL # HardLight
+  spritePath: Mobs/Silicon/Chassis/medical/default.rsi
+  spriteBodyMovementState: borg_moving
+
+  # Pet
+  petSuccessString: petting-success-medical-cyborg
+  petFailureString: petting-failure-medical-cyborg
+
+  # Sounds
+  footstepCollection:
+    collection: FootstepHoverBorg
+
+
+# Service borg
+- type: borgType
+  id: service
+
+  # Description
+  dummyPrototype: BorgChassisService
+
+  # Functional
+  extraModuleCount: 3
+  moduleWhitelist:
+    tags:
+    - BorgModuleGeneric
+    - BorgModuleService
+    - BorgModuleSyndicate # HardLight
+    - BorgModuleSyndicateAssault # HardLight
+    - XenoborgModuleGeneric # HardLight
+
+  defaultModules:
+  - BorgModuleTool # Starlight
+  - BorgModuleMusique
+  # - BorgModuleService # Frontier: deprecated, use NF variant
+  - BorgModuleClowning
+  - BorgModuleBureaucracy # Frontier
+  - BorgModuleNFService # Frontier
+
+  radioChannels:
+  - Science
+  - Service
+
+  addComponents: # HardLight
+  - type: FabricateActions # HardLight
+    actions:
+    - ActionFabricatePaper
+
+  # Visual
+  inventoryTemplateId: borgTallHL # HardLight
+  spritePath: Mobs/Silicon/Chassis/service/default.rsi
+
+  # Pet
+  petSuccessString: petting-success-service-cyborg
+  petFailureString: petting-failure-service-cyborg

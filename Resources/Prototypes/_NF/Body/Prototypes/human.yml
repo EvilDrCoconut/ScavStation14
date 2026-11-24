@@ -1,0 +1,43 @@
+- type: body
+  id: NFHumanNoHands
+  name: "human"
+  root: torso
+  slots:
+    head:
+      part: HeadHuman
+      connections:
+      - torso
+      organs:
+        brain: OrganHumanBrain
+        eyes: OrganHumanEyes
+        cybernetic_anchor: OrganCrescentDummy
+    torso:
+      part: TorsoHuman
+      connections:
+      - right_arm
+      - left_arm
+      - right_leg
+      - left_leg
+      organs:
+        heart: OrganHumanHeart
+        lungs: OrganHumanLungs
+        stomach: OrganHumanStomach
+        liver: OrganHumanLiver
+        kidneys: OrganHumanKidneys
+        dermis: OrganCrescentDummy
+    right_arm:
+      part: RightArmHuman
+    left_arm:
+      part: LeftArmHuman
+    right_leg:
+      part: RightLegHuman
+      connections:
+      - right_foot
+    left_leg:
+      part: LeftLegHuman
+      connections:
+      - left_foot
+    right_foot:
+      part: RightFootHuman
+    left_foot:
+      part: LeftFootHuman

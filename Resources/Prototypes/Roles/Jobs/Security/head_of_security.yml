@@ -1,0 +1,63 @@
+- type: job
+  id: HeadOfSecurity
+  name: job-name-hos
+  description: job-description-hos
+  playTimeTracker: JobHeadOfSecurity # Frontier JobHeadOfSecurity<JobHeadOfSecurityOld
+  requirements:
+    - !type:RoleTimeRequirement
+      role: JobWarden
+      time: 3600 # 1 hr
+    - !type:RoleTimeRequirement
+      role: JobDetective
+      time: 3600 # 1 hr; knowing how to use the tools is important
+    - !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 18000 # 5 hrs
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 36000 # 10 hrs
+  weight: 60 # HardLight: 10<60
+  startingGear: HoSGear
+  icon: "JobIconHeadOfSecurity"
+  supervisors: job-supervisors-captain
+  canBeAntag: false
+  requireAdminNotify: true
+  access:
+  - HeadOfSecurity
+  - Command
+  - Brig
+  - Security
+  - Armory
+  - Maintenance
+  - Service
+  - External
+  - Detective
+  - Cryogenics
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:AddComponentSpecial
+    components:
+    - type: CommandStaff
+    - type: PsionicBonusChance # Nyano: Makes it more likely to become psionic.
+      flatBonus: 0.025
+  ## Frontier: commented out stuff above
+  setPreference: true
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+
+- type: startingGear
+  id: HoSGear
+  equipment:
+    # eyes: ClothingEyesGlassesSecurity # HardLight: Add departmental NF-style loadouts
+    id: HoSPDA
+    # gloves: ClothingHandsGlovesCombat # HardLight: Add departmental NF-style loadouts
+    ears: ClothingHeadsetAltSecurity
+    pocket1: NFWeaponPistolMk58 # Frontier: use NF version
+    pocket2: NFHyperlinkBookCommandSOP # HardLight
+  storage:
+    back:
+    - Flash
+    - Magazine45_ACPPistolFMJ
+    - FrontierUplinkCoin10
+    - FrontierUplinkCoin10

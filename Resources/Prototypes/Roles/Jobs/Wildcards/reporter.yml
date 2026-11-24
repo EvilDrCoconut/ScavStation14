@@ -1,0 +1,27 @@
+- type: job
+  id: Reporter
+  name: job-name-reporter
+  description: job-description-reporter
+  playTimeTracker: JobReporter
+  setPreference: true
+  weight: -20 # HardLight
+  startingGear: ReporterGear
+  icon: "JobIconReporter"
+  supervisors: job-supervisors-hop
+  access: # Frontier
+  - Service # Frontier
+  - Maintenance # Frontier
+  - Journalism # HardLight
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+
+- type: startingGear
+  id: ReporterGear
+  equipment:
+    # shoes: ClothingShoesColorWhite # Hardlight: remove this in favour of loadout option
+    id: ReporterPDA
+    ears: ClothingHeadsetAltRadioHost
+  storage:
+    back:
+    - RadioServerFlatpack
+    - RadioRigFlatpack

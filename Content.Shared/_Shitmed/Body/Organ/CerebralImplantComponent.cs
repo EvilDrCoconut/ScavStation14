@@ -1,0 +1,7 @@
+namespace Content.Shared._Shitmed.Body.Organ;
+
+[RegisterComponent]
+public sealed partial class CerebralImplantComponent : Component
+{
+    //This is left blank as a placeholder.
+}

@@ -1,0 +1,148 @@
+# These will be spawned randomly around the station
+- type: entityLootTable
+  id: SuspicionRule
+  entries:
+  - id: NFWeaponRifleAssaultSm # Frontier: WeaponRifleAk<NFWeaponRifleAssaultSm
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponRifleAssaultM90GrenadeLauncher # Frontier: WeaponRifleM90GrenadeLauncher<NFWeaponRifleAssaultM90GrenadeLauncher
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponRifleAssaultLecter # Frontier: WeaponRifleLecter<NFWeaponRifleAssaultLecter
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponPistolViper # Frontier: WeaponPistolViper<NFWeaponPistolViper
+    amount: 0
+    maxAmount: 5
+  - id: WeaponPistolCobra # Frontier: WeaponPistolCobra<NFWeaponPistolCobra
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponPistolMk58 # Frontier: WeaponPistolMk58<NFWeaponPistolMk58
+    amount: 0
+    maxAmount: 5
+  - id: ButchCleaver
+    maxAmount: 5
+  - id: Pickaxe
+    maxAmount: 5
+  - id: Spear
+    maxAmount: 5
+  - id: ToolboxEmergency
+    maxAmount: 5
+  - id: CrowbarRed
+    maxAmount: 5
+  - id: Stunbaton
+    maxAmount: 10
+
+  - id: NFWeaponRevolverDeckard # Frontier: WeaponRevolverDeckard<NFWeaponRevolverDeckard
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponRevolverInspector # Frontier: WeaponRevolverInspector<NFWeaponRevolverInspector
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponRevolverWard45 # Frontier: WeaponRevolverMateba<NFWeaponRevolverWard45
+    amount: 0
+    maxAmount: 5
+
+  - id: NFWeaponShotgunBulldog # Frontier: use NF prefix
+    amount: 0
+    maxAmount: 5
+  - id: WeaponShotgunDoubleBarreled # Frontier: use NF prefix
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponShotgunEnforcer # Frontier: use NF prefix
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponShotgunKammerer # Frontier: use NF prefix
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponShotgunSawn # Frontier: use NF prefix
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponShotgunHandmade # Frontier: use NF prefix
+    amount: 0
+    maxAmount: 5
+
+  - id: NFWeaponSubMachineGunAtreides # Frontier: WeaponSubMachineGunAtreides<NFWeaponSubMachineGunAtreides
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponSubMachineGunC20r # Frontier: WeaponSubMachineGunC20r<NFWeaponSubMachineGunC20r
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponSubMachineGunWt550 # Frontier: WeaponSubMachineGunWt550<NFWeaponSubMachineGunWt550
+    amount: 0
+    maxAmount: 5
+
+  - id: WeaponSniperMosin # Frontier: WeaponSniperMosin<NFWeaponRifleBarlowsBolt
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponRifleSniperHristov # Frontier: WeaponSniperHristov<NFWeaponRifleSniperHristov
+    amount: 0
+    maxAmount: 5
+  - id: NFWeaponEnergyPistolLaser # Frontier: WeaponLaserGun<NFWeaponEnergyPistolLaser
+    amount: 0
+    maxAmount: 1
+  - id: NFWeaponEnergyRifleSniperCannon # Frontier: WeaponLaserCannon<NFWeaponEnergyRifleSniperCannon
+    amount: 0
+    maxAmount: 1
+  - id: NFWeaponEnergyRifleSniperXrayCannon # Frontier: WeaponXrayCannon<NFWeaponEnergyRifleSniperXrayCannon
+    amount: 0
+    maxAmount: 2
+  - id: NFWeaponEnergyPistolDisabler # Frontier: WeaponDisabler<NFWeaponEnergyPistolDisabler
+    amount: 0
+    maxAmount: 4
+
+  - id: NFWeaponLauncherChinaLake # Frontier: WeaponLauncherChinaLake<NFWeaponLauncherChinaLake
+    prob: 0.30
+    maxAmount: 3
+
+  - id: NFWeaponLauncherRocket # Frontier: WeaponLauncherRocket<NFWeaponLauncherRocket
+    prob: 0.20
+    maxAmount: 3
+
+  - id: LidSalami
+    amount: 0
+    maxAmount: 10
+
+  - id: ExGrenade
+    prob: 0.10
+    amount: 0
+    maxAmount: 2
+
+  - id: GrenadeFlashBang
+  - id: SyndieMiniBomb
+    prob: 0.05
+    amount: 0
+    maxAmount: 5
+
+  - id: 40mmGrenadeFlash
+  - id: 40mmGrenadeThermobaric
+  - id: 40mmGrenadeFragmentation
+  - id: 40mmGrenadeBaton
+  - id: SoapSyndie
+    amount: 0
+    maxAmount: 3
+
+
+    # Spawn a bunch of ammo around!
+  - id: Magazine556x45mmFMJ
+    maxAmount: 15
+  - id: Magazine635x40mmCaseless
+    maxAmount: 15
+  - id: Magazine635x40mmCaselessBig
+    maxAmount: 15
+  - id: Magazine635x40mmCaselessPistol
+    maxAmount: 15
+  - id: Magazine762x39mmFMJ
+    maxAmount: 15
+  - id: Magazine12_gaugeBuckshot
+    maxAmount: 15
+  - id: Magazine9x19mmPistolFMJ
+    maxAmount: 15
+  - id: Magazine9x19mmPistolHighCapacityFMJ
+    maxAmount: 15
+  - id: Magazine9x19mmSubMachineGunFMJ
+    maxAmount: 15
+  - id: CartridgeRocket
+    maxAmount: 15
+  - id: 40mmGrenadeFragmentation
+    maxAmount: 15

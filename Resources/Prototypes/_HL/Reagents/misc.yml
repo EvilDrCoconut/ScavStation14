@@ -1,0 +1,75 @@
+- type: reagent
+  id: Ink
+  name: reagent-name-ink
+  group: Medicine
+  desc: reagent-desc-ink
+  physicalDesc: reagent-physical-desc-inky-black
+  flavor: sweet
+  color: "#ae0072"
+  metabolisms:
+    Medicine:
+      metabolismRate : 0.02
+      effects:
+      - !type:Emote
+        conditions:
+        - !type:ReagentThreshold
+          min: 16.5
+        emote: Yawn
+        showInChat: true
+        probability: 0.02
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.8
+        sprintSpeedModifier: 0.8
+        conditions:
+        - !type:ReagentThreshold
+          min: 16.5
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 30.0
+        key: ForcedSleep
+        component: ForcedSleeping
+        refresh: false
+        type: Add
+        probability: 0.1
+      - !type:HealthChange # poisons you if you take way too much
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          types:
+            Poison: 1
+- type: reagent
+  id: Nepetalactone
+  name: reagent-name-nepetalactone
+  group: Medicine
+  desc: reagent-desc-nepetalactone
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: minty
+  color: "#979156"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:MovespeedModifier # stimulant
+        walkSpeedModifier: 1.05
+        sprintSpeedModifier: 1.05
+        conditions:
+        - !type:ReagentThreshold
+          max: 20
+        - !type:OrganType # same as thiobromine, not strictly chemically accurate, but id say its fair for balance. feel free to change this if anyone wants to add new organ types for vulpkanin/tajaran/felinid
+          type: Animal
+      - !type:MovespeedModifier # too much causes lethargy from overstimulation
+        walkSpeedModifier: 0.9
+        sprintSpeedModifier: 0.9
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        - !type:OrganType
+          type: Animal
+      - !type:ChemVomit # more too much make puke
+        probability: 0.10
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        - !type:OrganType
+          type: Animal

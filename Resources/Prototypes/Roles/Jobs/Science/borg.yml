@@ -1,0 +1,45 @@
+# No idea why it's in sci but we ball.
+# Why is this one file?
+- type: job
+  id: StationAi
+  name: job-name-station-ai
+  description: job-description-station-ai
+  playTimeTracker: JobStationAi
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobBorg
+    time: 18000  # 5 hrs
+  canBeAntag: false
+  weight: 10 # HardLight
+  icon: JobIconStationAi
+  supervisors: job-supervisors-ai
+  jobEntity: StationAiBrain
+  jobPreviewEntity: PlayerStationAiPreview
+  applyTraits: false
+  setPreference: true
+
+- type: job
+  id: Borg
+  name: job-name-borg
+  description: job-description-borg
+  playTimeTracker: JobBorg
+  setPreference: true
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 43200 # 12 hrs # Frontier: 10<12 hrs
+  canBeAntag: false
+  # accessGroups:
+  # - AllAccess
+  # access:
+  # - CentralCommand
+  icon: JobIconBorg
+  supervisors: job-supervisors-rd
+  jobEntity: PlayerBorgBattery
+  applyTraits: true #HardLight
+  startingGear: BorgGear #HardLight
+
+# HardLight
+- type: startingGear
+  id: BorgGear
+  equipment:
+    id: CyborgPDA

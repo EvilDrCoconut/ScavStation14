@@ -1,0 +1,178 @@
+using Content.Shared.Construction.Components;
+using Content.Shared.Construction.EntitySystems;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Database;
+using Content.Shared.Examine;
+using Content.Shared.Interaction;
+using Content.Shared.Materials;
+using Content.Shared.Popups;
+using Content.Shared.Tools.Systems;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Prototypes;
+
+namespace Content.Shared.Construction;
+
+public abstract class SharedFlatpackSystem : EntitySystem
+{
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
+    [Dependency] private readonly AnchorableSystem _anchorable = default!;
+    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] protected readonly MachinePartSystem MachinePart = default!;
+    [Dependency] protected readonly SharedMaterialStorageSystem MaterialStorage = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedToolSystem _tool = default!;
+
+    /// <inheritdoc/>
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<FlatpackComponent, InteractUsingEvent>(OnFlatpackInteractUsing);
+        SubscribeLocalEvent<FlatpackComponent, ExaminedEvent>(OnFlatpackExamined);
+
+        SubscribeLocalEvent<FlatpackCreatorComponent, ItemSlotInsertAttemptEvent>(OnInsertAttempt);
+    }
+
+    private void OnInsertAttempt(Entity<FlatpackCreatorComponent> ent, ref ItemSlotInsertAttemptEvent args)
+    {
+        if (args.Slot.ID != ent.Comp.SlotId || args.Cancelled)
+            return;
+
+        if (HasComp<MachineBoardComponent>(args.Item))
+            return;
+
+        if (TryComp<ComputerBoardComponent>(args.Item, out var computer) && computer.Prototype != null)
+            return;
+
+        args.Cancelled = true;
+    }
+
+    private void OnFlatpackInteractUsing(Entity<FlatpackComponent> ent, ref InteractUsingEvent args)
+    {
+        var (uid, comp) = ent;
+        if (!_tool.HasQuality(args.Used, comp.QualityNeeded) || _container.IsEntityInContainer(ent))
+            return;
+
+        var xform = Transform(ent);
+
+        if (xform.GridUid is not { } grid || !TryComp<MapGridComponent>(grid, out var gridComp))
+            return;
+
+        args.Handled = true;
+
+        if (comp.Entity == null)
+        {
+            Log.Error($"No entity prototype present for flatpack {ToPrettyString(ent)}.");
+
+            if (_net.IsServer)
+                QueueDel(ent);
+            return;
+        }
+
+        var buildPos = _map.TileIndicesFor(grid, gridComp, xform.Coordinates);
+
+        // Use the resulting machine's own hard collision layers/mask against anchored
+        // entities on the destination tile, instead of a broad lookup that always trips on
+        // the flatpack itself or on item-mask debris. Mirrors upstream Wizden behaviour.
+        var (layer, mask) = GetPrototypeHardCollision(comp.Entity);
+
+        if (!_anchorable.TileFree((grid, gridComp), buildPos, layer, mask))
+        {
+            _popup.PopupPredicted(Loc.GetString("flatpack-unpack-no-room"), uid, args.User);
+            return;
+        }
+
+        if (_net.IsServer)
+        {
+            var spawn = Spawn(comp.Entity, _map.GridTileToLocal(grid, gridComp, buildPos));
+            if (TryComp(spawn, out TransformComponent? spawnXform)) // Frontier: rotatable flatpacks
+                spawnXform.LocalRotation = xform.LocalRotation.GetCardinalDir().ToAngle(); // Frontier: rotatable flatpacks
+            _adminLogger.Add(LogType.Construction,
+                LogImpact.Low,
+                $"{ToPrettyString(args.User):player} unpacked {ToPrettyString(spawn):entity} at {xform.Coordinates} from {ToPrettyString(uid):entity}");
+            QueueDel(uid);
+        }
+
+        _audio.PlayPredicted(comp.UnpackSound, args.Used, args.User);
+    }
+
+    private void OnFlatpackExamined(Entity<FlatpackComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+        args.PushMarkup(Loc.GetString("flatpack-examine"));
+    }
+
+    /// <summary>
+    /// Aggregates the hard collision layer/mask of a prototype's fixtures so that we can
+    /// check whether the destination tile is free for the resulting machine.
+    /// </summary>
+    private (int Layer, int Mask) GetPrototypeHardCollision(EntProtoId? protoId)
+    {
+        if (protoId == null || !PrototypeManager.TryIndex<EntityPrototype>(protoId, out var proto))
+            return (0, 0);
+
+        if (!proto.TryGetComponent<FixturesComponent>(out var fixtures, EntityManager.ComponentFactory))
+            return (0, 0);
+
+        var layer = 0;
+        var mask = 0;
+
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            layer |= fixture.CollisionLayer;
+            mask |= fixture.CollisionMask;
+        }
+
+        return (layer, mask);
+    }
+
+    protected void SetupFlatpack(Entity<FlatpackComponent?> ent, EntProtoId proto, EntityUid board)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        ent.Comp.Entity = proto;
+        var machinePrototype = PrototypeManager.Index<EntityPrototype>(proto);
+
+        var meta = MetaData(ent);
+        _metaData.SetEntityName(ent, Loc.GetString("flatpack-entity-name", ("name", machinePrototype.Name)), meta);
+        _metaData.SetEntityDescription(ent, Loc.GetString("flatpack-entity-description", ("name", machinePrototype.Name)), meta);
+
+        Dirty(ent, meta);
+        Appearance.SetData(ent, FlatpackVisuals.Machine, MetaData(board).EntityPrototype?.ID ?? string.Empty);
+    }
+
+    public Dictionary<string, int> GetFlatpackCreationCost(Entity<FlatpackCreatorComponent> entity, Entity<MachineBoardComponent>? machineBoard)
+    {
+        Dictionary<string, int> cost = new();
+        Dictionary<ProtoId<MaterialPrototype>, int> baseCost;
+        if (machineBoard is not null)
+        {
+            cost = MachinePart.GetMachineBoardMaterialCost(machineBoard.Value, -1);
+            baseCost = entity.Comp.BaseMachineCost;
+        }
+        else
+            baseCost = entity.Comp.BaseComputerCost;
+
+        foreach (var (mat, amount) in baseCost)
+        {
+            cost.TryAdd(mat, 0);
+            cost[mat] -= amount;
+        }
+
+        return cost;
+    }
+}

@@ -1,0 +1,7 @@
+- type: entity
+  save: false
+  name: Urist McShadow
+  parent: [BaseMobShadekin, BaseMob]
+  id: MobShadekin
+  components:
+  - type: PotentialPsionic #HL - Summary: makes potentially psionic.

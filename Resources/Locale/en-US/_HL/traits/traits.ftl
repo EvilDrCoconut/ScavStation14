@@ -1,0 +1,146 @@
+hl-trait-robot-voice-name = Robotic Voice
+hl-trait-robot-voice-desc = Through a synthetic larynx or some other way, you sound like a robot. *This trait will replace your species' emotes with nothing.*
+
+hl-trait-borg-voice-name = Cyborg Voice
+hl-trait-borg-voice-desc = Through a synthetic larynx or some other way, you sound like a cyborg. *This trait will replace your species' emotes with nothing.*
+
+hl-trait-voice-syndieborg-name = Syndicate Cyborg Voice
+hl-trait-voice-syndieborg-desc = Through a synthetic larynx or some other way, you sound like a syndicate cyborg. *This trait will replace your species' emotes with nothing.*
+
+hl-trait-voice-xenoborg-name = Xenoborg Voice
+hl-trait-voice-xenoborg-desc = Through a synthetic larynx or some other way, you sound like a xenoborg. *This trait will replace your species' emotes with nothing.*
+
+hl-trait-voice-avali-name = Avali Voice
+hl-trait-voice-avali-desc = Through one way or another, you sound like an Avali. *This trait will replace your species' emotes.*
+
+hl-trait-voice-resomi-name = Resomi Voice
+hl-trait-voice-resomi-desc = Through one way or another, you sound like a Resomi. *This trait will replace your species' emotes.*
+
+hl-trait-voice-vulpkanin-name = Vulpkanin Voice
+hl-trait-voice-vulpkanin-desc = Through one way or another, you sound like a Vulpkanin. *This trait will replace your species' emotes.*
+
+hl-trait-voice-lizard-name = Reptilian Voice
+hl-trait-voice-lizard-desc = Through one way or another, you sound like a Reptilian. *This trait will replace your species' emotes.*
+
+hl-trait-voice-slime-name = Slimeperson Voice
+hl-trait-voice-slime-desc = Through one way or another, you sound like a slimeperson. *This trait will replace your species' emotes.*
+
+hl-trait-voice-moth-name = Moth Voice
+hl-trait-voice-moth-desc = Through one way or another, you sound like a mothperson. *This trait will replace your species' emotes.*
+
+hl-trait-voice-fox-name = Foxlike Voice
+hl-trait-voice-fox-desc = Through one way or another, you sound like a fox. *This trait will replace your species' emotes.*
+
+hl-trait-voice-dog-name = Doglike Voice
+hl-trait-voice-dog-desc = Through one way or another, you sound like a dog. *This trait will replace your species' emotes.*
+
+hl-trait-voice-cat-name = Cat Voice
+hl-trait-voice-cat-desc = Through one way or another, you sound like a cat. *This trait will replace your species' emotes.*
+
+hl-trait-voice-wawa-name = Scurret Voice
+hl-trait-voice-wawa-desc = Through one way or another, you sound like an adorable scurret!! *This trait will replace your species' emotes with nothing.*
+
+
+
+
+hl-trait-scandinavian-name = Scandinavian accent
+hl-trait-scandinavian-desc = You have to assemble the sentence yourself.
+
+hl-trait-russian-name = Russian accent
+hl-trait-russian-desc = You speak with a thick Russian accent, da?
+
+lead-footed-name = Lead-footed
+lead-footed-text = Somehow able to stay standing during the rigors of FTL.
+inoculated-name = Inoculated
+inoculated-text = Through regular dosages of Ambuzol+, you have become immune to the Romerol infection.
+insulated-name = Insulated
+insulated-text = Through natural or artificial means, your body is more resistant to Shock.
+heat-resistant-name = Heat-resistant
+heat-resistant-text = Through natural or artificial means, your body tolerates higher temperatures and takes less damage while on fire.
+radproof-name = Radproof
+radproof-text = Through natural or artificial means, your body is more resistant to Radiation.
+snake-eater-name = Snake Eater
+snake-eater-text = Through natural or artificial means, your body is more resistant to Toxin.
+cold-resistant-name = Cold-resistant
+cold-resistant-text = Through natural or artificial means, your body tolerates lower temperatures.
+natural-regen-name = Natural Regeneration
+natural-regen-text = Through unknown means, your body is slightly more capable of naturally healing injuries.
+
+
+
+
+
+
+pooltoy-name = Pool Toy!
+pooltoy-text = You're a living inflatable, whether by some weird mutation or by being a synthetic being. You are quite resillient to blunt and naturally insulated, but are extra susceptible to pierce and slash, and you are easily knocked about by sudden forces!
+
+big-name = Big
+big-text = You are noticeably larger than average.
+very-big-name = Very Big
+very-big-text = You are significantly larger than average.  This has brought you no benefits over merely being big except learning how to squeeze into tight spaces.
+small-name = Small
+small-text = You are noticeably smaller than average.
+tiny-name = Tiny
+tiny-text = You are substantially smaller than average.
+
+big-trait-cannot-wield-ranged = You are too large to wield this weapon.
+small-trait-cannot-use-wield-required = You are too small to use { THE($item) }.
+small-trait-must-wield-weapon = You are too small to use { THE($item) } unless it's wielded.
+small-trait-cannot-wield-weapon = You are too small to wield { THE($item) }.
+tiny-trait-cannot-pickup-weapon = You are too small to pick up { THE($item) }.
+tiny-trait-cannot-attack-with-tool = You are too small to attack with { THE($item) }.
+tiny-trait-cannot-wield = You are too small to wield { THE($item) }.
+tiny-trait-requires-two-hands = You are too small to hold { THE($item) } with only one hand.
+
+pettable-name = Pettable
+pettable-text = You enjoy being pet on your soft floofy head!
+
+trait-untouchable-name = Untouchable
+trait-untouchable-desc = You tend to avoid the touch of others, leaning away from bites, hugs, passive pulls, and pets.
+untouchable-pull-fail = {CAPITALIZE(THE($target))} pulls away from your touch.
+
+hl-trait-light-sensitivity-name = Light Sensitivity
+hl-trait-light-sensitivity-desc = Your physiology is especially vulnerable to light. You begin burning at HIGH light exposure.
+
+hl-trait-extreme-light-sensitivity-name = Extreme Light Sensitivity
+hl-trait-extreme-light-sensitivity-desc = Light is agonizing to your form. Even MODERATE exposure causes severe burns.
+
+hl-trait-shadekin-regeneration-name = Dark Healing
+hl-trait-shadekin-regeneration-desc = In TOTAL darkness, your nature accelerates recovery from physical and heat trauma, but not caustic.
+
+hl-trait-extreme-shadekin-regeneration-name = Extreme Dark Healing
+hl-trait-extreme-shadekin-regeneration-desc = In TOTAL darkness, your essence rapidly heals all but cellular damage.
+
+hl-trait-mild-light-sensitivity-name = Mild Light Sensitivity
+hl-trait-mild-light-sensitivity-desc = You are somewhat sensitive to EXTREME light, just like shadekin.
+
+
+
+
+
+trait-hardskin-name = Hard Skin
+trait-hardskin-desc = Your skin is too hard for needles to pierce.
+injector-component-deny-hardskin = {CAPITALIZE(THE($target))}'s skin is too hard for the needle to pierce.
+
+trait-ultravision-nobypass-name = Ultraviolet vision (Untoggleable)
+trait-ultravision-nobypass-desc = Through a random mutation, you perceive the world with ultraviolet light. (Note this cannot be disable with the accessibility toggle)
+
+trait-deuteranopia-nobypass-name = Deuteranopia (Untoggleable)
+trait-deuteranopia-nobypass-desc = Through a random mutation, you have red-green colour blindness. (Note this cannot be disable with the accessibility toggle)
+
+trait-low-voice-name = Low voice
+trait-low-voice-desc = Your emotes sound a little deeper than usual.
+
+trait-lowest-voice-name = Deep voice
+trait-lowest-voice-desc = Your emotes sound much deeper than usual.
+
+trait-high-voice-name = High voice
+trait-high-voice-desc = Your emotes sound a little higher than usual.
+
+trait-highest-voice-name = Squeaky voice
+trait-highest-voice-desc = Your emotes sound much higher than usual.
+
+trait-test-bionic-spinarette-name = Test Bionic Spinarette
+trait-test-bionic-spinarette-desc = Speeeeeeen
+
+

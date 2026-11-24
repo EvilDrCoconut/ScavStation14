@@ -1,0 +1,12 @@
+- type: entity
+  id: PoweredLightPostSmallRed
+  suffix: Red
+  parent: PoweredLightPostSmall
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.PoweredLightLayers.Base" ]
+  - type: ContainerFill # HardLight
+    containers:
+      light_bulb: [ LightTubeCrystalRed ]

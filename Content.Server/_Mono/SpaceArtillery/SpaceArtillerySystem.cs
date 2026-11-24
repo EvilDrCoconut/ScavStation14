@@ -1,0 +1,216 @@
+using System.Numerics;
+using Content.Server._Mono.FireControl;
+using Content.Server._Mono.NPC.HTN;
+using Content.Shared.DeviceLinking.Events;
+using Content.Server.Power.Components;
+using Content.Server.Power.EntitySystems;
+using Content.Server.Weapons.Ranged.Systems;
+using Content.Shared._Mono.ShipGuns;
+using Content.Shared._Mono.SpaceArtillery;
+using Content.Shared.Camera;
+using Content.Shared.DeviceLinking;
+using Content.Shared.Examine;
+using Content.Shared.Power;
+using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Map;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Player;
+using SpaceArtilleryComponent = Content.Server._Mono.SpaceArtillery.Components.SpaceArtilleryComponent;
+
+namespace Content.Server._Mono.SpaceArtillery;
+
+public sealed partial class SpaceArtillerySystem : EntitySystem
+{
+    [Dependency] private readonly GunSystem _gun = default!;
+    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
+    [Dependency] private readonly SharedCameraRecoilSystem _recoilSystem = default!;
+    [Dependency] private readonly FireControlSystem _fireControl = default!;
+    [Dependency] private readonly ShipAggroSystem _aggro = default!;
+
+    private const float DISTANCE = 100;
+    private const float BIG_DAMAGE = 1000;
+    private const float BIG_DAMGE_KICK = 35;
+    private ISawmill _sawmill = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        _sawmill = Logger.GetSawmill("SpaceArtillery");
+        SubscribeLocalEvent<SpaceArtilleryComponent, AmmoShotEvent>(OnShotEvent);
+        SubscribeLocalEvent<SpaceArtilleryComponent, PowerChangedEvent>(OnApcChanged);
+        SubscribeLocalEvent<SpaceArtilleryComponent, OnEmptyGunShotEvent>(OnEmptyShotEvent);
+        SubscribeLocalEvent<SpaceArtilleryComponent, SignalReceivedEvent>(OnSignalReceived);
+        SubscribeLocalEvent<SpaceArtilleryComponent, ChargeChangedEvent>(OnBatteryChargeChanged);
+        SubscribeLocalEvent<ShipWeaponProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
+        SubscribeLocalEvent<ShipWeaponProjectileComponent, PreventCollideEvent>(OnShipProjectilePreventCollide);
+        SubscribeLocalEvent<ShipGunClassComponent, ExaminedEvent>(OnExamined);
+    }
+
+    /// <summary>
+    /// Ship-gun projectiles spawn on the firing ship's grid; without this they can collide with
+    /// the firing ship's own hull on the first physics step.
+    /// </summary>
+    private void OnShipProjectilePreventCollide(EntityUid uid, ShipWeaponProjectileComponent component, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!TryComp<ProjectileComponent>(uid, out var projectile) || projectile.Weapon == null)
+            return;
+
+        var weaponGrid = _xform.GetGrid(projectile.Weapon.Value);
+        if (weaponGrid == null)
+            return;
+
+        if (args.OtherEntity == weaponGrid.Value || _xform.GetGrid(args.OtherEntity) == weaponGrid)
+            args.Cancelled = true;
+    }
+
+
+    private void OnSignalReceived(EntityUid uid, SpaceArtilleryComponent component, ref SignalReceivedEvent args)
+    {
+        if (!TryComp<DeviceLinkSinkComponent>(uid, out var source))
+            return;
+
+        if (args.Port != component.SpaceArtilleryFirePort)
+            OnMalfunction(uid, component);
+
+        var hasBattery = TryComp<BatteryComponent>(uid, out var battery);
+
+        if (!TryComp<ApcPowerReceiverComponent>(uid, out var apc) && !hasBattery)
+            return;
+
+        if (apc is { Powered: true } || battery?.CurrentCharge >= component.PowerUseActive)
+            TryFireArtillery(uid, component);
+        else
+            OnMalfunction(uid, component);
+    }
+
+
+    private void OnApcChanged(EntityUid uid, SpaceArtilleryComponent component, ref PowerChangedEvent args)
+    {
+        if (TryComp<BatterySelfRechargerComponent>(uid, out var batteryCharger))
+        {
+            if (args.Powered)
+            {
+                batteryCharger.AutoRecharge = true;
+                batteryCharger.AutoRechargeRate = component.PowerChargeRate;
+            }
+            else
+            {
+                batteryCharger.AutoRecharge = true;
+                batteryCharger.AutoRechargeRate = component.PowerUsePassive * -1;
+            }
+        }
+    }
+
+
+    private void OnBatteryChargeChanged(EntityUid uid, SpaceArtilleryComponent component, ref ChargeChangedEvent args)
+    {
+        if (TryComp<ApcPowerReceiverComponent>(uid, out var apcPowerReceiver) && TryComp<BatteryComponent>(uid, out var battery))
+        {
+            apcPowerReceiver.Load = battery.CurrentCharge >= battery.MaxCharge * 0.99 ? component.PowerUsePassive : component.PowerUsePassive + component.PowerChargeRate;
+        }
+    }
+
+    private void TryFireArtillery(EntityUid uid, SpaceArtilleryComponent component)
+    {
+        var xform = Transform(uid);
+
+        if (xform.GridUid == null && !xform.MapUid.HasValue)
+        {
+            return;
+        }
+
+        var parentGrid = xform.GridUid;
+        if (!xform.Anchored)
+        {
+            return;
+        }
+
+        if (!_gun.TryGetGun(uid, out var gunUid, out var gun))
+        {
+            OnMalfunction(uid, component);
+            return;
+        }
+
+        var worldPosX = _xform.GetWorldPosition(uid).X;
+        var worldPosY = _xform.GetWorldPosition(uid).Y;
+        var worldRot = _xform.GetWorldRotation(uid) + Math.PI;
+        var targetSpot = new Vector2(worldPosX - DISTANCE * (float)Math.Sin(worldRot), worldPosY + DISTANCE * (float)Math.Cos(worldRot));
+
+        // Create coordinates for the target and source positions
+        var sourceCoordinates = xform.Coordinates;
+        var targetCoordinates = new EntityCoordinates(xform.MapUid!.Value, targetSpot);
+
+        // We need to set the ShootCoordinates for the gun component
+        // This is important to ensure it uses the proper calculations in SharedGunSystem
+        gun.ShootCoordinates = targetCoordinates;
+
+        // Call AttemptShoot with the correct signature that includes target coordinates
+        // This will eventually call GunSystem.Shoot which correctly handles grid velocity
+        _gun.AttemptShoot(uid, gunUid, gun, targetCoordinates);
+    }
+
+    private void OnShotEvent(EntityUid uid, SpaceArtilleryComponent component, AmmoShotEvent args)
+    {
+        if (args.FiredProjectiles.Count == 0)
+        {
+            OnMalfunction(uid, component);
+            return;
+        }
+
+        if (TryComp<BatteryComponent>(uid, out var battery))
+        {
+            _battery.UseCharge(uid, component.PowerUseActive, battery);
+        }
+    }
+
+    private void OnEmptyShotEvent(EntityUid uid, SpaceArtilleryComponent component, OnEmptyGunShotEvent args)
+    {
+        OnMalfunction(uid, component);
+    }
+
+    private void OnMalfunction(EntityUid uid, SpaceArtilleryComponent component)
+    {
+    }
+
+    private void OnProjectileHit(EntityUid uid, ShipWeaponProjectileComponent component, ProjectileHitEvent hitEvent)
+    {
+        var grid = Transform(hitEvent.Target).GridUid;
+        if (grid == null)
+            return;
+
+        // Notify any AI ship core on the hit grid so it can wake up and chase.
+        _aggro.NotifyGridHit(grid.Value);
+
+        var players = Filter.Empty();
+        players.AddInGrid((EntityUid)grid);
+
+        foreach (var player in players.Recipients)
+        {
+            if (player.AttachedEntity is not EntityUid playerEnt)
+                continue;
+
+            var vector = _xform.GetWorldPosition(uid) - _xform.GetWorldPosition(playerEnt);
+
+            _recoilSystem.KickCamera(playerEnt, vector.Normalized() * (float)hitEvent.Damage.GetTotal() / BIG_DAMAGE * BIG_DAMGE_KICK);
+        }
+    }
+
+    private void OnExamined(EntityUid uid, ShipGunClassComponent component, ExaminedEvent args)
+    {
+        if (!TryComp<FireControllableComponent>(uid, out var controllable))
+            return;
+        if (!args.IsInDetailsRange)
+            return;
+        args.PushMarkup(
+            Loc.GetString(
+                "ship-gun-class-component-examine-detail",
+                ("processingPower", _fireControl.GetProcessingPowerCost(uid, controllable))
+            )
+        );
+    }
+}

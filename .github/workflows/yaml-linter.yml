@@ -1,0 +1,29 @@
+name: YAML Linter
+on:
+  pull_request:
+    paths:
+      - 'Content.*/**' # C#.
+      - 'Resources/**' # YAML, RSI, etc.
+      - 'RobustToolbox/**' # Engine updates.
+
+jobs:
+  build:
+    name: YAML Linter
+    if: forgejo.event.pull_request.draft == false && forgejo.actor != 'HardLight-Auto-Changelog'
+    runs-on: ubuntu-latest
+    container:
+      image: node:20-bookworm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Setup SS14
+        uses: ./.github/actions/setup-ss14
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore /p:WarningsAsErrors= /m
+
+      - name: Run Linter
+        run: dotnet run --project Content.YAMLLinter/Content.YAMLLinter.csproj --no-build

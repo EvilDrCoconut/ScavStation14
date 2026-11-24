@@ -1,0 +1,21 @@
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
+
+namespace Content.Shared.Chemistry.Dispenser
+{
+    /// <summary>
+    /// Is simply a list of reagents defined in yaml. This can then be set as a
+    /// SharedReagentDispenserComponents <c>pack</c> value (also in yaml),
+    /// to define which reagents it's able to dispense. Based off of how vending
+    /// machines define their inventory.
+    /// </summary>
+    [Prototype]
+    public sealed partial class ReagentDispenserInventoryPrototype : IPrototype
+    {
+        [DataField("inventory", customTypeSerializer: typeof(PrototypeIdListSerializer<EntityPrototype>))]
+        public List<string> Inventory = new();
+
+        [ViewVariables, IdDataField]
+        public string ID { get; private set; } = default!;
+    }
+}

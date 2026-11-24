@@ -1,0 +1,29 @@
+- type: cargoProduct
+  id: RadioAdsCrateCargo
+  icon:
+    sprite: Objects/Misc/cd.rsi
+    state: icon
+  product: CrateRadioStationAds
+  cost: 1000 # Hardlight - Standardized cost with out custom disks.
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: RadioVinylCrateCargo
+  icon:
+    sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
+    state: red-vinyl-disk
+  product: CrateRadioStationVinyls
+  cost: 1000 # Hardlight - Standardized cost with out custom disks.
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: RadioVinylCrateCargo5
+  icon:
+    sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi
+    state: red-vinyl-disk
+  product: CrateRadioStationVinyls5
+  cost: 5000 # Hardlight - Standardized cost with our custom disks.
+  category: cargoproduct-category-name-service
+  group: market

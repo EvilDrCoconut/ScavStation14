@@ -1,0 +1,27 @@
+name: RGA schema validator
+on:
+  pull_request:
+    paths: # The only two dirs with RGA (attribtutions.yml) attributed assets.
+      - 'Resources/Audio/**'
+      - 'Resources/Textures/**'
+
+jobs:
+  yaml-schema-validation:
+    name: YAML RGA schema validator
+    if: forgejo.event.pull_request.draft == false && forgejo.actor != 'HardLight-Auto-Changelog'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Pull engine updates
+        uses: https://github.com/space-wizards/submodule-dependency@v0.1.5
+
+      - uses: https://github.com/PaulRitter/yaml-schema-validator@v1
+        with:
+          schema: RobustToolbox/Schemas/rga.yml
+          path_pattern: .*attributions.ya?ml$
+          validators_path: RobustToolbox/Schemas/rga_validators.py
+          validators_requirements: RobustToolbox/Schemas/rga_requirements.txt

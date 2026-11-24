@@ -1,0 +1,50 @@
+name: Build & Test Debug
+
+on:
+  pull_request:
+    paths:
+      - 'Content.*/**' # C#.
+      - 'Resources/**' # YAML, RSI, etc.
+      - 'RobustToolbox/**' # Engine updates.
+
+concurrency:
+  group: integration-tests-${{ forgejo.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: forgejo.event.pull_request.draft == false && forgejo.actor != 'HardLight-Auto-Changelog'
+    runs-on: ubuntu-latest
+    name: Build Client & Server
+
+    steps:
+      - name: Checkout Master
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Setup SS14 Env
+        uses: ./.github/actions/setup-ss14
+
+      - name: Build Project
+        run: dotnet build --configuration DebugOpt --no-restore /p:TreatWarningsAsErrors=true /m
+
+      - name: Check Formatting
+        run: dotnet format --verify-no-changes --severity warn --exclude RobustToolbox
+
+      - name: Run Content.Tests
+        run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0
+
+      - name: Run Content.IntegrationTests
+        shell: bash
+        env:
+          DOTNET_gcServer: 1
+        run: dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed
+  ci-success:
+    name: Build & Test Debug
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: CI succeeded
+        run: exit 0

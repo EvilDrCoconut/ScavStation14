@@ -1,0 +1,50 @@
+# ColSec techfab made into packs.
+# TODO: Reorganize these into common packs.
+
+- type: latheRecipePack
+  id: NFNfsdTechfabDeprecatedStatic
+  recipes:
+  - ClothingEyesHudNfsd
+  - CombatKnife
+  - Flash
+  - ForensicPad
+  - Handcuffs
+  - RiotShield
+  - Stunbaton
+  - TargetClown
+  - TargetHuman
+  - TargetSyndicate
+  - WeaponDisablerPractice
+#      - WeaponFlareGunSecurity
+  - WeaponLaserCarbinePractice
+  - Zipties
+  - ThrusterNfsdMachineCircuitboard
+  - SmallThrusterMachineCircuitboard
+  - GyroscopeNfsdMachineCircuitboard
+  - SmallGyroscopeNfsdMachineCircuitboard
+  - ClothingOuterHardsuitEVAPrisoner
+  - WeaponDisabler
+  - ContrabandAppraisalTool
+  - HoloprojectorNfsd
+  - NFClothingBackpackElectropack
+  - PowerCageRechargerCircuitboard
+  - PowerCageHigh
+  - PowerCageMedium
+  - PowerCageSmall
+  - Signaller
+
+- type: latheRecipePack
+  id: NFNfsdTechfabDynamicDeprecated
+  recipes:
+  - ExplosivePayload
+  - FlashPayload
+  - PortableRecharger
+  - SignalTrigger
+  - TimerTrigger
+  - VoiceTrigger
+
+# Practice ammo/mags and practice weapons
+- type: latheRecipePack
+  id: NfsdPracticeStatic
+  recipes:
+  - Wirecutter

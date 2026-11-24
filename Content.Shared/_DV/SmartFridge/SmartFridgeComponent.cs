@@ -1,0 +1,96 @@
+using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+
+namespace Content.Shared._DV.SmartFridge;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
+public sealed partial class SmartFridgeComponent : Component
+{
+    [DataField]
+    public string Container = "smart_fridge_inventory";
+
+    [DataField]
+    public EntityWhitelist? Whitelist;
+
+    [DataField]
+    public EntityWhitelist? Blacklist;
+
+    [DataField]
+    public SoundSpecifier? InsertSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/revolver_magin.ogg");
+
+    [DataField, AutoNetworkedField]
+    public HashSet<SmartFridgeEntry> Entries = new();
+
+    // Map from entry name to the contained net-entities. Using string keys avoids
+    // complex-key YAML serialization issues when saving grids/ships.
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, HashSet<NetEntity>> ContainedEntries = new();
+
+    [DataField]
+    public TimeSpan EjectCooldown = TimeSpan.FromSeconds(1.2);
+
+    [ViewVariables]
+    public bool Ejecting => EjectEnd != null;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan? EjectEnd;
+
+    /// <summary>
+    ///     Sound that plays when ejecting an item
+    /// </summary>
+    [DataField]
+    public SoundSpecifier SoundVend = new SoundPathSpecifier("/Audio/Machines/machine_vend.ogg")
+    {
+        Params = new AudioParams
+        {
+            Volume = -4f,
+            Variation = 0.15f
+        }
+    };
+
+    /// <summary>
+    ///     Sound that plays when an item can't be ejected
+    /// </summary>
+    [DataField]
+    public SoundSpecifier SoundDeny = new SoundPathSpecifier("/Audio/Machines/custom_deny.ogg");
+
+    // Frontier:
+    /// <summary>
+    /// The maximum number of entities that can be stored in the fridge
+    /// </summary>
+    [DataField]
+    public int MaxContainedCount = 300;
+    // End Frontier
+}
+
+[Serializable, NetSerializable, DataRecord]
+public partial record struct SmartFridgeEntry
+{
+    public string Name;
+
+    public SmartFridgeEntry(string name)
+    {
+        Name = name;
+    }
+}
+
+[Serializable, NetSerializable]
+public enum SmartFridgeUiKey
+{
+    Key,
+}
+
+[Serializable, NetSerializable]
+public sealed class SmartFridgeDispenseItemMessage(SmartFridgeEntry entry) : BoundUserInterfaceMessage
+{
+    public SmartFridgeEntry Entry = entry;
+}
+
+[Serializable, NetSerializable]
+public sealed class SmartFridgeRemoveEntryMessage(SmartFridgeEntry entry) : BoundUserInterfaceMessage
+{
+    public SmartFridgeEntry Entry = entry;
+}

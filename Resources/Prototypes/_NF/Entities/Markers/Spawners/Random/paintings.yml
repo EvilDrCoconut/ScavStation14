@@ -1,0 +1,41 @@
+- type: entity
+  parent: RandomPainting
+  id: RandomPaintingHalloween
+  suffix: Halloween
+  components:
+  - type: RandomSpawner
+    offset: 0
+    prototypes:
+      - PaintingPersistenceOfMemory
+      - PaintingTheSonOfMan
+      - PaintingTheKiss
+      - PaintingTheScream
+      - PaintingTheGreatWave
+      - PaintingCafeTerraceAtNight
+      - PaintingNightHawks
+      - PaintingSkeletonCigarette
+      - PaintingPrayerHands
+      - PaintingOldGuitarist
+      - PaintingSaturn
+      - PaintingSleepingGypsy
+      - PaintingRedBlueYellow
+      - PaintingHelloWorld
+      - PaintingNightOfThePostGoblin
+      - PaintingCaladrius
+      # Special halloween posters
+      - PaintingSpookyIan
+      - PaintingSpookyLady
+      - PaintingArcameDuelAtDusk
+      - PaintingDrDinoGothic
+      - PaintingFihSpecimine
+      - PaintingQuietShift
+      - PaintingShitshitshitfuckfuckfuck
+      - PaintingTitansAmongGiants
+      - PaintingUristesque
+    chance: 1
+    rarePrototypes:
+      - PaintingSkeletonBoof
+      - PaintingEmpty
+      - PaintingMoony
+      - PaintingAmogusTriptych
+    rareChance: 0.01

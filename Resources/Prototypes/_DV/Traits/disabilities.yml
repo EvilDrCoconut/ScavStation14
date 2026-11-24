@@ -1,0 +1,25 @@
+- type: trait
+  id: UltraVision
+  name: trait-ultravision-name
+  description: trait-ultravision-desc
+  category: Physical
+  cost: 0
+  mutuallyExclusiveTraits:
+    - DogVision
+    - DogVisionNoBypass
+    - UltraVisionNoBypass
+  components:
+    - type: UltraVision
+
+- type: trait
+  id: DogVision
+  name: trait-deuteranopia-name
+  description: trait-deuteranopia-desc
+  category: Physical
+  cost: 0
+  mutuallyExclusiveTraits:
+    - UltraVision
+    - UltraVisionNoBypass
+    - DogVisionNoBypass
+  components:
+    - type: DogVision

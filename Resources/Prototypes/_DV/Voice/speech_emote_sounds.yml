@@ -1,0 +1,395 @@
+# species
+- type: emoteSounds
+  id: SoundsHarpy
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: HarpyScreams
+    Laugh:
+      collection: HarpyLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: HarpyCry
+    Whistle:
+      collection: Whistles
+    Hiss:
+      collection: HarpyHisses
+    Meow:
+      collection: HarpyMeows
+    Mew:
+      collection: HarpyMews
+    Growl:
+      collection: HarpyGrowls
+    Purr:
+      collection: HarpyPurrs
+    HarpyRing:
+      collection: HarpyRings
+    HarpyHonk:
+      collection: HarpyHonks
+      params: # Frontier
+        volume: -5 # Frontier
+    HarpyPew:
+      collection: HarpyPews
+    HarpyBang:
+      collection: HarpyBangs
+      params: # Frontier
+        volume: -5 # Frontier
+    HarpyBeep:
+      collection: HarpyBeeps
+    HarpyRev:
+      collection: HarpyRevs
+      params: # Frontier
+        volume: -5 # Frontier
+    Click:
+      collection: HarpyClicks
+    Chitter:
+      collection: HarpyChitter
+    Squeak:
+      collection: HarpySqueak
+    HarpyCaw:
+      collection: HarpyCaws
+    Chirp:
+      collection: HarpyChirps
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: VulpkaninBarks
+    Whine:
+      collection: VulpkaninWhines
+    Howl:
+      collection: VulpkaninHowls
+#    Honk:
+#      collection: BikeHorn
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Gasp:
+      collection: HarpyGasp
+    DefaultDeathgasp:
+      collection: DeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+    Squish: # Frontier
+      collection: HarpySquishes # Frontier
+    Gnash: # Flooftier
+      collection: FeroxiGnashes # Flooftier
+    MonkeyScreeches: # Frontier
+      collection: MonkeyScreeches # Frontier
+    Trill: # Hardlight
+      collection: FelionoidTrills # Hardlight
+
+- type: emoteSounds
+  id: MobDog
+  params:
+    variation: 0.125
+  sounds:
+    Growl:
+      collection: Growl # Starlight
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: Bark # Starlight
+    Whine:
+      collection: Whine # Starlight
+    Howl:
+      path: /Audio/_Starlight/Effects/howl.ogg # Starlight
+    Awoo:
+      path: /Audio/_Starlight/Effects/howl.ogg # Starlight
+    Weh: # Dogs need to Weh too
+      collection: Weh
+    Hew:
+      collection: Hew
+
+- type: emoteSounds
+  id: MaleRodentia
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: RodentiaScreams # Floof
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: BikeHorn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Squeak:
+      path: /Audio/Animals/mouse_squeak.ogg
+
+- type: emoteSounds
+  id: FemaleRodentia
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: RodentiaScreams # Floof
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: CluwneHorn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Squeak:
+      path: /Audio/Animals/mouse_squeak.ogg
+
+- type: emoteSounds
+  id: UnisexChitinid
+  params:
+    variation: 0.125
+  sounds:
+    Buzz:
+      path: /Audio/DeltaV/Voice/Chitinid/moth_scream.ogg
+    Scream:
+      path: /Audio/Voice/Arachnid/arachnid_scream.ogg
+    Laugh:
+      path: /Audio/DeltaV/Voice/Chitinid/moth_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
+    Click:
+      path: /Audio/Voice/Arachnid/arachnid_click.ogg
+    Crying:
+      collection: FemaleCry
+
+- type: emoteSounds
+  id: MaleFeroxi
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FeroxiScreams # HardLight: OmuStation
+    Laugh:
+      collection: MaleLaugh
+    Snore:
+      collection: Snores
+    Honk:
+      collection: BikeHorn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: FeroxiCries # HardLight: OmuStation
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Hiss:
+      path: /Audio/Animals/snake_hiss.ogg
+    Gnash:
+      collection: FeroxiGnashes
+    FeroxiChirp: # HardLight: OmuStation emote wheel
+      collection: FeroxiChirps
+    FeroxiSqueak: # HardLight: OmuStation emote wheel
+      collection: FeroxiSqueaks
+
+- type: emoteSounds
+  id: FemaleFeroxi
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FeroxiScreams # HardLight: OmuStation
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: CluwneHorn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FeroxiScreams # HardLight: OmuStation
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gnash:
+      collection: FeroxiGnashes
+    FeroxiChirp: # HardLight: OmuStation emote wheel
+      collection: FeroxiChirps
+    FeroxiSqueak: # HardLight: OmuStation emote wheel
+      collection: FeroxiSqueaks
+
+- type: emoteSounds
+  id: MaleKitsune
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: KitsuneScream #HL
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: BikeHorn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Growl:
+      collection: KitsuneGrowl #HL
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: VulpkaninBarks
+    Whine:
+      collection: VulpkaninWhines
+    Purr: # Hardlight
+      collection: FelinidPurrs
+    Howl:
+      collection: VulpkaninHowls
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+    MonkeyScreeches: # Frontier
+      collection: MonkeyScreeches # Frontier
+    Yap: # Floof
+      collection: VulpkaninYaps
+    Gekker: # Floof
+      collection: VulpkaninGekkers
+    Squeak: #HL
+      path: /Audio/_DV/Voice/Kitsune/fox_squeal1.ogg #HL
+    Yip: #HL
+      path: /Audio/_Starlight/Effects/yip.ogg #HL
+    Pout: #HL
+      collection: Whine #HL
+
+
+
+- type: emoteSounds
+  id: FemaleKitsune
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: KitsuneScream #HL
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: CluwneHorn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Growl:
+      collection: KitsuneGrowl #HL
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: VulpkaninBarks
+    Whine:
+      collection: VulpkaninWhines
+    Howl:
+      collection: VulpkaninHowls
+    Purr: # Hardlight
+      collection: FelinidPurrs
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+    MonkeyScreeches: # Frontier
+      collection: MonkeyScreeches # Frontier
+    Yap: # Floof
+      collection: VulpkaninYaps
+    Gekker: # Floof
+      collection: VulpkaninGekkers
+    Squeak: #HL
+      path: /Audio/_DV/Voice/Kitsune/fox_squeal1.ogg #HL
+    Yip: #HL
+      path: /Audio/_Starlight/Effects/yip.ogg #HL
+    Pout: #HL
+      collection: Whine #HL
+

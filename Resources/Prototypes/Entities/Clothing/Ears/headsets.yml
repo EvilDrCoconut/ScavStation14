@@ -1,0 +1,474 @@
+- type: entity
+  abstract: true
+  parent: [Clothing, RecyclableItemClothDevice] # Frontier: added RecyclableItemClothDevice
+  id: ClothingHeadset
+  name: headset
+  description: An updated, modular intercom that fits over the head. Comes with preset frequencies and takes encryption keys. # HardLight: Reworded
+  components:
+  - type: ContainerContainer
+    containers:
+      key_slots: !type:Container
+  - type: Headset
+  - type: EncryptionKeyHolder
+    keySlots: 10 # Frontier 4<10
+  # HardLight start: Added IntrinsicRadio components
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+  - type: ActiveRadio
+  # HardLight end
+  - type: Sprite
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots:
+    - ears
+    sprite: Clothing/Ears/Headsets/base.rsi
+  - type: GuideHelp
+    guides:
+    - Radio
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetGrey
+  name: passenger headset
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/base.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetCargo
+  name: cargo headset
+  description: A headset used by supply employees.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Supply
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Supply
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/cargo.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/cargo.rsi
+
+- type: entity
+  parent: ClothingHeadsetCargo
+  id: ClothingHeadsetMining
+  name: mining headset
+  description: Headset used by shaft miners.
+  components:
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/mining.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/mining.rsi
+
+- type: entity
+  parent: [ClothingHeadsetCargo, BaseCommandContraband]
+  id: ClothingHeadsetQM
+  name: QM headset # HardLight
+  description: A headset used by the quartermaster.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Command
+    - Supply
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Command
+    - Supply
+    - Common
+    - Faction
+  # HardLight end
+
+- type: entity
+  parent: [HLColCommBaseEars, ClothingHeadset, BaseColcommContraband] # Hardlight Change from centcom to colcomm contra
+  id: ClothingHeadsetCentCom
+  name: ColComm headset # HardLight
+  description: A headset used by the upper echelons of the Trans-Solar Federation.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - ColCom
+    - Command
+    - ColSec
+    - Security
+    - Medical
+    - Engineering
+    - Science
+    - Supply
+    - Service
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - ColCom
+    - Command
+    - ColSec
+    - Security
+    - Medical
+    - Engineering
+    - Science
+    - Supply
+    - Service
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/centcom.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/centcom.rsi
+
+- type: entity
+  parent: [ClothingHeadset, BaseCommandContraband]
+  id: ClothingHeadsetCommand
+  name: command headset
+  description: A headset with a commanding channel.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Command
+    - ColSec
+    - Security
+    - Medical
+    - Engineering
+    - Science
+    - Supply
+    - Service
+    - Common
+    - Faction
+    - Freelance
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Command
+    - ColSec
+    - Security
+    - Medical
+    - Engineering
+    - Science
+    - Supply
+    - Service
+    - Common
+    - Faction
+    - Freelance
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/command.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/command.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetEngineering
+  name: engineering headset
+  description: A headset for engineers to chat while the station burns around them.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Engineering
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Engineering
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/engineering.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/engineering.rsi
+
+- type: entity
+  parent: [ClothingHeadsetEngineering, BaseCommandContraband]
+  id: ClothingHeadsetCE
+  name: CE headset # HardLight
+  description: A headset for the chief engineer to ignore all emergency calls on.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Command
+    - Engineering
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Command
+    - Engineering
+    - Common
+    - Faction
+  # HardLight end
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetMedical
+  name: medical headset
+  description: A headset for the trained staff of the medbay.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Medical
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Medical
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/medical.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/medical.rsi
+
+- type: entity
+  parent: [ClothingHeadsetMedical, BaseCommandContraband]
+  id: ClothingHeadsetCMO
+  name: CMO headset # HardLight
+  description: A headset used by the CMO.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Command
+    - Medical
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Command
+    - Medical
+    - Common
+    - Faction
+  # HardLight end
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetScience
+  name: science headset
+  description: A sciency headset. Like usual.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Science
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Science
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/science.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/science.rsi
+
+- type: entity
+  parent: ClothingHeadsetScience
+  id: ClothingHeadsetMedicalScience
+  name: medical research headset
+  description: A headset that is a result of the mating between medical and science.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Medical
+    - Science
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Medical
+    - Science
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/medicalscience.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/medicalscience.rsi
+
+- type: entity
+  parent: ClothingHeadsetScience
+  id: ClothingHeadsetRobotics
+  name: robotics headset
+  description: Made specifically for the roboticists, who cannot decide between departments.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Science
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Science
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/robotics.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/robotics.rsi
+
+- type: entity
+  parent: [ClothingHeadsetScience, BaseCommandContraband]
+  id: ClothingHeadsetRD
+  name: RD headset # HardLight
+  description: Lamarr used to love chewing on this...
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Trinary # HL: Move RD's headset to Trinary
+    - Command
+    - Science
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Trinary # HL: Move RD's headset to Trinary
+    - Command
+    - Science
+    - Common
+    - Faction
+  # HardLight end
+
+- type: entity
+  parent: [ClothingHeadset, BaseSecurityLawyerContraband]
+  id: ClothingHeadsetSecurity
+  name: security headset
+  description: This is used by your elite security force.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Security
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Security
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/security.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/security.rsi
+
+- type: entity
+  parent: [ClothingHeadset, BaseSecurityContraband]
+  id: ClothingHeadsetBrigmedic
+  name: brigmedic headset
+  description: A headset that helps to hear the death cries.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Security
+    - Medical
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Security
+    - Medical
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/brigmedic.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/brigmedic.rsi
+
+- type: entity
+  parent: ClothingHeadset
+  id: ClothingHeadsetService
+  name: service headset
+  description: Headset used by the service staff, tasked with keeping the station full, happy and clean.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Service
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Service
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/service.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/service.rsi
+
+- type: entity
+  parent: [ClothingHeadset, BaseC3PirateContraband, ContrabandClothing] # Frontier: add BaseC3Contraband, ContrabandClothing
+  id: ClothingHeadsetFreelance
+  name: Pirate headset
+  description: This is used by a roaming group of Pirates.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Pirate
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Pirate
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/freelance.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/freelance.rsi
+
+- type: entity
+  parent: [ClothingHeadset, BaseC3WizardContraband, ContrabandClothing] # Frontier: BaseMagicalContraband<BaseC3WizardContraband, add ContrabandClothing
+  id: ClothingHeadsetWizard
+  name: wizard headset
+  description: A headset used by the dreaded space wizards.
+  components:
+  # HardLight start: Replaced starting encryption keys with intrinsic radio channels.
+  - type: ActiveRadio
+    intrinsicChannels:
+    - Common
+    - Faction
+  - type: EncryptionKeyHolder
+    intrinsicChannels:
+    - Common
+    - Faction
+  # HardLight end
+  - type: Sprite
+    sprite: Clothing/Ears/Headsets/wizard.rsi
+  - type: Clothing
+    sprite: Clothing/Ears/Headsets/wizard.rsi
+

@@ -1,0 +1,19 @@
+- type: marking
+  id: OniHornShaved
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  forcedColoring: false
+  speciesRestriction: [Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Oni/oni_horns.rsi
+    state: shaved
+
+- type: marking
+  id: OniHornBull
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  forcedColoring: false
+  speciesRestriction: [Thaven,Dwarf, Diona, Human, SlimePerson, Felinid, Oni, Harpy, Reptilian, Vulpkanin, Rodentia, Goblin, Sheleg, IPC, Feroxi, Moth, Arachnid, Kitsune, Chitinid]
+  sprites:
+  - sprite: _DV/Mobs/Customization/Oni/oni_horns.rsi
+    state: bull

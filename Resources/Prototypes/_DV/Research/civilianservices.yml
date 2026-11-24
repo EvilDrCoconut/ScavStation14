@@ -1,0 +1,19 @@
+- type: technology
+  id: SyringeGun
+  name: research-technology-syringe-gun
+  icon:
+    sprite: Objects/Weapons/Guns/Cannons/syringe_gun.rsi
+    state: syringe_gun
+  discipline: CivilianServices
+  tier: 2
+  cost: 25000
+
+  recipeUnlocks:
+    - LauncherSyringe
+    - MiniSyringe
+    - SyringeDart
+    - NFDartTracking
+    - DartGun
+  technologyPrerequisites:
+    - IndustrialMedicine
+  position: -5, 11

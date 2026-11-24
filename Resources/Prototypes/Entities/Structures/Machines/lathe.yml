@@ -1,0 +1,1177 @@
+# SPDX-FileCopyrightText: 2019 DamianX
+# SPDX-FileCopyrightText: 2019 L.E.D
+# SPDX-FileCopyrightText: 2020 Decappi
+# SPDX-FileCopyrightText: 2020 Hugo Laloge
+# SPDX-FileCopyrightText: 2020 Vera Aguilera Puerto
+# SPDX-FileCopyrightText: 2020 V?ctor Aguilera Puerto
+# SPDX-FileCopyrightText: 2020 lajolico
+# SPDX-FileCopyrightText: 2020 py01
+# SPDX-FileCopyrightText: 2020 windarkata
+# SPDX-FileCopyrightText: 2021 20kdc
+# SPDX-FileCopyrightText: 2021 Acruid
+# SPDX-FileCopyrightText: 2021 Alex Evgrashin
+# SPDX-FileCopyrightText: 2021 MehimoNemo
+# SPDX-FileCopyrightText: 2021 Metal Gear Sloth
+# SPDX-FileCopyrightText: 2021 SETh lafuente
+# SPDX-FileCopyrightText: 2021 SethLafuente
+# SPDX-FileCopyrightText: 2021 Swept
+# SPDX-FileCopyrightText: 2021 iczero
+# SPDX-FileCopyrightText: 2022 0x6273
+# SPDX-FileCopyrightText: 2022 Andreas K?mper
+# SPDX-FileCopyrightText: 2022 Anthemic
+# SPDX-FileCopyrightText: 2022 August Eymann
+# SPDX-FileCopyrightText: 2022 BubblegumBlue
+# SPDX-FileCopyrightText: 2022 Chris V
+# SPDX-FileCopyrightText: 2022 CrzyPotato
+# SPDX-FileCopyrightText: 2022 EmoGarbage404
+# SPDX-FileCopyrightText: 2022 Fishfish458
+# SPDX-FileCopyrightText: 2022 Flipp Syder
+# SPDX-FileCopyrightText: 2022 Francesco
+# SPDX-FileCopyrightText: 2022 Jack Fox
+# SPDX-FileCopyrightText: 2022 Jacob Tong
+# SPDX-FileCopyrightText: 2022 Justin Trotter
+# SPDX-FileCopyrightText: 2022 Lamrr
+# SPDX-FileCopyrightText: 2022 Lucas
+# SPDX-FileCopyrightText: 2022 Moony
+# SPDX-FileCopyrightText: 2022 Paul Ritter
+# SPDX-FileCopyrightText: 2022 Peptide90
+# SPDX-FileCopyrightText: 2022 Rane
+# SPDX-FileCopyrightText: 2022 Ripmorld
+# SPDX-FileCopyrightText: 2022 Snowni
+# SPDX-FileCopyrightText: 2022 Starm4ncer
+# SPDX-FileCopyrightText: 2022 Visne
+# SPDX-FileCopyrightText: 2022 ZeroDayDaemon
+# SPDX-FileCopyrightText: 2022 ZeroDiamond
+# SPDX-FileCopyrightText: 2022 fishfish458 <fishfish458>
+# SPDX-FileCopyrightText: 2022 mirrorcult
+# SPDX-FileCopyrightText: 2022 themias
+# SPDX-FileCopyrightText: 2022 zero
+# SPDX-FileCopyrightText: 2023 AJCM-git
+# SPDX-FileCopyrightText: 2023 AjexRose
+# SPDX-FileCopyrightText: 2023 Checkraze
+# SPDX-FileCopyrightText: 2023 ChilbroBaggins
+# SPDX-FileCopyrightText: 2023 Doru991
+# SPDX-FileCopyrightText: 2023 DrSmugleaf
+# SPDX-FileCopyrightText: 2023 HerCoyote23
+# SPDX-FileCopyrightText: 2023 IntegerTempest
+# SPDX-FileCopyrightText: 2023 Jeff
+# SPDX-FileCopyrightText: 2023 Kevin Zheng
+# SPDX-FileCopyrightText: 2023 KingFroozy
+# SPDX-FileCopyrightText: 2023 LankLTE
+# SPDX-FileCopyrightText: 2023 Lei Yunxing
+# SPDX-FileCopyrightText: 2023 Leon Friedrich
+# SPDX-FileCopyrightText: 2023 MishaUnity
+# SPDX-FileCopyrightText: 2023 MisterMecky
+# SPDX-FileCopyrightText: 2023 Morb
+# SPDX-FileCopyrightText: 2023 Nim
+# SPDX-FileCopyrightText: 2023 OttoMaticode
+# SPDX-FileCopyrightText: 2023 PECK
+# SPDX-FileCopyrightText: 2023 Puro
+# SPDX-FileCopyrightText: 2023 RiceMar1244
+# SPDX-FileCopyrightText: 2023 Scribbles0
+# SPDX-FileCopyrightText: 2023 Segonist
+# SPDX-FileCopyrightText: 2023 Slava0135
+# SPDX-FileCopyrightText: 2023 SpartanKadence
+# SPDX-FileCopyrightText: 2023 Stanislav4ix
+# SPDX-FileCopyrightText: 2023 Vordenburg
+# SPDX-FileCopyrightText: 2023 Whisper
+# SPDX-FileCopyrightText: 2023 brainfood1183
+# SPDX-FileCopyrightText: 2023 c4llv07e
+# SPDX-FileCopyrightText: 2023 chromiumboy
+# SPDX-FileCopyrightText: 2023 coolmankid12345
+# SPDX-FileCopyrightText: 2023 iller_saver
+# SPDX-FileCopyrightText: 2023 keronshb
+# SPDX-FileCopyrightText: 2023 liltenhead
+# SPDX-FileCopyrightText: 2023 lzk228
+# SPDX-FileCopyrightText: 2023 metalgearsloth
+# SPDX-FileCopyrightText: 2023 nmajask
+# SPDX-FileCopyrightText: 2023 ubis1
+# SPDX-FileCopyrightText: 2023 ???
+# SPDX-FileCopyrightText: 2024 Adrian16199
+# SPDX-FileCopyrightText: 2024 Alchebun
+# SPDX-FileCopyrightText: 2024 Alpaccalypse
+# SPDX-FileCopyrightText: 2024 Alzore
+# SPDX-FileCopyrightText: 2024 AndresE55
+# SPDX-FileCopyrightText: 2024 Aqeel Little
+# SPDX-FileCopyrightText: 2024 ArZarLordOfMango
+# SPDX-FileCopyrightText: 2024 Boaz1111
+# SPDX-FileCopyrightText: 2024 BramvanZijp
+# SPDX-FileCopyrightText: 2024 Cojoke
+# SPDX-FileCopyrightText: 2024 Debug
+# SPDX-FileCopyrightText: 2024 Dmitri
+# SPDX-FileCopyrightText: 2024 Dvir
+# SPDX-FileCopyrightText: 2024 Ed
+# SPDX-FileCopyrightText: 2024 Emisse
+# SPDX-FileCopyrightText: 2024 Flareguy
+# SPDX-FileCopyrightText: 2024 FungiFellow
+# SPDX-FileCopyrightText: 2024 Ghagliiarghii
+# SPDX-FileCopyrightText: 2024 GreaseMonk
+# SPDX-FileCopyrightText: 2024 GreyMario
+# SPDX-FileCopyrightText: 2024 Hannah Giovanna Dawson
+# SPDX-FileCopyrightText: 2024 Hanz
+# SPDX-FileCopyrightText: 2024 IProduceWidgets
+# SPDX-FileCopyrightText: 2024 Ilya246
+# SPDX-FileCopyrightText: 2024 Julian Giebel
+# SPDX-FileCopyrightText: 2024 Kara
+# SPDX-FileCopyrightText: 2024 KieueCaprie
+# SPDX-FileCopyrightText: 2024 Ko4ergaPunk
+# SPDX-FileCopyrightText: 2024 Krunklehorn
+# SPDX-FileCopyrightText: 2024 MACMAN2003
+# SPDX-FileCopyrightText: 2024 Maxtone
+# SPDX-FileCopyrightText: 2024 Menshin
+# SPDX-FileCopyrightText: 2024 Minty642
+# SPDX-FileCopyrightText: 2024 Nairod
+# SPDX-FileCopyrightText: 2024 Nemanja
+# SPDX-FileCopyrightText: 2024 Pieter-Jan Briers
+# SPDX-FileCopyrightText: 2024 Plykiya
+# SPDX-FileCopyrightText: 2024 RumiTiger
+# SPDX-FileCopyrightText: 2024 Salvantrix
+# SPDX-FileCopyrightText: 2024 SlamBamActionman
+# SPDX-FileCopyrightText: 2024 TakoDragon
+# SPDX-FileCopyrightText: 2024 Tayrtahn
+# SPDX-FileCopyrightText: 2024 Teemu Kauhanen
+# SPDX-FileCopyrightText: 2024 Ubaser
+# SPDX-FileCopyrightText: 2024 VividPups
+# SPDX-FileCopyrightText: 2024 Whatstone
+# SPDX-FileCopyrightText: 2024 amatwiedle
+# SPDX-FileCopyrightText: 2024 beck-thompson
+# SPDX-FileCopyrightText: 2024 blueDev2
+# SPDX-FileCopyrightText: 2024 checkraze
+# SPDX-FileCopyrightText: 2024 chrome-cirrus
+# SPDX-FileCopyrightText: 2024 deepdarkdepths
+# SPDX-FileCopyrightText: 2024 icekot8
+# SPDX-FileCopyrightText: 2024 lapatison
+# SPDX-FileCopyrightText: 2024 lzk
+# SPDX-FileCopyrightText: 2024 ninruB
+# SPDX-FileCopyrightText: 2024 osjarw
+# SPDX-FileCopyrightText: 2024 takemysoult
+# SPDX-FileCopyrightText: 2024 to4no_fix
+# SPDX-FileCopyrightText: 2025 Ark
+# SPDX-FileCopyrightText: 2025 ArtisticRoomba
+# SPDX-FileCopyrightText: 2025 BeeRobynn
+# SPDX-FileCopyrightText: 2025 ErhardSteinhauer
+# SPDX-FileCopyrightText: 2025 K-Dynamic
+# SPDX-FileCopyrightText: 2025 Myzumi
+# SPDX-FileCopyrightText: 2025 Redrover1760
+# SPDX-FileCopyrightText: 2025 Southbridge
+# SPDX-FileCopyrightText: 2025 Velken
+# SPDX-FileCopyrightText: 2025 core-mene
+# SPDX-FileCopyrightText: 2025 deltanedas
+# SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
+# SPDX-FileCopyrightText: 2025 dustylens
+# SPDX-FileCopyrightText: 2025 kosticia
+# SPDX-FileCopyrightText: 2025 mikus
+# SPDX-FileCopyrightText: 2025 slarticodefast
+# SPDX-FileCopyrightText: 2025 starch
+# SPDX-FileCopyrightText: 2025 wewman222
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseLathe
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  abstract: true
+  name: lathe
+  components:
+  - type: Appearance
+  - type: WiresVisuals
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Lathe
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist: # Frontier
+      tags: # Frontier
+      - Sheet # Frontier
+      - RawMaterial # Frontier
+      - Ingot # Frontier
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: WiresPanel
+  - type: ActivatableUI
+    key: enum.LatheUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: Transform
+    anchored: true
+  - type: Pullable
+  - type: StaticPrice
+    price: 800
+  - type: ResearchClient
+  - type: AutomationSlots # Goobstation
+    slots:
+    - !type:AutomatedMaterialStorage
+      input: AutomationSlotMaterials
+      output: null
+    - !type:AutomatedPorts
+      sinks:
+      - LathePrint
+  - type: TechnologyDatabase
+  - type: MaterialStorageMagnetPickup # Frontier
+    range: 0.30 # Frontier
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+  - type: LatheAutomation # Goobstation
+
+# a lathe that can be sped up with space lube / slowed down with glue
+- type: entity
+  abstract: true
+  parent: BaseLathe
+  id: BaseLatheLube
+  components:
+  - type: ReagentSpeed
+    solution: lube
+    modifiers:
+      SpaceLube: 0.5 # Frontier: 0.25<0.5 (we double dip on time with lube and machine parts)
+      SpaceGlue: 5
+  - type: SolutionContainerManager
+    solutions:
+      lube:
+        maxVol: 250
+  - type: Spillable
+    solution: lube
+  - type: RefillableSolution
+    solution: lube
+  - type: ExaminableSolution
+    solution: lube
+
+- type: entity
+  abstract: true
+  id: BaseHyperlathe
+  components:
+  - type: Lathe
+    materialUseMultiplier: 0.5
+    timeMultiplier: 1.5 # Revert to upstream
+  - type: LatheHeatProducing
+  - type: ReagentSpeed
+    modifiers:
+      SpaceLube: 0.8 # Revert to upstream
+      SpaceGlue: 5 # no change from normal lathe, overheat!!!
+
+- type: entity
+  id: Autolathe
+  parent: BaseLatheLube
+  name: autolathe
+  description: It produces basic items using metal and glass. Has the ability to process blueprints to print new recipes.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/autolathe.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: AutolatheMachineCircuitboard
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: OreSiloClient
+  - type: Lathe
+    idleState: icon
+    runningState: building
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
+    staticPacks:
+    - ToolsStatic
+    - PartsStatic
+    - AtmosStatic
+    - CablesStatic
+    - CargoStatic
+    - MaterialsStatic
+    - BasicChemistryStatic
+    - RollerBedsStatic
+    - LightsStatic
+    - ServiceStatic
+    - PowerCellsStatic
+    - ElectronicsStatic
+    - NFSalvageStatic # Frontier
+    - NFLights # Frontier
+    - NFServiceStatic # Frontier
+    - ReportingStatic # DeltaV
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - CivilianAmmoRecipePack
+  #  - MonoRestraintsStatic # Mono
+  - type: BlueprintReceiver
+    whitelist:
+      tags:
+      - BlueprintAutolathe
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      blueprint: !type:Container
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - blueprint
+  - type: PirateBountyItem # Frontier
+    id: Autolathe # Frontier
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: AutolatheHyperConvection
+  parent: [Autolathe, BaseHyperlathe]
+  name: hyper convection autolathe
+  description: A highly-experimental autolathe that harnesses the power of extreme heat to slowly create objects more cost-effectively.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/autolathe_hypercon.rsi
+  - type: Machine
+    board: AutolatheHyperConvectionMachineCircuitboard
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: Protolathe
+  parent: BaseLatheLube
+  name: protolathe
+  description: Converts raw materials into advanced items.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/protolathe.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: ProtolatheMachineCircuitboard
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: OreSiloClient
+  - type: Lathe
+    idleState: icon
+    runningState: building
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
+    staticPacks:
+    - ChemistryStatic
+    - SurgeryStatic
+    - NullEnforcerStatic #HL
+    dynamicPacks:
+    - ServiceBoardsGoob
+    - AdvancedTools
+    - ScienceEquipment
+    - ScienceExplosives
+    - ScienceClothing
+    - PowerCells
+    - ScienceWeapons
+    - Mining
+    - AtmosTools
+    # - EngineeringWeapons # Frontier
+    - Chemistry
+    - Janitor
+    - Instruments
+    - Equipment
+    - FauxTiles
+    - Hydroponics
+    - NFMedical # Frontier
+    - NFEngineering # Frontier
+    - NFHardsuits # Frontier
+    - NFService # Frontier
+    - NFScience # Frontier
+    - NFPouches # Frontier
+    - SMSurgery # Shitmed Change
+    - AutomationKits # HL
+    # WD EDIT START
+    #- VisionGoggles
+    # WD EDIT END
+    - ShuttleWeaponMaterials # HL
+    - HLBags # HL: HardLight bag recipes
+    - NFCookingBagPack # Hardlight adds to protolathe research
+    - HLTacticalBagsPack
+  - type: EmagLatheRecipes
+    emagDynamicPacks:
+    - AdvancedAmmoRecipePack
+    - SecurityExplosives
+    - SecurityEquipment
+    - SecurityWeapons # Frontier
+    - SyringeGuns # Delta-V
+    - HLIndustrialImplants # HL
+    emagStaticPacks:
+    - CivilianAmmoRecipePack
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: ProtolatheHyperConvection
+  parent: [Protolathe, BaseHyperlathe]
+  name: hyper convection protolathe
+  description: A highly-experimental protolathe that harnesses the power of extreme heat to slowly create objects more cost-effectively.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/protolathe_hypercon.rsi
+  - type: Machine
+    board: ProtolatheHyperConvectionMachineCircuitboard
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: CircuitImprinter
+  parent: BaseLatheLube
+  name: circuit imprinter
+  description: Prints circuit boards for machines.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/circuit_imprinter.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: CircuitImprinterMachineCircuitboard
+  - type: Lathe
+    producingSound: /Audio/Machines/circuitprinter.ogg
+    idleState: icon
+    runningState: building
+    staticPacks:
+    - ScienceBoardsStatic
+    - ServiceBoardsStatic
+    - CargoBoardsStatic
+    - MedicalBoardsStatic # Shitmed Change
+    - EngineeringBoardsStatic
+    - CircuitFloorsStatic
+    - NFScienceBoardsStatic # Frontier
+    - NFServiceBoardsStatic # Frontier
+    - NFSalvageBoardsStatic # Frontier
+    dynamicPacks:
+    - EngineeringBoards
+    - CargoBoards
+    - MedicalBoards
+    - ServiceBoards
+    - ScienceBoards
+    - CameraBoards
+    - MechBoards
+    - ShuttleBoards
+    - EngineeringBoardsGoob #Goob Factorio port
+    - NFEngineeringBoards # Frontier
+    - NFMedicalBoards # Frontier + Shitmed Change
+    - NFServiceBoards # Frontier
+    - MechBoardsPlus
+    - MonoAdvancedShuttleComponents # Hardlight
+    - CivShuttleWeapons # HL
+    - ReactorCircuitboards # HL
+  - type: EmagLatheRecipes
+    emagDynamicPacks: # Frontier: empty list
+    - SecurityBoards # Frontier
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: OreSiloClient
+  - type: RequireProjectileTarget
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: CircuitImprinterHyperConvection
+  parent: [CircuitImprinter, BaseHyperlathe]
+  name: hyper convection circuit imprinter
+  description: A highly-experimental circuit imprinter that harnesses the power of extreme heat to slowly create objects more cost-effectively.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/circuit_imprinter_hypercon.rsi
+  - type: Machine
+    board: CircuitImprinterHyperConvectionMachineCircuitboard
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: ExosuitFabricator
+  parent: BaseLatheLube
+  name: exosuit fabricator
+  description: Creates parts for robotics and other mechanical needs.
+  components:
+  - type: Sprite
+    snapCardinals: true # Frontier
+    sprite: Structures/Machines/exosuit_fabricator.rsi
+    layers:
+    - state: fab-idle
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: fab-load
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: fab-o
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: ExosuitFabricatorMachineCircuitboard
+  - type: Lathe
+    idleState: fab-idle
+    runningState: fab-active
+    staticPacks:
+    - RoboticsStatic
+    - BorgModulesStatic
+    - BorgLimbsStatic
+    - MechMiscStatic # Mono
+    dynamicPacks:
+    - Robotics
+    - BorgModules
+    - MechParts
+    - MechEquipment
+    # Shitmed Change
+    - BorgModulesDynamic
+    - SMCybernetics
+    # Mono - Mechs
+    - ClarkeMechParts
+    - DurandMechParts
+    - GygaxMechParts
+    - MechWeapons
+    - RipleyUpgrade
+    # Starlight - Implants
+    - SLCybernetics
+    # HardLight - Implants
+    - HLIndustrialImplants
+  - type: EmagLatheRecipes
+    emagDynamicPacks:
+    - WeaponMechCombatArsenal
+    # Mono - Space Mecha
+    - S2Mechs
+    - SpaceMechaWeapons
+    - S2MechBoards
+    # Hardlight Change
+    - BorgArmorEnergy
+    - BorgArmorPhys
+    - ShuttleWeaponMaterials
+    - LightShuttleWeapons
+    - MediumShuttleWeapons
+    - HeavyShuttleWeapons
+    - CapitalShuttleWeapons
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: OreSiloClient
+  - type: GuideHelp
+    guides:
+    - Robotics
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: Biofabricator
+  parent: BaseLathe
+  name: biocube fabricator
+  description: Produces animal cubes using biomass.
+  categories: [ HideSpawnMenu ] # Frontier
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/biofabricator.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+      color: "#ffaa99"
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      color: "#ffaaaa"
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+      color: "#ffaaaa"
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: BiofabricatorMachineCircuitboard
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    ignoreColor: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+  - type: Lathe
+    idleState: icon
+    runningState: building
+    staticPacks:
+    - FriendlyCubesStatic
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - HostileCubesStatic
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: SecurityTechFab
+  parent: [ BaseLatheLube, BaseC3ContrabandUnredeemable ]
+  name: security techfab
+  description: Prints equipment for use by security crew.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/techfab.rsi
+    snapCardinals: true # Frontier
+    layers:
+    - state: icon
+      map: [ "enum.LatheVisualLayers.IsRunning" ]
+    - state: sec
+    - state: unlit
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Machine
+    board: SecurityTechFabCircuitboard
+  - type: DisableToolUse
+    anchoring: true
+    prying: true
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
+    staticPacks:
+    - SecurityAmmoStatic
+    - SecurityEquipmentStatic
+    - SecurityPracticeStatic
+    - CivilianAmmoRecipePack
+    - SecurityWeaponsStatic
+    - SecBorgLimbsStatic # HardLight addition
+    dynamicPacks:
+    - SalvageSecurityBoards
+    - SalvageSecurityWeapons
+    - SecurityEquipment
+    - SecurityBoards # Frontier
+    - SecurityExplosives
+    - AdvancedAmmoRecipePack
+    - SecurityWeapons
+    - SecurityDisablers
+    - SMCybernetics
+    # Mono - Mechs
+    - WeaponMechCombatArsenal
+    - S2Mechs
+    - S2MechBoards
+    - SpaceMechaWeapons
+    - MonoAdvancedShuttleComponents
+    - UniversalMissileAmmo
+    - UniversalRailgunAmmo
+    - UniversalShellAmmo
+    - UniversalOrdinance
+    - ShuttleWeaponMaterials
+    - CapitalShuttleWeapons
+    - HeavyShuttleWeapons
+    - MediumShuttleWeapons
+    - LightShuttleWeapons
+    # Crescent - Cyberware
+    - CombatCybernetics
+    # Starlight - Implants
+    - SLCybernetics
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: OreSiloClient
+  # - type: LatheAnnouncing # Frontier: spammy
+  #   channels: [Security] # Frontier
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: AmmoTechFab
+  parent: [BlueprintReceiverBase, BaseLatheLube] # Frontier: added BlueprintReceiverBase
+  name: ammo techfab
+  description: Prints the bare minimum of bullets that any budget military or armory could need. Nothing fancy.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/techfab.rsi
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: ammo
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: AmmoTechFabCircuitboard
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
+    staticPacks:
+    - CivilianAmmoRecipePack
+    dynamicPacks:
+    - AdvancedAmmoRecipePack
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: PirateBountyItem # Mono
+    id: Techfab
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+  - type: OreSiloClient
+
+- type: entity
+  id: MedicalTechFab
+  parent: [ BlueprintReceiverBase, BaseLatheLube ] # Frontier: added BlueprintReceiverBase
+  name: medical techfab
+  description: Prints equipment for use by the medbay.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/techfab.rsi
+    snapCardinals: true # Frontier
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: med
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Lathe
+    idleState: icon
+    runningState: icon
+    unlitIdleState: unlit
+    unlitRunningState: unlit-building
+    staticPacks:
+    - TopicalsStatic
+    - ChemistryStatic
+    - MedicalStatic
+    - RollerBedsStatic
+    - MedicalClothingStatic
+    - EmptyMedkitsStatic
+    - SurgeryStatic
+    - NFMedicalStatic # Frontier
+    - StratosUniformStatic # HL
+    dynamicPacks:
+    - Chemistry
+    - SyringeGuns # DeltaV
+    - NFMedical # Frontier
+    # Shitmed Change
+    - SMSurgery
+    - SMCybernetics
+  - type: EmagLatheRecipes
+    emagDynamicPacks:
+    - CombatCybernetics
+  - type: Machine
+    board: MedicalTechFabCircuitboard
+  - type: StealTarget
+    stealGroup: MedicalTechFabCircuitboard
+  - type: OreSiloClient
+  # - type: LatheAnnouncing # Frontier: spammy
+  #   channels: [Medical] # Frontier
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  parent: BaseLathe
+  id: UniformPrinter
+  name: uniform printer
+  description: Prints new or replacement uniforms.
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: Structures/Machines/uniform_printer.rsi
+    snapCardinals: false
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Machine
+    board: UniformPrinterMachineCircuitboard
+  - type: Lathe
+    producingSound: /Audio/Machines/uniformprinter.ogg
+    idleState: icon
+    runningState: building
+    staticPacks:
+    - ClothingCivilian
+    - ClothingCargo
+    - ClothingCommand
+    - ClothingEngineering
+    - ClothingMedical
+    - ClothingScience
+    - ClothingSecurity
+    - ClothingService
+    - WinterCoats
+    - Ties
+    - Scarves
+    - Carpets
+    - Bedsheets
+    - NFFloorTilesCarpet # Frontier
+    - NFUniformColored #Frontier
+    - NFUniformMilitary # Frontier
+    - NFUniformSpecial # Frontier
+    - NFUniformCloaks # Frontier
+    - NFWallets # Frontier
+    - PillowsStandard # HL
+    dynamicPacks: # Frontier
+    - NFPouches # Frontier
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    # - ClothingColComm # Frontier
+    - ClothingSyndie
+    # HL Starts
+    - ClothingNT
+    # HL Ends
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+      - Ingot
+  - type: OreSiloClient
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  id: Biogenerator
+  parent: BaseLathe
+  name: biogenerator
+  description: Converts plants into biomass, which can be used to construct useful items.
+  components:
+  - type: Sprite
+    sprite: _NF/Structures/Machines/biofabricator.rsi # Frontier: use NF version
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - state: beaker # Frontier
+      map: ["beaker"] # Frontier
+      visible: false # Frontier
+  - type: Machine
+    board: BiogeneratorMachineCircuitboard
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+  - type: ProduceMaterialExtractor
+  - type: ItemSlots
+    slots:
+      beaker_slot:
+        name: lathe-component-output-slot-beaker-name
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      beaker_slot: !type:ContainerSlot
+  - type: Lathe
+    reagentOutputSlotId: beaker_slot
+    idleState: icon
+    runningState: building
+    staticPacks:
+    - BioGenIngredientsStatic
+    - BioGenMaterialsStatic
+    - FriendlyCubesStatic # Frontier
+    - NFBioGenIngredientsStatic # Frontier
+    - NFBioGenMaterialsStatic # Frontier
+    - NFBioGenSodaStatic # Frontier
+    - NFBioGenSeedsStatic # Frontier
+    - NFBioGenSeedsMedicalStatic # Frontier
+    - NFBioGenSoil # Frontier
+    - NFBioGenAnimalCubesStatic #Frontier
+  - type: OreSiloClient #Hardlight
+  # Frontier: emag lathe recipes, item mapper
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - HostileCubesStatic
+    - NFBioGenIngredientsDangerous
+    - BioGenEmagStatic
+  - type: ItemMapper
+    mapLayers:
+      beaker:
+        whitelist: null # We shouldn't really care what goes in it
+    containerWhitelist:
+    - beaker_slot
+    spriteLayers:
+    - beaker
+  # End Frontier: emag lathe recipes, item mapper
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  parent: BaseLathe
+  id: OreProcessor
+  name: ore processor
+  description: It produces sheets and ingots using ores.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/ore_processor.rsi
+    #  snapCardinals: true # Frontier
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: inserting
+      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: OreProcessorMachineCircuitboard
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    ignoreColor: true
+    whitelist:
+      tags:
+      - Ore
+  - type: OreSiloClient
+  - type: Lathe
+    idleState: icon
+    runningState: building
+    defaultProductionAmount: 10
+    productValueModifier: null # Frontier
+    staticPacks:
+    - OreSmelting
+    # - RGlassSmelting # Frontier: raw mats only
+  - type: PlaceableSurface # DeltaV: Allow ore bags to dump into it directly
+    isPlaceable: false # but not place on it if you just click it with a random item
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  parent: OreProcessor
+  id: OreProcessorIndustrial
+  name: industrial ore processor
+  description: An ore processor specifically designed for mass-producing metals in industrial applications.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/ore_processor_industrial.rsi
+  - type: Machine
+    board: OreProcessorIndustrialMachineCircuitboard
+  - type: Lathe
+    materialUseMultiplier: 0.75
+    timeMultiplier: 0.5
+    staticPacks:
+    - OreSmelting
+    - RGlassSmelting
+    - AdvancedSmelting
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  parent: BaseLathe
+  id: Sheetifier
+  name: sheet-meister 2000
+  description: A very sheety machine.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/sheetifier.rsi
+    snapCardinals: true # Frontier
+    layers:
+    - state: base_machine
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: buttons_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Machine
+    board: SheetifierMachineCircuitboard
+  - type: MaterialStorage
+    dropOnDeconstruct: false #should drop ores instead of ingots/sheets
+    ignoreColor: true
+    canEjectStoredMaterials: true # Frontier: false<true
+    whitelist:
+      tags:
+      - Raw
+      - Wooden
+  - type: Lathe
+    idleState: base_machine
+    runningState: base_machine_processing
+    staticPacks:
+    - SheetifierStatic
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+- type: entity
+  parent: BaseLathe
+  id: CutterMachine
+  name: cutter machine
+  description: This is a cutter. It cuts. Add variety to your station floor with eye-pleasing patterns! Don't stick your fingers in.
+  components:
+  - type: Transform
+    noRot: false
+  - type: Sprite
+    sprite: Structures/Machines/cuttermachine.rsi
+    snapCardinals: true
+    layers:
+    - state: icon
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: unlit
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: CutterMachineCircuitboard
+  - type: Lathe
+    producingSound: /Audio/Machines/cutter.ogg
+    idleState: icon
+    runningState: building
+    staticPacks:
+    - FloorTilesStatic
+    - Carpets # Frontier
+    - CircuitFloorsStatic # Frontier
+    - NFFloorsMiscStatic # Frontier
+    - NFFloorTiles # Frontier
+    - NFFloorTilesCarpet # Frontier
+    - FloorTilesStaticSL
+    dynamicPacks: # Frontier
+    - FauxTiles # Frontier
+  - type: EmagLatheRecipes # Frontier
+    emagStaticPacks: # Frontier
+    - NFFloorTilesStrange # Frontier
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - Metal
+      - Wooden
+      - RawMaterial
+      - Plastic
+      - Ingot # Frontier
+  - type: OreSiloClient
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem
+
+# Shitmed Change Start
+- type: entity
+  id: MedicalBiofabricator
+  parent: BaseLathe
+  name: medical biofabricator
+  description: Produces organs and other organic matter that can be surgically grafted onto patients with biomass.
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Structures/Machines/limbgrower.rsi
+    snapCardinals: true
+    layers:
+    - state: limbgrower_idleoff
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  #    - state: limbgrower_idleoff
+  #      shader: unshaded
+  #      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  #    - state: inserting
+  #      map: ["enum.MaterialStorageVisualLayers.Inserting"]
+  #    - state: panel
+  #      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: Machine
+    board: MedicalBiofabMachineBoard
+  - type: MaterialStorage
+    canEjectStoredMaterials: true
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+  - type: Lathe
+    idleState: limbgrower_idleoff
+    runningState: limbgrower_idleon
+    productValueModifier: 0.05 # Mono - #3899
+    staticPacks:
+    - MedicalSynthLimbsStatic
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - MedicalPizzaLimbsStatic
+# Shitmed Change End
+  - type: DeviceLinkSink
+    ports:
+      - FillbotAnyItem

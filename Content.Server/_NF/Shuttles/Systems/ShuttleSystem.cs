@@ -1,0 +1,184 @@
+// New Frontiers - This file is licensed under AGPLv3
+// Copyright (c) 2024 New Frontiers Contributors
+// See AGPLv3.txt for details.
+using Content.Server._NF.Station.Components;
+using Content.Server.Shuttles.Components;
+using Content.Shared._NF.Shuttles.Events;
+using Content.Shared._NF.Shipyard.Components;
+using Content.Shared.Shuttles.Components;
+using Robust.Shared.Physics.Components;
+
+namespace Content.Server.Shuttles.Systems;
+
+public sealed partial class ShuttleSystem
+{
+    private const float SpaceFrictionStrength = 0.0015f;
+    private const float DampenDampingStrength = 0.25f; // FRONTIER MERGE: this should be valuable
+    private const float AnchorDampingStrength = 3f;
+    private void NfInitialize()
+    {
+        SubscribeLocalEvent<ShuttleConsoleComponent, SetInertiaDampeningRequest>(OnSetInertiaDampening);
+        SubscribeLocalEvent<ShuttleConsoleComponent, SetServiceFlagsRequest>(NfSetServiceFlags);
+    }
+
+    public bool SetInertiaDampening(EntityUid uid, PhysicsComponent physicsComponent, ShuttleComponent shuttleComponent, TransformComponent transform, InertiaDampeningMode mode)
+    {
+        if (!transform.GridUid.HasValue)
+        {
+            return false;
+        }
+
+        if (mode == InertiaDampeningMode.Query)
+        {
+            _console.RefreshShuttleConsoles(transform.GridUid.Value);
+            return false;
+        }
+
+        if (!HasComp<ShuttleDeedComponent>(transform.GridUid) ||
+            HasComp<StationDampeningComponent>(_station.GetOwningStation(transform.GridUid)))
+        {
+            return false;
+        }
+
+        var linearDampeningStrength = mode switch
+        {
+            InertiaDampeningMode.Off => SpaceFrictionStrength,
+            InertiaDampeningMode.Dampen => DampenDampingStrength,
+            InertiaDampeningMode.Anchor => AnchorDampingStrength,
+            _ => DampenDampingStrength, // other values: default to some sane behaviour (assume normal dampening)
+        };
+
+        var angularDampeningStrength = mode switch
+        {
+            InertiaDampeningMode.Off => SpaceFrictionStrength,
+            InertiaDampeningMode.Dampen => DampenDampingStrength,
+            InertiaDampeningMode.Anchor => AnchorDampingStrength,
+            _ => DampenDampingStrength, // other values: default to some sane behaviour (assume normal dampening)
+        };
+
+        // Persist the requested damping so TileFriction applies the selected mode every tick.
+        shuttleComponent.DampingModifier = linearDampeningStrength;
+        //Dirty(transform.GridUid.Value, shuttleComponent); HL: Don't need to dirty non-networked components
+
+        _console.RefreshShuttleConsoles(transform.GridUid.Value);
+        return true;
+    }
+
+    private void OnSetInertiaDampening(EntityUid uid, ShuttleConsoleComponent component, SetInertiaDampeningRequest args)
+    {
+        // Ensure that the entity requested is a valid shuttle (stations should not be togglable)
+        if (!TryComp(uid, out TransformComponent? transform) ||
+            !transform.GridUid.HasValue ||
+            !TryComp(transform.GridUid, out PhysicsComponent? physicsComponent) ||
+            !TryComp(transform.GridUid, out ShuttleComponent? shuttleComponent))
+        {
+            return;
+        }
+
+        if (SetInertiaDampening(uid, physicsComponent, shuttleComponent, transform, args.Mode) && args.Mode != InertiaDampeningMode.Query)
+            component.DampeningMode = args.Mode;
+    }
+
+    public InertiaDampeningMode NfGetInertiaDampeningMode(EntityUid entity)
+    {
+        if (!TryComp(entity, out TransformComponent? xform))
+            return InertiaDampeningMode.Dampen;
+
+        // Not a shuttle, shouldn't be togglable
+        if (!HasComp<ShuttleDeedComponent>(xform.GridUid) ||
+            HasComp<StationDampeningComponent>(_station.GetOwningStation(xform.GridUid)))
+            return InertiaDampeningMode.Station;
+
+        // Prefer reading the ShuttleComponent's DampingModifier since we persist
+        // the desired dampening there. Fall back to PhysicsComponent if missing.
+        if (TryComp(xform.GridUid, out ShuttleComponent? shuttleComp))
+        {
+            var modifier = shuttleComp.DampingModifier;
+            if (modifier >= AnchorDampingStrength)
+                return InertiaDampeningMode.Anchor;
+            else if (modifier <= SpaceFrictionStrength)
+                return InertiaDampeningMode.Off;
+            else
+                return InertiaDampeningMode.Dampen;
+        }
+
+        if (!TryComp(xform.GridUid, out PhysicsComponent? physicsComponent))
+            return InertiaDampeningMode.Dampen;
+
+        if (physicsComponent.LinearDamping >= AnchorDampingStrength)
+            return InertiaDampeningMode.Anchor;
+        else if (physicsComponent.LinearDamping <= SpaceFrictionStrength)
+            return InertiaDampeningMode.Off;
+        else
+            return InertiaDampeningMode.Dampen;
+    }
+
+    public void NfSetPowered(EntityUid uid, ShuttleConsoleComponent component, bool powered)
+    {
+        // Ensure that the entity requested is a valid shuttle (stations should not be togglable)
+        if (!TryComp(uid, out TransformComponent? transform) ||
+            !transform.GridUid.HasValue ||
+            !TryComp(transform.GridUid, out PhysicsComponent? physicsComponent) ||
+            !TryComp(transform.GridUid, out ShuttleComponent? shuttleComponent))
+        {
+            return;
+        }
+
+        // Update dampening physics without adjusting requested mode.
+        if (!powered)
+        {
+            SetInertiaDampening(uid, physicsComponent, shuttleComponent, transform, InertiaDampeningMode.Anchor);
+        }
+        else
+        {
+            // Update our dampening mode if we need to, and if we aren't a station.
+            var currentDampening = NfGetInertiaDampeningMode(uid);
+            if (currentDampening != component.DampeningMode &&
+                currentDampening != InertiaDampeningMode.Station &&
+                component.DampeningMode != InertiaDampeningMode.Station)
+            {
+                SetInertiaDampening(uid, physicsComponent, shuttleComponent, transform, component.DampeningMode);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Get the current service flags for this grid.
+    /// </summary>
+    public ServiceFlags NfGetServiceFlags(EntityUid uid)
+    {
+        var transform = Transform(uid);
+        // Get the grid entity from the console transform
+        if (!transform.GridUid.HasValue)
+            return ServiceFlags.None;
+
+        var gridUid = transform.GridUid.Value;
+
+        // Set the service flags on the IFFComponent.
+        if (!TryComp<IFFComponent>(gridUid, out var iffComponent))
+            return ServiceFlags.None;
+
+        return iffComponent.ServiceFlags;
+    }
+
+    /// <summary>
+    /// Set the service flags for this grid.
+    /// </summary>
+    public void NfSetServiceFlags(EntityUid uid, ShuttleConsoleComponent component, SetServiceFlagsRequest args)
+    {
+        var transform = Transform(uid);
+        // Get the grid entity from the console transform
+        if (!transform.GridUid.HasValue)
+            return;
+
+        var gridUid = transform.GridUid.Value;
+
+        // Set the service flags on the IFFComponent.
+        if (!TryComp<IFFComponent>(gridUid, out var iffComponent))
+            return;
+
+        iffComponent.ServiceFlags = args.ServiceFlags;
+        _console.RefreshShuttleConsoles(gridUid);
+        Dirty(gridUid, iffComponent);
+    }
+}

@@ -1,0 +1,162 @@
+- type: vendingMachineInventory
+  id: WeaponryWorksVendInventory
+  startingInventory:
+  # Weapons
+    NFWeaponEnergyPistolLaser: 6
+    NFWeaponRevolverArgenti: 6
+    #NFWeaponRevolverFitz: 6
+    #WeaponSniperRepeater: 6
+    NFWeaponShotgunDoubleBarreled: 6
+    WeaponBrassKnuckles: 6
+    #WeaponLaserPistolNF: 6
+    WeaponRifleGestio: 6
+    WeaponRifleNovaliteC1: 6
+    WeaponShotgunDoubleBarreled: 6
+    #WeaponRevolverArgenti: 6
+    #WeaponPistolMk36: 6
+    #WeaponRevolverFaith: 6
+    #WeaponRifleVulcanCFCM: 6
+    BowModern: 6
+    #GestioBoxDeployable: 2
+    SearchlightBoxDeployable: 2
+# Magazines
+    Magazine9x19mmPistolFMJ: 28 # 9x19mm Pistol
+    Magazine45_ACPPistolFMJ: 28 # .45 ACP Pistol
+    Magazine9x19mmSubMachineGunFMJ: 28 # 9x19mm C20r
+    Magazine45_ACPSubMachineGunFMJ: 28 # .45 ACP Drozd
+    #Magazine4.28x30mmSubMachineGunTopMountedFMJ: 28 # 4.28x30mm WT550
+    #Magazine5.528x45mmFMJ: 28 # 5.528x45mm Lecter
+    #Magazine7.282x39mmLowCapacityFMJ: 28 # 7.282x39mm Gestio/AKM
+    #Magazine7.282x39mmFMJ: 28 # 7.282x39mm Gestio/AKM
+    #Magazine7.282x51mmLowCapacityFMJ: 28 # 7.282x51mm Vulcan
+    #Magazine7.282x51mmFMJ: 28 # 7.282x51mm Vulcan
+    #Magazine7.282x54mmRFMJ: 28 # 7.282x54mmR SVS
+    #SpeedLoader7.282x39mmFMJ: 28 # 7.282x39mm Gestio/AKM
+    #SpeedLoader7.282x54mmRFMJ: 28 # 7.282x54mmR SVS
+    SpeedLoader45_magnumFMJ: 28 # .45 magnum revolvers
+    MagazineNovaliteC1: 6
+    Magazine762x39mmLowCapacityFMJ: 28
+    ClothingBeltQuiverFullBodkin: 6
+    ClothingBeltQuiverFullBroadhead: 6
+# Ammo
+    #AmmoBox5.528x45mmFMJ: 28 # 5.528x45mm
+    #AmmoBox5.528x45mmBigFMJ: 28 # 5.528x45mm
+    #AmmoBox7.282x39mmFMJ: 28 # 7.282x39mm
+    #AmmoBox7.282x39mmBigFMJ: 28 # 7.282x39mm
+    #AmmoBox7.282x54mmRFMJ: 28 # 7.282x54mmR
+    #AmmoBox7.282x54mmRBigFMJ: 28 # 7.282x54mmR
+    AmmoBox762x39mmFMJ: 28
+    AmmoBox9x19mmFMJ: 28 # 9x19mm
+    AmmoBox9x19mmBigFMJ: 28 # 9x19mm
+    AmmoBox45_ACPFMJ: 28 # .45 ACP
+    AmmoBox45_ACPBigFMJ: 28 # .45 ACP
+    #AmmoBox4.28x30mmFMJ: 28 # 4.28x30mm
+    #AmmoBox4.28x30mmBigFMJ: 28 # 4.28x30mm
+    AmmoBox45_magnumFMJ: 28 # .45 magnum
+    AmmoBox12_gaugeSlug: 28 # 12 gauge
+    AmmoBox12_gaugeBuckshot: 28 # 12 gauge
+    AmmoBox12_gaugeBeanbag: 28 # 12 gauge
+    ArrowRegular: 90
+    ArrowSlash: 90
+    ArrowPractice: 4294967295
+
+  emaggedInventory:
+    WeaponPistolViper: 1
+
+- type: vendingMachineInventory
+  id: WeaponryWorksVendPOIInventory
+  startingInventory:
+  # Weapons
+    NFWeaponEnergyPistolLaser: 4294967295
+    NFWeaponRevolverArgenti: 4294967295
+    NFWeaponRevolverFitz: 4294967295
+    WeaponSniperRepeater: 4294967295
+    # NFWeaponShotgunDoubleBarreled: 4294967295 replaced for weaponshotgundoublebarreled   Hard Light change
+    WeaponBrassKnuckles: 4294967295
+    WeaponRifleGestio: 4294967295
+    WeaponRifleNovaliteC1: 4294967295
+    WeaponShotgunDoubleBarreled: 4294967295
+    #WeaponRevolverArgenti: 4294967295
+    WeaponPistolMk32: 4294967295
+    WeaponRevolverFaith: 4294967295
+    WeaponRifleVulcanCFCM: 4294967295
+# Magazines
+    Magazine9x19mmPistolFMJ: 4294967295 # 9x19mm Pistol
+    Magazine45_ACPPistolFMJ: 4294967295 # .45 ACP Pistol
+    Magazine9x19mmSubMachineGunFMJ: 4294967295 # 9x19mm C20r
+    Magazine45_ACPSubMachineGunFMJ: 4294967295 # .45 ACP Drozd
+    Magazine46x30mmSubMachineGunTopMountedFMJ: 4294967295 # 46x30mm WT550
+    Magazine556x45mmFMJ: 4294967295 # 556x45mm Lecter
+    Magazine762x39mmLowCapacityFMJ: 4294967295 # 762x39mm Gestio/AKM
+    Magazine762x39mmFMJ: 4294967295 # 762x39mm Gestio/AKM
+    Magazine762x51mmLowCapacityFMJ: 4294967295 # 762x51mm Vulcan
+    Magazine762x51mmFMJ: 4294967295 # 762x51mm Vulcan
+    Magazine762x54mmRFMJ: 4294967295 # 762x54mmR SVS
+    SpeedLoader762x39mmFMJ: 4294967295 # 762x39mm Gestio/AKM
+    SpeedLoader762x54mmRFMJ: 4294967295 # 762x54mmR SVS
+    SpeedLoader45_magnumFMJ: 4294967295 # .45 magnum revolvers
+# Ammo
+    AmmoBox556x45mmFMJ: 4294967295 # 556x45mm
+    AmmoBox556x45mmBigFMJ: 4294967295 # 556x45mm
+    AmmoBox762x39mmFMJ: 4294967295 # 762x39mm
+    AmmoBox762x39mmBigFMJ: 4294967295 # 762x39mm
+    AmmoBox762x54mmRFMJ: 4294967295 # 762x54mmR
+    AmmoBox762x54mmRBigFMJ: 4294967295 # 762x54mmR
+    AmmoBox9x19mmFMJ: 4294967295 # 9x19mm
+    AmmoBox9x19mmBigFMJ: 4294967295 # 9x19mm
+    AmmoBox45_ACPFMJ: 4294967295 # .45 ACP
+    AmmoBox45_ACPBigFMJ: 4294967295 # .45 ACP
+    AmmoBox46x30mmFMJ: 4294967295 # 46x30mm
+    #AmmoBox46x30mmBigFMJ: 4294967295 # 46x30mm
+    AmmoBox45_magnumFMJ: 4294967295 # .45 magnum
+    AmmoBox12_gaugeSlug: 4294967295 # 12 gauge
+    AmmoBox12_gaugeBuckshot: 4294967295 # 12 gauge
+    AmmoBox12_gaugeBeanbag: 4294967295 # 12 gauge
+  emaggedInventory:
+    WeaponPistolViper: 1
+
+- type: vendingMachineInventory # Mono - this entire thing is mono
+  id: WeaponryWorksVendPOIMercInventory
+  startingInventory:
+# SMGs
+    #WeaponSubMachineGunC20rPMC: 4294967295
+    WeaponSubMachineGunWt550PMC: 4294967295
+    WeaponRifleLecterPMC: 4294967295
+    WeaponSubMachineGunDrozdPMC: 4294967295
+# Shotguns
+    WeaponShotgunEnforcerPMC: 4294967295
+    WeaponShotgunKammererPMC: 4294967295
+# Energy
+    WeaponLaserCannonPMC: 4294967295
+    WeaponEnergyGunPMC: 4294967295
+    WeaponLaserCarbinePMC: 4294967295
+    WeaponDisablerSMGPMC: 4294967295
+# Sidearms
+    WeaponShotgunSawn: 4294967295
+    WeaponPistolViperPMC: 4294967295
+    WeaponPistolMk32: 4294967295
+    Machete: 4294967295
+    KukriKnife: 4294967295
+    CombatKnife: 4294967295
+    SurvivalKnifePMC: 4294967295
+# Magazines
+    Magazine9x19mmPistolFMJ: 4294967295 # 9x19mm Pistol
+    Magazine45_ACPPistolFMJ: 4294967295 # .45 ACP Pistol
+    Magazine9x19mmSubMachineGunFMJ: 4294967295 # 9x19mm C20r
+    Magazine45_ACPSubMachineGunFMJ: 4294967295 # .45 ACP Drozd
+    Magazine46x30mmSubMachineGunTopMountedFMJ: 4294967295 # 46x30mm WT550
+    Magazine556x45mmFMJ: 4294967295 # 556x45mm Lecter
+    Magazine762x39mmLowCapacityFMJ: 4294967295 # 762x39mm Gestio/AKM
+    Magazine762x39mmFMJ: 4294967295 # 762x39mm Gestio/AKM
+    Magazine762x54mmRFMJ: 4294967295 # 762x54mmR SVS
+    SpeedLoader762x39mmFMJ: 4294967295 # 762x39mm Gestio/AKM
+    SpeedLoader762x54mmRFMJ: 4294967295 # 762x54mmR SVS
+    SpeedLoader45_magnumFMJ: 4294967295 # .45 magnum revolvers
+# Ammo
+    AmmoBox556x45mmBigFMJ: 4294967295 # 556x45mm
+    AmmoBox762x39mmBigFMJ: 4294967295 # 762x39mm
+    AmmoBox9x19mmBigFMJ: 4294967295 # 9x19mm
+    AmmoBox45_magnumFMJ: 4294967295 # .45 magnum
+    AmmoBox12_gaugeSlug: 4294967295 # 12 gauge
+    AmmoBox12_gaugeBuckshot: 4294967295 # 12 gauge
+    AmmoBox12_gaugeBeanbag: 4294967295 # 12 gauge

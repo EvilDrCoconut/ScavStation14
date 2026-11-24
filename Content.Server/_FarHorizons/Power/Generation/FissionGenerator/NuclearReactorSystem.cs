@@ -1,0 +1,1031 @@
+using Content.Server.Administration.Logs;
+using Content.Server.AlertLevel;
+using Content.Server.Atmos.EntitySystems;
+using Content.Server.Atmos.Piping.Components;
+using Content.Server.Audio;
+using Content.Server.Chat.Systems;
+using Content.Server.Explosion.EntitySystems;
+using Content.Server.NodeContainer.EntitySystems;
+using Content.Server.Radio.EntitySystems;
+using Content.Server.Station.Systems;
+using Content.Shared._FarHorizons.Power.Generation.FissionGenerator;
+using Content.Shared.Atmos;
+using Content.Shared.Damage;
+using Content.Shared.Database;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Radiation.Components;
+using Content.Shared.Radio;
+using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Audio;
+using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Content.Shared._FarHorizons.Materials.Systems;
+using Content.Server.NodeContainer.Nodes;
+using Content.Shared.DeviceLinking.Events;
+using Content.Server.DeviceLinking.Systems;
+using Content.Shared.Construction.Components;
+using Content.Shared.Popups;
+using Content.Server.Popups;
+using Content.Shared.DeviceLinking;
+using Content.Shared.DeviceNetwork;
+using Content.Shared.Random;
+using Content.Shared.Random.Helpers;
+using Content.Shared.Rejuvenate;
+using Content.Shared.Throwing;
+using System.Diagnostics.CodeAnalysis;
+using Robust.Shared.Timing;
+
+namespace Content.Server._FarHorizons.Power.Generation.FissionGenerator;
+
+// Ported and modified from goonstation by Jhrushbe.
+// MIT
+// https://github.com/goonstation/goonstation/blob/ff86b044/code/obj/nuclearreactor/nuclearreactor.dm
+// Performance optimizations adapted from Far-Horizons-SS14/Far-Horizons-SS14#1000
+// and ss14Starlight/space-station-14#3967.
+
+public sealed class NuclearReactorSystem : SharedNuclearReactorSystem
+{
+    // The great wall of dependencies
+    [Dependency] private readonly AlertLevelSystem _alertLevel = default!;
+    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private readonly EntityManager _entityManager = default!;
+    [Dependency] private readonly ExplosionSystem _explosionSystem = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+    [Dependency] private readonly RadioSystem _radioSystem = default!;
+    [Dependency] private readonly ReactorPartSystem _partSystem = default!;
+    [Dependency] private readonly ServerGlobalSoundSystem _soundSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly UserInterfaceSystem _uiSystem = null!;
+    [Dependency] private readonly DeviceLinkSystem _signal = default!;
+    [Dependency] private readonly PopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
+    [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private readonly SharedPointLightSystem _lightSystem = default!;
+    [Dependency] private readonly AmbientSoundSystem _ambientSoundSystem = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+
+    private sealed class LogData
+    {
+        public TimeSpan CreationTime;
+        public float? SetControlRodInsertion;
+    }
+
+    private readonly Dictionary<KeyValuePair<EntityUid, EntityUid>, LogData> _logQueue = [];
+    private static readonly ReactorPartComponent?[] NeighborBuffer = new ReactorPartComponent?[4];
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        // Component events
+        SubscribeLocalEvent<NuclearReactorComponent, MapInitEvent>(OnInit);
+        SubscribeLocalEvent<NuclearReactorComponent, ComponentShutdown>(OnShutdown);
+
+        SubscribeLocalEvent<NuclearReactorComponent, DamageChangedEvent>(OnDamaged);
+        SubscribeLocalEvent<NuclearReactorComponent, RejuvenateEvent>(OnRejuvenate);
+
+        // Atmos events
+        SubscribeLocalEvent<NuclearReactorComponent, AtmosDeviceUpdateEvent>(OnUpdate);
+        SubscribeLocalEvent<NuclearReactorComponent, GasAnalyzerScanEvent>(OnAnalyze);
+
+        // Item events
+        SubscribeLocalEvent<NuclearReactorComponent, EntInsertedIntoContainerMessage>(OnPartChanged);
+        SubscribeLocalEvent<NuclearReactorComponent, EntRemovedFromContainerMessage>(OnPartChanged);
+
+        // BUI events
+        SubscribeLocalEvent<NuclearReactorComponent, ReactorItemActionMessage>(OnItemActionMessage);
+        SubscribeLocalEvent<NuclearReactorComponent, ReactorControlRodModifyMessage>(OnControlRodMessage);
+
+        // Signal events
+        SubscribeLocalEvent<NuclearReactorComponent, SignalReceivedEvent>(OnSignalReceived);
+        SubscribeLocalEvent<NuclearReactorComponent, PortDisconnectedEvent>(OnPortDisconnected);
+
+        // Anchor events
+        SubscribeLocalEvent<NuclearReactorComponent, AnchorStateChangedEvent>(OnAnchorChanged);
+        SubscribeLocalEvent<NuclearReactorComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
+    }
+
+    private void OnInit(EntityUid uid, NuclearReactorComponent comp, ref MapInitEvent args)
+    {
+        _signal.EnsureSinkPorts(uid, comp.ControlRodInsertPort, comp.ControlRodRetractPort);
+
+        var gridWidth = comp.ReactorGridWidth;
+        var gridHeight = comp.ReactorGridHeight;
+
+        comp.ComponentGrid = new ReactorPartComponent[gridWidth, gridHeight];
+        comp.FluxGrid = new List<ReactorNeutron>[gridWidth, gridHeight];
+        comp.FluxGridScratch = new List<ReactorNeutron>[gridWidth, gridHeight];
+        comp.TemperatureGrid = new double[gridWidth, gridHeight];
+        comp.NeutronGrid = new int[gridWidth, gridHeight];
+
+        ApplyPrefab(uid, comp);
+
+        // I hate everything about this, but it ensures the audio doesn't just stop if you don't look at it
+        comp.AlarmAudioHighThermal = SpawnAttachedTo("ReactorAlarmEntity", new(uid, 0, 0));
+        comp.AlarmAudioHighTemp = SpawnAttachedTo("ReactorAlarmEntity", new(uid, 0, 0));
+        _ambientSoundSystem.SetSound(comp.AlarmAudioHighTemp.Value, new SoundPathSpecifier("/Audio/_FarHorizons/Machines/reactor_alarm_2.ogg"));
+        comp.AlarmAudioHighRads = SpawnAttachedTo("ReactorAlarmEntity", new(uid, 0, 0));
+        _ambientSoundSystem.SetSound(comp.AlarmAudioHighRads.Value, new SoundPathSpecifier("/Audio/_FarHorizons/Machines/reactor_alarm_3.ogg"));
+    }
+
+    #region Prefab
+    private void ApplyPrefab(EntityUid uid, NuclearReactorComponent comp)
+    {
+        var prefab = comp.Prefab == "random" ? GenerateRandomPrefab(comp) : GetPrefabFromProto(comp);
+        for (var x = 0; x < comp.ReactorGridWidth; x++)
+            for (var y = 0; y < comp.ReactorGridHeight; y++)
+            {
+                comp.ComponentGrid[x, y] = prefab.TryGetValue(new Vector2i(x, y), out var part) ? new ReactorPartComponent(part) : null;
+                comp.FluxGrid[x, y] = [];
+                comp.FluxGridScratch[x, y] = [];
+            }
+
+        UpdateGasVolume(comp);
+        UpdateGridVisual((uid, comp));
+    }
+
+    private Dictionary<Vector2i, ReactorPartComponent> GenerateRandomPrefab(NuclearReactorComponent comp)
+    {
+        var exportDict = new Dictionary<Vector2i, ReactorPartComponent>();
+        for (var x = 0; x < comp.ReactorGridWidth; x++)
+            for (var y = 0; y < comp.ReactorGridHeight; y++)
+                if (_random.Prob(comp.RandomPrefabFill))
+                    exportDict.Add(new Vector2i(x, y), RandomComponent());
+        return exportDict;
+    }
+
+    private ReactorPartComponent RandomComponent()
+    {
+        var compName = Factory.GetComponentName<ReactorPartComponent>();
+        var source = "NuclearReactorRandomParts";
+        var protoID = _prototypes.Index<WeightedRandomPrototype>(source).Pick(_random);
+        if (!_prototypes.TryIndex(protoID, out var entProto)
+                || !entProto.TryGetComponent<ReactorPartComponent>(compName, out var comp))
+            return new();
+        comp.ProtoId = protoID;
+        return comp;
+    }
+
+    private Dictionary<Vector2i, ReactorPartComponent> GetPrefabFromProto(NuclearReactorComponent comp)
+    {
+        var exportDict = new Dictionary<Vector2i, ReactorPartComponent>();
+
+        if (!_prototypes.TryIndex<NuclearReactorPrefabPrototype>(comp.Prefab, out var proto) || proto.ReactorComponents == null)
+            return exportDict;
+
+        var compName = Factory.GetComponentName<ReactorPartComponent>();
+
+        foreach (var pair in proto.ReactorComponents)
+        {
+            if (!_prototypes.TryIndex(pair.Value, out var entProto)
+                || !entProto.TryGetComponent<ReactorPartComponent>(compName, out var reactorPart))
+                continue;
+
+            reactorPart.ProtoId = pair.Value;
+            exportDict.Add(pair.Key, reactorPart);
+        }
+
+        return exportDict;
+    }
+    #endregion
+
+    private void OnAnalyze(EntityUid uid, NuclearReactorComponent comp, ref GasAnalyzerScanEvent args)
+    {
+        if (!comp.InletEnt.HasValue || !comp.OutletEnt.HasValue)
+            return;
+
+        args.GasMixtures ??= [];
+
+        if (_nodeContainer.TryGetNode(comp.InletEnt.Value, comp.PipeName, out PipeNode? inlet) && inlet.Air.Volume != 0f)
+        {
+            var inletAirLocal = inlet.Air.Clone();
+            inletAirLocal.Multiply(inlet.Volume / inlet.Air.Volume);
+            inletAirLocal.Volume = inlet.Volume;
+            args.GasMixtures.Add((Loc.GetString("gas-analyzer-window-text-inlet"), inletAirLocal));
+        }
+
+        if (_nodeContainer.TryGetNode(comp.OutletEnt.Value, comp.PipeName, out PipeNode? outlet) && outlet.Air.Volume != 0f)
+        {
+            var outletAirLocal = outlet.Air.Clone();
+            outletAirLocal.Multiply(outlet.Volume / outlet.Air.Volume);
+            outletAirLocal.Volume = outlet.Volume;
+            args.GasMixtures.Add((Loc.GetString("gas-analyzer-window-text-outlet"), outletAirLocal));
+        }
+    }
+
+    private void OnPartChanged(EntityUid uid, NuclearReactorComponent component, ContainerModifiedMessage args)
+    {
+        ReactorTryGetSlot(uid, "part_slot", out component.PartSlot!);
+        UpdateUI(uid, component);
+    }
+
+    private void OnShutdown(Entity<NuclearReactorComponent> ent, ref ComponentShutdown args) => CleanUp(ent.Comp);
+
+    #region Main Loop
+    private void OnUpdate(Entity<NuclearReactorComponent> ent, ref AtmosDeviceUpdateEvent args)
+    {
+        var comp = ent.Comp;
+        var uid = ent.Owner;
+
+        _appearance.SetData(uid, ReactorVisuals.Sprite, comp.Melted ? Reactors.Melted : Reactors.Normal);
+
+        ProcessCaseRadiation(ent);
+
+        if (comp.Melted)
+            return;
+
+        if (!GetPipes(uid, comp, out var inlet, out var outlet))
+            return;
+
+        var gridWidth = comp.ReactorGridWidth;
+        var gridHeight = comp.ReactorGridHeight;
+
+        if (comp.ApplyPrefab)
+        {
+            ApplyPrefab(uid, comp);
+            comp.ApplyPrefab = false;
+        }
+
+        _appearance.SetData(uid, ReactorVisuals.Input, inlet.Air.TotalMoles > 20);
+        _appearance.SetData(uid, ReactorVisuals.Output, outlet.Air.TotalMoles > 20);
+
+
+        var tempRads = 0;
+        var controlRods = 0;
+        var avgControlRodInsertion = 0f;
+        var tempChange = 0f;
+
+        // Debug Vars
+        var neutronCount = 0;
+        var meltedComps = 0;
+        var totalNRads = 0f;
+        var totalRads = 0f;
+        var totalSpent = 0f;
+
+        var transferVolume = CalculateTransferVolume(inlet.Air.Volume, inlet, outlet, args.Dt);
+        var gasInput = inlet.Air.RemoveVolume(transferVolume);
+
+        gasInput.Volume = inlet.Volume;
+
+        // Update control rod insertion based on device network
+        if (comp.InsertPortState != SignalState.Low)
+            AdjustControlRods(comp, 0.1f);
+        if (comp.RetractPortState != SignalState.Low)
+            AdjustControlRods(comp, -0.1f);
+
+        if (comp.InsertPortState == SignalState.Momentary)
+            comp.InsertPortState = SignalState.Low;
+        if (comp.RetractPortState == SignalState.Momentary)
+            comp.RetractPortState = SignalState.Low;
+
+        comp.SimTime.Restart();
+        var scratch = comp.FluxGridScratch;
+        for (var x = 0; x < gridWidth; x++)
+        {
+            for (var y = 0; y < gridHeight; y++)
+            {
+                var reactorComp = comp.ComponentGrid[x, y];
+
+                if (reactorComp == null)
+                {
+                    comp.TemperatureGrid[x, y] = 0;
+                }
+                else
+                {
+                    var gas = _partSystem.ProcessGas(reactorComp, ent, gasInput);
+                    gasInput.Volume -= reactorComp.GasVolume;
+
+                    if (gas != null)
+                        _atmosphereSystem.Merge(outlet.Air, gas);
+
+                    _partSystem.ProcessHeat(reactorComp, ent, GetGridNeighbors(comp, x, y, NeighborBuffer), this);
+                    comp.TemperatureGrid[x, y] = reactorComp.Temperature;
+
+                    if (reactorComp.HasRodType(ReactorPartComponent.RodTypes.ControlRod) && reactorComp.IsControlRod)
+                    {
+                        reactorComp.ConfiguredInsertionLevel = comp.ControlRodInsertion;
+                        controlRods++;
+                    }
+
+                    if (reactorComp.Melted)
+                        meltedComps++;
+
+                    comp.FluxGrid[x, y] = _partSystem.ProcessNeutrons(reactorComp, comp.FluxGrid[x, y], out var deltaT);
+                    tempChange += deltaT;
+
+                    // Second check so that AvgControlRodInsertion represents the present instead of 1 tick in the past
+                    if (reactorComp.HasRodType(ReactorPartComponent.RodTypes.ControlRod) && reactorComp.IsControlRod)
+                        avgControlRodInsertion += reactorComp.NeutronCrossSection;
+
+                    totalNRads += reactorComp.Properties.NeutronRadioactivity;
+                    totalRads += reactorComp.Properties.Radioactivity;
+                    totalSpent += reactorComp.Properties.FissileIsotopes;
+                }
+
+                foreach (var neutron in comp.FluxGrid[x, y])
+                {
+                    neutronCount++;
+
+                    var dir = (byte)neutron.Dir.AsFlag();
+                    // Bit abuse
+                    var xmod = ((dir >> 1) % 2) - ((dir >> 3) % 2);
+                    var ymod = ((dir >> 2) % 2) - (dir % 2);
+
+                    if (x + xmod >= 0 && y + ymod >= 0 && x + xmod <= gridWidth - 1
+                        && y + ymod <= gridHeight - 1)
+                    {
+                        scratch[x + xmod, y + ymod].Add(neutron);
+                    }
+                    else
+                    {
+                        tempRads++;
+                    }
+                }
+
+                comp.NeutronGrid[x, y] = comp.FluxGrid[x, y].Count;
+
+                if (comp.SimTime.Elapsed.TotalMilliseconds > 500)
+                {
+                    QueueDel(uid);
+                    _adminLog.Add(LogType.EntityDelete, LogImpact.Extreme, $"{ToPrettyString(uid):reactor} simulation took too long ({comp.SimTime.Elapsed.TotalMilliseconds} ms).");
+                    return;
+                }
+            }
+        }
+
+        (comp.FluxGrid, comp.FluxGridScratch) = (comp.FluxGridScratch, comp.FluxGrid);
+        for (var x = 0; x < gridWidth; x++)
+        {
+            for (var y = 0; y < gridHeight; y++)
+            {
+                comp.FluxGridScratch[x, y].Clear();
+            }
+        }
+
+        avgControlRodInsertion /= controlRods;
+
+        // Sound for the control rods moving, basically an audio cue that the reactor's doing something important
+        if (controlRods > 0 && !MathHelper.CloseTo(comp.AvgInsertion, avgControlRodInsertion))
+            _audio.PlayPvs(new SoundPathSpecifier("/Audio/_FarHorizons/Machines/relay_click.ogg"), uid);
+
+        var casingGas = ProcessCasingGas(comp, gasInput);
+        if (casingGas != null)
+            _atmosphereSystem.Merge(outlet.Air, casingGas);
+
+        // If there's still input gas left over
+        _atmosphereSystem.Merge(outlet.Air, gasInput);
+
+        comp.RadiationLevel = Math.Max(comp.RadiationLevel + tempRads, 0);
+
+        comp.NeutronCount = neutronCount;
+        comp.MeltedParts = meltedComps;
+        comp.DetectedControlRods = controlRods;
+        comp.AvgInsertion = avgControlRodInsertion;
+        comp.TotalNRads = totalNRads;
+        comp.TotalRads = totalRads;
+        comp.TotalSpent = totalSpent;
+
+        if (comp.ThermalPowerCount < comp.ThermalPowerPrecision)
+            comp.ThermalPowerCount++;
+        comp.ThermalPower += (tempChange - comp.ThermalPower) / Math.Min(comp.ThermalPowerCount, comp.ThermalPowerPrecision);
+
+        if (comp.Temperature > comp.ReactorMeltdownTemp) // Disabled the explode if over 1000 rads thing, hope the server survives
+        {
+            CatastrophicOverload(ent);
+        }
+
+        UpdateVisuals(ent);
+        UpdateAudio(ent);
+        UpdateRadio(ent);
+        UpdateTempIndicators(ent);
+
+        UpdateUI(uid, comp);
+    }
+
+    private void ProcessCaseRadiation(Entity<NuclearReactorComponent> ent)
+    {
+        var reactor = ent.Comp;
+        var comp = EnsureComp<RadiationSourceComponent>(ent.Owner);
+
+        // Linear scaling up to maximum, logarithmic beyond that
+        comp.Intensity = (float)Math.Max(reactor.RadiationLevel <= reactor.MaximumRadiation ? reactor.RadiationLevel : reactor.MaximumRadiation + Math.Log(reactor.RadiationLevel - reactor.MaximumRadiation + 1), reactor.Melted ? reactor.MeltdownRadiation : 0);
+        reactor.RadiationLevel /= Math.Max(reactor.RadiationStability, 1);
+    }
+
+    private static ReactorPartComponent?[] GetGridNeighbors(NuclearReactorComponent reactor, int x, int y, ReactorPartComponent?[] buffer)
+    {
+        buffer[0] = x - 1 < 0 ? null : reactor.ComponentGrid[x - 1, y];
+        buffer[1] = x + 1 >= reactor.ReactorGridWidth ? null : reactor.ComponentGrid[x + 1, y];
+        buffer[2] = y - 1 < 0 ? null : reactor.ComponentGrid[x, y - 1];
+        buffer[3] = y + 1 >= reactor.ReactorGridHeight ? null : reactor.ComponentGrid[x, y + 1];
+        return buffer;
+    }
+
+    private void UpdateGasVolume(NuclearReactorComponent reactor)
+    {
+        if (reactor.InletEnt == null || reactor.OutletEnt == null)
+            return;
+
+        if (!_nodeContainer.TryGetNode(reactor.InletEnt.Value, reactor.PipeName, out PipeNode? inlet) || !_nodeContainer.TryGetNode(reactor.OutletEnt.Value, reactor.PipeName, out PipeNode? outlet))
+            return;
+
+        var totalGasVolume = reactor.ReactorVesselGasVolume;
+
+        for (var x = 0; x < reactor.ReactorGridWidth; x++)
+            for (var y = 0; y < reactor.ReactorGridHeight; y++)
+                if (reactor.ComponentGrid![x, y] != null)
+                    totalGasVolume += reactor.ComponentGrid[x, y]!.GasVolume;
+        inlet.Volume = totalGasVolume;
+        outlet.Volume = totalGasVolume;
+    }
+
+    private GasMixture? ProcessCasingGas(NuclearReactorComponent reactor, GasMixture inGas)
+    {
+        GasMixture? processedGas = null;
+        if (reactor.AirContents != null)
+        {
+            var deltaT = reactor.Temperature - reactor.AirContents.Temperature;
+            var deltaTr = Math.Pow(reactor.Temperature, 4) - Math.Pow(reactor.AirContents.Temperature, 4);
+
+            var k = MaterialSystem.CalculateHeatTransferCoefficient(_prototypes.Index(reactor.Material).Properties, null);
+            var a = 1 * (0.4 * 8);
+
+            var thermalEnergy = _atmosphereSystem.GetThermalEnergy(reactor.AirContents);
+
+            var hottest = Math.Max(reactor.AirContents.Temperature, reactor.Temperature);
+            var coldest = Math.Min(reactor.AirContents.Temperature, reactor.Temperature);
+
+            var maxDeltaE = Math.Clamp((k * a * deltaT) + (5.67037442e-8 * a * deltaTr),
+                (reactor.Temperature * reactor.ThermalMass) - (hottest * reactor.ThermalMass),
+                (reactor.Temperature * reactor.ThermalMass) - (coldest * reactor.ThermalMass));
+
+            reactor.AirContents.Temperature = (float)Math.Clamp(reactor.AirContents.Temperature +
+                (maxDeltaE / _atmosphereSystem.GetHeatCapacity(reactor.AirContents, true)), coldest, hottest);
+
+            reactor.Temperature = (float)Math.Clamp(reactor.Temperature -
+                ((_atmosphereSystem.GetThermalEnergy(reactor.AirContents) - thermalEnergy) / reactor.ThermalMass), coldest, hottest);
+
+            if (reactor.AirContents.Temperature < 0 || reactor.Temperature < 0)
+                throw new Exception("Reactor casing temperature calculation resulted in sub-zero value.");
+
+            processedGas = reactor.AirContents;
+        }
+
+        if (inGas != null && _atmosphereSystem.GetThermalEnergy(inGas) > 0)
+        {
+            reactor.AirContents = inGas.RemoveVolume(reactor.ReactorVesselGasVolume);
+
+            if (reactor.AirContents != null && reactor.AirContents.TotalMoles < 1)
+            {
+                if (processedGas != null)
+                {
+                    _atmosphereSystem.Merge(processedGas, reactor.AirContents);
+                    reactor.AirContents.Clear();
+                }
+                else
+                {
+                    processedGas = reactor.AirContents;
+                    reactor.AirContents.Clear();
+                }
+            }
+        }
+        return processedGas;
+    }
+
+    private float CalculateTransferVolume(float volume, PipeNode inlet, PipeNode outlet, float dt)
+    {
+        var wantToTransfer = volume * _atmosphereSystem.PumpSpeedup() * dt;
+        var transferVolume = Math.Min(inlet.Air.Volume, wantToTransfer);
+        var transferMoles = inlet.Air.Pressure * transferVolume / (inlet.Air.Temperature * Atmospherics.R);
+        var molesSpaceLeft = ((Atmospherics.MaxOutputPressure * 3) - outlet.Air.Pressure) * outlet.Air.Volume / (outlet.Air.Temperature * Atmospherics.R);
+        var actualMolesTransfered = Math.Clamp(transferMoles, 0, Math.Max(0, molesSpaceLeft));
+        return Math.Max(0, actualMolesTransfered * inlet.Air.Temperature * Atmospherics.R / inlet.Air.Pressure);
+    }
+
+    private void CatastrophicOverload(Entity<NuclearReactorComponent> ent)
+    {
+        var comp = ent.Comp;
+        var uid = ent.Owner;
+
+        var stationUid = _station.GetStationInMap(Transform(uid).MapID);
+        if (stationUid != null)
+            _alertLevel.SetLevel(stationUid.Value, comp.MeltdownAlertLevel, true, true, true);
+
+        var announcement = Loc.GetString("reactor-meltdown-announcement");
+        var sender = Loc.GetString("reactor-meltdown-announcement-sender");
+        _chatSystem.DispatchStationAnnouncement(stationUid ?? uid, announcement, sender, false, null, Color.Orange);
+
+        _soundSystem.PlayGlobalOnStation(uid, _audio.ResolveSound(comp.MeltdownSound));
+
+        comp.Melted = true;
+        var meltdownBadness = 0f;
+        comp.AirContents ??= new();
+
+        for (var x = 0; x < comp.ReactorGridWidth; x++)
+        {
+            for (var y = 0; y < comp.ReactorGridHeight; y++)
+            {
+                if (comp.ComponentGrid[x, y] != null)
+                {
+                    var rc = comp.ComponentGrid[x, y];
+                    if (rc == null)
+                        return;
+                    meltdownBadness += ((rc.Properties.Radioactivity * 2) + (rc.Properties.NeutronRadioactivity * 5) + (rc.Properties.FissileIsotopes * 10)) * (rc.Melted ? 2 : 1);
+                    if (rc.HasRodType(ReactorPartComponent.RodTypes.GasChannel))
+                    {
+                        _atmosphereSystem.Merge(comp.AirContents, rc.AirContents ?? new());
+                        (rc.AirContents ?? new()).Clear();
+                    }
+
+                    comp.ComponentGrid[x, y] = null;
+                    comp.NeutronGrid[x, y] = 0;
+                    comp.FluxGrid[x, y] = [];
+                    if (comp.GridEntities.TryGetValue(new(x, y), out var partEntity))
+                    {
+                        QueueDel(partEntity);
+                        comp.GridEntities.Remove(new(x, y));
+                    }
+                }
+            }
+        }
+        comp.RadiationLevel = Math.Clamp(comp.RadiationLevel + meltdownBadness, 0, 200);
+        comp.AirContents.AdjustMoles(Gas.Tritium, meltdownBadness * 15);
+        comp.AirContents.Temperature = Math.Max(comp.Temperature, comp.AirContents.Temperature);
+
+        var t = _atmosphereSystem.GetTileMixture(ent.Owner, excite: true);
+        if (t != null)
+            _atmosphereSystem.Merge(t, comp.AirContents);
+
+        _adminLog.Add(LogType.Explosion, LogImpact.Extreme, $"{ToPrettyString(ent):reactor} catastrophically overloads, meltdown badness: {meltdownBadness}");
+
+        // You did not see graphite on the roof. You're in shock. Report to medical.
+        for (var i = 0; i < _random.Next(10, 30); i++)
+            _throwingSystem.TryThrow(Spawn("NuclearDebrisChunk", _transformSystem.GetMapCoordinates(uid)), _random.NextAngle().ToVec().Normalized(), _random.NextFloat(8, 16), uid);
+
+        _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/metal_break5.ogg"), uid);
+        _explosionSystem.QueueExplosion(ent.Owner, "Radioactive", Math.Max(100, meltdownBadness * 5), 1, 5, 0, canCreateVacuum: false);
+
+        var lightcomp = _lightSystem.EnsureLight(uid);
+        _lightSystem.SetEnergy(uid, 0.1f, lightcomp);
+        _lightSystem.SetFalloff(uid, 2, lightcomp);
+        _lightSystem.SetRadius(uid, (comp.ReactorGridWidth + comp.ReactorGridHeight) / 4, lightcomp);
+        _lightSystem.SetColor(uid, Color.FromHex("#FFAAAAFF"), lightcomp);
+
+        // Reset grids
+        comp.ComponentGrid = new ReactorPartComponent[comp.ReactorGridWidth, comp.ReactorGridHeight]; // Not Array.Clear due to ammonia
+        Array.Clear(comp.NeutronGrid);
+        Array.Clear(comp.TemperatureGrid);
+        Array.Clear(comp.FluxGrid);
+        Array.Clear(comp.FluxGridScratch);
+
+        // This will Dirty() the reactor, so no need to declare it explicitly
+        UpdateGridVisual(ent);
+    }
+
+    private void UpdateVisuals(Entity<NuclearReactorComponent> ent)
+    {
+        var comp = ent.Comp;
+        var uid = ent.Owner;
+
+        if (comp.Melted)
+        {
+            _appearance.SetData(uid, ReactorVisuals.Lights, ReactorWarningLights.LightsOff);
+            _appearance.SetData(uid, ReactorVisuals.Status, ReactorStatusLights.Off);
+            _appearance.SetData(uid, ReactorVisuals.Input, false);
+            _appearance.SetData(uid, ReactorVisuals.Output, false);
+            return;
+        }
+
+        // Temperature & radiation warning
+        if (comp.Temperature >= comp.ReactorOverheatTemp || comp.RadiationLevel > comp.MaximumRadiation * 0.5)
+            if (comp.Temperature >= comp.ReactorFireTemp || comp.RadiationLevel > comp.MaximumRadiation)
+                _appearance.SetData(uid, ReactorVisuals.Lights, ReactorWarningLights.LightsMeltdown);
+            else
+                _appearance.SetData(uid, ReactorVisuals.Lights, ReactorWarningLights.LightsWarning);
+        else
+            _appearance.SetData(uid, ReactorVisuals.Lights, ReactorWarningLights.LightsOff);
+
+        // Status screen / side lights
+        switch (comp.Temperature)
+        {
+            case float n when n is <= Atmospherics.T20C:
+                _appearance.SetData(uid, ReactorVisuals.Status, ReactorStatusLights.Off);
+                break;
+            case float n when n > Atmospherics.T20C && n <= comp.ReactorOverheatTemp:
+                _appearance.SetData(uid, ReactorVisuals.Status, ReactorStatusLights.Active);
+                break;
+            case float n when n > comp.ReactorOverheatTemp && n <= comp.ReactorFireTemp:
+                _appearance.SetData(uid, ReactorVisuals.Status, ReactorStatusLights.Overheat);
+                break;
+            case float n when n > comp.ReactorFireTemp && n <= float.PositiveInfinity:
+                _appearance.SetData(uid, ReactorVisuals.Status, ReactorStatusLights.Meltdown);
+                break;
+            default:
+                _appearance.SetData(uid, ReactorVisuals.Status, ReactorStatusLights.Off);
+                break;
+        }
+    }
+
+    private void UpdateAudio(Entity<NuclearReactorComponent> ent)
+    {
+        var comp = ent.Comp;
+
+        if (Exists(comp.AlarmAudioHighThermal))
+            _ambientSoundSystem.SetAmbience(comp.AlarmAudioHighThermal.Value, !comp.Melted && comp.ThermalPower > comp.MaximumThermalPower);
+        if (Exists(comp.AlarmAudioHighTemp))
+            _ambientSoundSystem.SetAmbience(comp.AlarmAudioHighTemp.Value, !comp.Melted && comp.Temperature > comp.ReactorOverheatTemp);
+        if (Exists(comp.AlarmAudioHighRads))
+            _ambientSoundSystem.SetAmbience(comp.AlarmAudioHighRads.Value, !comp.Melted && comp.RadiationLevel > comp.MaximumRadiation * 0.5);
+    }
+
+    private void UpdateRadio(Entity<NuclearReactorComponent> ent)
+    {
+        var comp = ent.Comp;
+        var uid = ent.Owner;
+
+        if (comp.Melted)
+            return;
+
+        var engi = _prototypes.Index<RadioChannelPrototype>(ent.Comp.EngineeringChannel);
+
+        if (comp.Temperature >= comp.ReactorOverheatTemp)
+        {
+            if (!comp.IsSmoking)
+            {
+                _adminLog.Add(LogType.Damaged, $"{ToPrettyString(ent):reactor} is at {comp.Temperature}K and may meltdown");
+                _radioSystem.SendRadioMessage(uid, Loc.GetString("reactor-smoke-start-message", ("owner", uid), ("temperature", Math.Round(comp.Temperature))), engi, ent);
+                comp.LastSendTemperature = comp.Temperature;
+            }
+            if (comp.Temperature >= comp.ReactorFireTemp && !comp.IsBurning)
+            {
+                _adminLog.Add(LogType.Damaged, $"{ToPrettyString(ent):reactor} is at {comp.Temperature}K and is likely to meltdown");
+                _radioSystem.SendRadioMessage(uid, Loc.GetString("reactor-fire-start-message", ("owner", uid), ("temperature", Math.Round(comp.Temperature))), engi, ent);
+                comp.LastSendTemperature = comp.Temperature;
+            }
+            else if (comp.Temperature < comp.ReactorFireTemp && comp.IsBurning)
+            {
+                _adminLog.Add(LogType.Healed, $"{ToPrettyString(ent):reactor} is cooling from {comp.ReactorFireTemp}K");
+                _radioSystem.SendRadioMessage(uid, Loc.GetString("reactor-fire-stop-message", ("owner", uid)), engi, ent);
+                comp.LastSendTemperature = comp.Temperature;
+            }
+        }
+        else
+        {
+            if (comp.IsSmoking)
+            {
+                _adminLog.Add(LogType.Healed, $"{ToPrettyString(ent):reactor} is cooling from {comp.ReactorOverheatTemp}K");
+                _radioSystem.SendRadioMessage(uid, Loc.GetString("reactor-smoke-stop-message", ("owner", uid)), engi, ent);
+                comp.LastSendTemperature = comp.Temperature;
+                comp.HasSentWarning = false;
+            }
+        }
+
+        if (comp.Temperature >= (comp.ReactorFireTemp + comp.ReactorMeltdownTemp) >> 1 && !comp.HasSentWarning)
+        {
+            var stationUid = _station.GetStationInMap(Transform(uid).MapID);
+            var announcement = Loc.GetString("reactor-melting-announcement");
+            var sender = Loc.GetString("reactor-melting-announcement-sender");
+            _chatSystem.DispatchStationAnnouncement(stationUid ?? uid, announcement, sender, false, null, Color.Orange);
+            _soundSystem.PlayGlobalOnStation(uid, _audio.ResolveSound(new SoundPathSpecifier("/Audio/Misc/delta_alt.ogg")));
+            comp.HasSentWarning = true;
+        }
+
+        if (Math.Max(comp.LastSendTemperature, comp.Temperature) < comp.ReactorOverheatTemp)
+            return;
+
+        var step = comp.ReactorMeltdownTemp * 0.05;
+
+        if (Math.Abs(comp.Temperature - comp.LastSendTemperature) < step)
+            return;
+
+        if (comp.LastSendTemperature > comp.Temperature)
+        {
+            _radioSystem.SendRadioMessage(uid, Loc.GetString("reactor-temperature-cooling-message", ("owner", uid), ("temperature", Math.Round(comp.Temperature))), engi, ent);
+        }
+        else
+        {
+            if (comp.Temperature >= comp.ReactorFireTemp)
+            {
+                _radioSystem.SendRadioMessage(uid, Loc.GetString("reactor-temperature-critical-message", ("owner", uid), ("temperature", Math.Round(comp.Temperature))), engi, ent);
+            }
+            else if (comp.Temperature >= comp.ReactorOverheatTemp)
+            {
+                _radioSystem.SendRadioMessage(uid, Loc.GetString("reactor-temperature-dangerous-message", ("owner", uid), ("temperature", Math.Round(comp.Temperature))), engi, ent);
+            }
+        }
+
+        comp.LastSendTemperature = comp.Temperature;
+    }
+    #endregion
+
+    #region BUI
+    public void UpdateUI(EntityUid uid, NuclearReactorComponent reactor)
+    {
+        if (!_uiSystem.IsUiOpen(uid, NuclearReactorUiKey.Key))
+            return;
+
+        if (reactor.Melted)
+        {
+            _uiSystem.CloseUi(uid, NuclearReactorUiKey.Key);
+            return;
+        }
+
+        var gridWidth = reactor.ReactorGridWidth;
+        var gridHeight = reactor.ReactorGridHeight;
+
+        var dict = new Dictionary<Vector2i, ReactorSlotBUIData>();
+
+        for (var x = 0; x < gridWidth; x++)
+        {
+            for (var y = 0; y < gridHeight; y++)
+            {
+                var reactorPart = reactor.ComponentGrid[x, y];
+                if (reactorPart == null)
+                {
+                    if (reactor.NeutronGrid[x, y] > 0)
+                        dict.Add(new(x, y), new ReactorSlotBUIData { NeutronCount = reactor.NeutronGrid[x, y] });
+                    continue;
+                }
+
+                dict.Add(new(x, y), new ReactorSlotBUIData
+                {
+                    Temperature = reactor.TemperatureGrid[x, y],
+                    NeutronCount = reactor.NeutronGrid[x, y],
+                    IconName = reactorPart.IconStateInserted,
+                    PartName = _prototypes.Index(reactorPart.ProtoId).Name,
+                    NeutronRadioactivity = reactorPart.Properties.NeutronRadioactivity,
+                    Radioactivity = reactorPart.Properties.Radioactivity,
+                    SpentFuel = reactorPart.Properties.FissileIsotopes
+                });
+            }
+        }
+
+        // This is transmitting close to 2.3KB of data every time it's called... ouch
+        _uiSystem.SetUiState(uid, NuclearReactorUiKey.Key,
+           new NuclearReactorBuiState
+           {
+               SlotData = dict,
+
+               ItemName = reactor.PartSlot.Item != null ? Identity.Name(reactor.PartSlot.Item.Value, _entityManager) : null,
+
+               ReactorTemp = reactor.Temperature,
+               ReactorRads = reactor.RadiationLevel,
+               ReactorRadsMax = reactor.MaximumRadiation,
+               ReactorTherm = reactor.ThermalPower,
+
+               ControlRodActual = reactor.AvgInsertion,
+               ControlRodSet = reactor.ControlRodInsertion,
+
+               GridWidth = gridWidth,
+               GridHeight = gridHeight,
+           });
+    }
+
+    private void OnItemActionMessage(Entity<NuclearReactorComponent> ent, ref ReactorItemActionMessage args)
+    {
+        var comp = ent.Comp;
+        var pos = args.Position;
+        var part = comp.ComponentGrid[(int)pos.X, (int)pos.Y];
+
+        if (comp.PartSlot.Item == null == (part == null))
+            return;
+
+        if (comp.PartSlot.Item == null)
+        {
+            if (part!.Melted) // No removing a part if it's melted
+            {
+                _audio.PlayPvs(new SoundPathSpecifier("/Audio/Machines/custom_deny.ogg"), ent.Owner);
+                return;
+            }
+
+            var item = SpawnInContainerOrDrop(part!.ProtoId, ent.Owner, "part_slot");
+            _entityManager.RemoveComponent<ReactorPartComponent>(item);
+            _entityManager.AddComponent(item, new ReactorPartComponent(part!));
+
+            _adminLog.Add(LogType.Action, $"{ToPrettyString(args.Actor):actor} removed {ToPrettyString(item):item} from position {pos.Y},{pos.X} in {ToPrettyString(ent):target}");
+            comp.ComponentGrid[(int)pos.X, (int)pos.Y] = null;
+        }
+        else
+        {
+            if (TryComp(comp.PartSlot.Item, out ReactorPartComponent? reactorPart))
+                comp.ComponentGrid[(int)pos.X, (int)pos.Y] = new ReactorPartComponent(reactorPart);
+            else
+                return;
+
+            _adminLog.Add(LogType.Action, $"{ToPrettyString(args.Actor):actor} added {ToPrettyString(comp.PartSlot.Item):item} to position {pos.Y},{pos.X} in {ToPrettyString(ent):target}");
+            var proto = _entityManager.GetComponent<MetaDataComponent>(comp.PartSlot.Item.Value).EntityPrototype;
+            comp.ComponentGrid[(int)pos.X, (int)pos.Y]!.ProtoId = proto != null ? proto.ID : "BaseReactorPart";
+            _entityManager.DeleteEntity(comp.PartSlot.Item);
+        }
+
+        UpdateGridVisual(ent);
+        UpdateGasVolume(comp);
+        UpdateUI(ent.Owner, comp);
+    }
+
+    private void OnControlRodMessage(Entity<NuclearReactorComponent> ent, ref ReactorControlRodModifyMessage args)
+    {
+        if (AdjustControlRods(ent.Comp, args.Change))
+            // Data is sent to a log queue to avoid spamming the admin log when adjusting values rapidly
+            if (!_logQueue.TryGetValue(new(args.Actor, ent.Owner), out var value))
+                _logQueue.Add(new(args.Actor, ent.Owner), new LogData
+                {
+                    CreationTime = _gameTiming.RealTime,
+                    SetControlRodInsertion = ent.Comp.ControlRodInsertion
+                });
+            else
+                value.SetControlRodInsertion = ent.Comp.ControlRodInsertion;
+
+        UpdateUI(ent.Owner, ent.Comp);
+    }
+
+    private float _accumulator = 0f;
+    private readonly float _threshold = 0.5f;
+
+    public override void Update(float frameTime)
+    {
+        _accumulator += frameTime;
+        if (_accumulator > _threshold)
+        {
+            UpdateLogs();
+            _accumulator = 0;
+        }
+
+        return;
+
+        void UpdateLogs()
+        {
+            var toRemove = new List<KeyValuePair<EntityUid, EntityUid>>();
+            foreach (var log in _logQueue.Where(log => !((_gameTiming.RealTime - log.Value.CreationTime).TotalSeconds < 2)))
+            {
+                toRemove.Add(log.Key);
+
+                if (log.Value.SetControlRodInsertion != null)
+                    _adminLog.Add(LogType.Action, $"{ToPrettyString(log.Key.Key):actor} set control rod insertion of {ToPrettyString(log.Key.Value):target} to {log.Value.SetControlRodInsertion}");
+            }
+
+            foreach (var kvp in toRemove)
+                _logQueue.Remove(kvp);
+        }
+    }
+    #endregion
+
+    private void OnSignalReceived(EntityUid uid, NuclearReactorComponent comp, ref SignalReceivedEvent args)
+    {
+        var state = SignalState.Momentary;
+        args.Data?.TryGetValue(DeviceNetworkConstants.LogicState, out state);
+
+        if (args.Port == comp.ControlRodInsertPort)
+            comp.InsertPortState = state;
+        else if (args.Port == comp.ControlRodRetractPort)
+            comp.RetractPortState = state;
+
+        var logtext = "maintain";
+        if (comp.InsertPortState != SignalState.Low && comp.RetractPortState == SignalState.Low)
+            logtext = "insert";
+        else if (comp.RetractPortState != SignalState.Low && comp.InsertPortState == SignalState.Low)
+            logtext = "retract";
+
+        _adminLog.Add(LogType.Action, $"{ToPrettyString(args.Trigger):trigger} set control rod insertion of {ToPrettyString(uid):target} to {logtext}");
+    }
+
+    private void OnPortDisconnected(EntityUid uid, NuclearReactorComponent comp, ref PortDisconnectedEvent args)
+    {
+        if (args.Port == comp.ControlRodInsertPort)
+            comp.InsertPortState = SignalState.Low;
+        if (args.Port == comp.ControlRodRetractPort)
+            comp.RetractPortState = SignalState.Low;
+    }
+
+    #region Anchoring
+    private void OnAnchorChanged(EntityUid uid, NuclearReactorComponent comp, ref AnchorStateChangedEvent args)
+    {
+        if (!args.Anchored)
+        {
+            CleanUp(comp);
+            return;
+        }
+    }
+
+    private void OnUnanchorAttempt(EntityUid uid, NuclearReactorComponent comp, ref UnanchorAttemptEvent args)
+    {
+        // One does not simply move a reactor that has welded itself in place
+        if (comp.Melted)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("reactor-unanchor-melted"), args.User, args.User, PopupType.LargeCaution);
+            args.Cancel();
+            return;
+        }
+
+        if (comp.Temperature >= Atmospherics.T0C + 80 || !CheckEmpty(comp))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("reactor-unanchor-warning"), args.User, args.User, PopupType.LargeCaution);
+            args.Cancel();
+        }
+    }
+
+    private static bool CheckEmpty(NuclearReactorComponent comp)
+    {
+        for (var x = 0; x < comp.ReactorGridWidth; x++)
+            for (var y = 0; y < comp.ReactorGridHeight; y++)
+                if (comp.ComponentGrid[x, y] != null)
+                    return false;
+        return true;
+    }
+
+    private bool GetPipes(EntityUid uid, NuclearReactorComponent comp, [NotNullWhen(true)] out PipeNode? inlet, [NotNullWhen(true)] out PipeNode? outlet)
+    {
+        inlet = null;
+        outlet = null;
+
+        if (!comp.InletEnt.HasValue || EntityManager.Deleted(comp.InletEnt.Value))
+            comp.InletEnt = SpawnAttachedTo(comp.PipePrototype, new(uid, comp.InletPos), rotation: Angle.FromDegrees(comp.InletRot));
+        if (!comp.OutletEnt.HasValue || EntityManager.Deleted(comp.OutletEnt.Value))
+            comp.OutletEnt = SpawnAttachedTo(comp.PipePrototype, new(uid, comp.OutletPos), rotation: Angle.FromDegrees(comp.OutletRot));
+
+        if (comp.InletEnt == null || comp.OutletEnt == null)
+            return false;
+
+        if (!Transform(comp.InletEnt.Value).Anchored || !Transform(comp.OutletEnt.Value).Anchored)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("reactor-unanchor-warning"), uid, PopupType.MediumCaution);
+            CleanUp(comp);
+            _transform.Unanchor(uid);
+            return false;
+        }
+
+        if (!_nodeContainer.TryGetNode(comp.InletEnt.Value, comp.PipeName, out inlet))
+            return false;
+        if (!_nodeContainer.TryGetNode(comp.OutletEnt.Value, comp.PipeName, out outlet))
+            return false;
+
+        return true;
+    }
+    #endregion
+
+    private void CleanUp(NuclearReactorComponent comp)
+    {
+        QueueDel(comp.InletEnt);
+        QueueDel(comp.OutletEnt);
+    }
+
+    private void OnDamaged(EntityUid uid, NuclearReactorComponent comp, ref DamageChangedEvent args)
+    {
+        if (!args.DamageIncreased || args.DamageDelta == null)
+            return;
+
+        var damage = (float)args.DamageDelta.GetTotal();
+        var destruction = 100;
+
+        var throwProb = Math.Clamp(damage / destruction, 0, 1);
+        var coords = _transformSystem.GetMapCoordinates(uid);
+        for (var x = 0; x < comp.ReactorGridWidth; x++)
+            for (var y = 0; y < comp.ReactorGridHeight; y++)
+                if (comp.ComponentGrid[x, y] != null && _random.Prob(throwProb))
+                {
+                    var reactorPart = comp.ComponentGrid[x, y];
+                    if (reactorPart == null)
+                        continue;
+
+                    EntityUid item;
+                    if (_random.Prob(0.5f) || reactorPart.Melted)
+                        item = Spawn("NuclearDebrisChunk", coords);
+                    else
+                    {
+                        item = Spawn(reactorPart.ProtoId, coords);
+                        _entityManager.RemoveComponent<ReactorPartComponent>(item);
+                        _entityManager.AddComponent(item, new ReactorPartComponent(reactorPart));
+                    }
+
+                    _throwingSystem.TryThrow(item, _random.NextAngle().ToVec().Normalized(), _random.NextFloat(8, 16), uid);
+                    _adminLog.Add(LogType.Action, $"Damage by {ToPrettyString(args.Origin):actor} removed {ToPrettyString(item):item} from position {x},{y} in {ToPrettyString(uid):target}");
+
+                    comp.ComponentGrid[x, y] = null;
+
+                    UpdateGridVisual((uid, comp));
+                    UpdateGasVolume(comp);
+                }
+    }
+
+    private void OnRejuvenate(EntityUid uid, NuclearReactorComponent comp, ref RejuvenateEvent args)
+    {
+        comp.Temperature = Atmospherics.T20C;
+        comp.LastSendTemperature = comp.Temperature;
+        comp.Melted = false;
+        comp.IsBurning = false;
+        comp.IsSmoking = false;
+        comp.RadiationLevel = 0;
+        comp.ThermalPower = 0;
+        comp.ControlRodInsertion = 2;
+        comp.ApplyPrefab = true;
+    }
+}

@@ -1,0 +1,163 @@
+# Wizard
+- type: startingGear
+  id: NPCWizardBlueGear
+  equipment:
+    head: ClothingHeadHatWizard
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackBlueWizardLoot
+    belt: ClothingBeltWand
+    neck: ClothingNeckScarfStripedLightBlue
+    outerClothing: ClothingOuterWizard
+  inhand:
+    - WizardStaffMeleeBase
+
+- type: startingGear
+  id: NPCWizardRedGear
+  equipment:
+    head: ClothingHeadHatRedwizard
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackRedWizardLoot
+    belt: ClothingBeltWand
+    neck: ClothingNeckScarfStripedRed
+    outerClothing: ClothingOuterWizardRed
+  inhand:
+    - WizardStaffMeleeRed
+
+- type: startingGear
+  id: NPCWizardVioletGear
+  equipment:
+    head: ClothingHeadHatVioletwizard
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackVioletWizardLoot
+    belt: ClothingBeltWand
+    neck: ClothingNeckScarfStripedPurple
+    outerClothing: ClothingOuterWizardViolet
+  inhand:
+    - WizardStaffMeleeViolet
+
+- type: startingGear
+  id: NPCWizardSoapGear
+  equipment:
+    head: ClothingHeadHatRedwizard
+    mask: ClothingMaskClown
+    back: ClothingBackpackSoapWizardLoot
+    jumpsuit: ClothingUniformJumpsuitClown
+    shoes: ClothingShoesClown
+    outerClothing: ClothingOuterClownPriest
+    pocket1: BikeHorn
+  inhand:
+#    - ToyHammer
+     - WizardStaffMeleeSoap
+
+# Hardsuits
+- type: startingGear
+  id: NPCWizardBlueHardsuitGear
+  equipment:
+    head: ClothingHeadHelmetWizardHelm
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackBlueWizardLoot
+    belt: ClothingBeltWand
+    neck: ClothingNeckScarfStripedLightBlue
+    outerClothing: ClothingOuterArmorMagusblue # Well, it's not a hardsuit but whatever
+  inhand:
+    - WizardStaffMeleeBase
+
+- type: startingGear
+  id: NPCWizardRedHardsuitGear
+  equipment:
+    head: ClothingHeadHelmetWizardHelm
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackRedWizardLoot
+    belt: ClothingBeltWand
+    neck: ClothingNeckScarfStripedRed
+    outerClothing: ClothingOuterArmorMagusred # Well, it's not a hardsuit but whatever
+  inhand:
+    - WizardStaffMeleeRed
+
+- type: startingGear
+  id: NPCWizardVioletHardsuitGear
+  equipment:
+    head: ClothingHeadHelmetWizardHelm
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackVioletWizardLoot
+    belt: ClothingBeltWand
+    neck: ClothingNeckScarfStripedPurple
+    outerClothing: ClothingOuterHardsuitWizard
+  inhand:
+    - WizardStaffMeleeViolet
+
+- type: startingGear
+  id: NPCWizardSoapHardsuitGear
+  equipment:
+    head: ClothingHeadHelmetWizardHelm
+    mask: ClothingMaskClown
+    back: ClothingBackpackSoapWizardLoot
+    jumpsuit: ClothingUniformJumpsuitClown
+    shoes: ClothingShoesClown
+    neck: ClothingNeckScarfStripedRed
+    outerClothing: ClothingOuterHardsuitClown
+  inhand:
+    - WizardStaffMeleeSoap
+
+# Expedition enemies
+
+- type: startingGear
+  id: MobHumanoidWizardGearMeleeT1
+  equipment:
+    head: ClothingHeadPaperSackSmile
+    back: ClothingBackpackT1WizardLoot
+    jumpsuit: ClothingUniformJumpsuitLoungewear
+  inhand:
+    - ReinforcedShiv
+
+- type: startingGear
+  id: MobHumanoidWizardRangedT1
+  equipment:
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackT1WizardLoot
+    outerClothing: ClothingOuterWizardRed
+  inhand:
+    - WizardStaffMeleeRed
+
+- type: startingGear
+  id: MobHumanoidWizardRangedT2
+  equipment:
+    head: ClothingHeadHatPartyBlue
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackT2WizardLoot
+    outerClothing: ClothingOuterWizard
+  inhand:
+    - WizardStaffMeleeBase
+
+- type: startingGear
+  id: MobHumanoidWizardGearSupportT3
+  equipment:
+    head: ClothingHeadHatWitch
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackT3WizardLoot
+    outerClothing: ClothingOuterHoodieChaplain
+  inhand:
+    - WizardStaffMeleeBase
+
+- type: startingGear
+  id: MobHumanoidWizardGearMixedT3
+  equipment:
+    head: ClothingHeadHelmetWizardHelm
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackT3WizardLoot
+    outerClothing: ClothingOuterArmorMagusblue
+  inhand:
+    - WizardStaffMeleeBase
+
+- type: startingGear
+  id: MobHumanoidWizardGearBoss
+  equipment:
+    head: ClothingHeadHatVioletwizard
+    shoes: ClothingShoesWizard
+    back: ClothingBackpackT4WizardLoot
+    belt: ClothingBeltWand
+    neck: ClothingNeckScarfStripedPurple
+    outerClothing: ClothingOuterHardsuitWizard
+  inhand:
+    - Claymore
+    - WizardStaffMeleeViolet

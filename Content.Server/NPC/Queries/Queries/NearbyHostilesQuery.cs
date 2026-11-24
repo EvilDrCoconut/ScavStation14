@@ -1,0 +1,9 @@
+namespace Content.Server.NPC.Queries.Queries;
+
+/// <summary>
+/// Returns nearby entities considered hostile from FactionSystem
+/// </summary>
+public sealed partial class NearbyHostilesQuery : UtilityQuery
+{
+
+}

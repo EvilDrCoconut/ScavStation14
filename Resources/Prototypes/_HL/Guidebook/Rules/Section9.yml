@@ -1,0 +1,31 @@
+# Section 9: All-Ages Content Rules
+
+- type: serverRule
+  id: ServerRule9_1
+  section: 9
+  code: 9.1
+  text: "This is an all-ages server. Erotic roleplay (ERP) and sexual content of any kind are forbidden everywhere: in-character, subtle, whispers, LOOC, OOC, PDA messages, radio, paper, and descriptions."
+
+- type: serverRule
+  id: ServerRule9_2
+  section: 9
+  code: 9.2
+  text: "Do not make sexual jokes, innuendo, or references, and do not describe characters, items, or actions in a sexual way."
+
+- type: serverRule
+  id: ServerRule9_3
+  section: 9
+  code: 9.3
+  text: "Any romantic roleplay must stay light and age-appropriate. If you are unsure whether something is appropriate, don't do it."
+
+- type: serverRule
+  id: ServerRule9_4
+  section: 9
+  code: 9.4
+  text: "Character names, appearances, descriptions, and OOC preference notes must be free of sexual content."
+
+- type: serverRule
+  id: ServerRule9_5
+  section: 9
+  code: 9.5
+  text: "If anyone makes you uncomfortable or breaks these rules, Ahelp immediately. Breaking this section may result in an immediate ban."

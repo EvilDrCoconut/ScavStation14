@@ -1,0 +1,6 @@
+# Player preference toggles (OOC).
+
+- type: consentToggle
+  id: NoClone
+  name: No Cloning
+  description: Turn this on to disallow Paradox clones of yourself.

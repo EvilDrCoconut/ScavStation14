@@ -1,0 +1,33 @@
+using Content.Shared.Actions;
+using Robust.Shared.Timing;
+
+namespace Content.Shared.CM14.Xenos.Evolution;
+
+public sealed class XenoEvolutionSystem : EntitySystem
+{
+    [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<XenoEvolveActionComponent, MapInitEvent>(OnXenoEvolveActionMapInit);
+        SubscribeLocalEvent<XenoComponent, XenoOpenEvolutionsActionEvent>(OnXenoOpenEvolutionsAction);
+    }
+
+    private void OnXenoEvolveActionMapInit(Entity<XenoEvolveActionComponent> ent, ref MapInitEvent args)
+    {
+        if (!_action.TryGetActionData(ent, out _, logError: false))
+            return;
+
+        _action.SetCooldown(ent, _timing.CurTime, _timing.CurTime + ent.Comp.Cooldown);
+    }
+
+    private void OnXenoOpenEvolutionsAction(Entity<XenoComponent> ent, ref XenoOpenEvolutionsActionEvent args)
+    {
+        // Convert the action event to a component event and re-raise it
+        var ev = new XenoOpenEvolutionsEvent();
+        RaiseLocalEvent(ent.Owner, ev);
+    }
+}

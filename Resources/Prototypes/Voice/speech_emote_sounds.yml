@@ -1,0 +1,911 @@
+# species
+- type: emoteSounds
+  id: MaleHuman
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: MaleScreams
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: BikeHorn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+
+- type: emoteSounds
+  id: FemaleHuman
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: FemaleScreams
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: CluwneHorn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+
+- type: emoteSounds
+  id: MaleReptilian
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/Voice/Reptilian/reptilian_scream.ogg
+    Laugh:
+      path: /Audio/Animals/lizard_happy.ogg
+    Hiss: # Imp
+      collection: ReptilianHiss # Imp
+    MonkeyScreeches: # Frontier
+      collection: MonkeyScreeches # Frontier
+    Honk:
+      collection: BikeHorn
+    Whistle:
+      collection: Whistles
+    Crying:
+      collection: MaleCry
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: DeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+    Purr: # RMC14
+      path: /Audio/_RMC14/Voice/Reptilian/lizard_purr.ogg
+      params:
+        variation: 0.125
+    KoboldYip: # HardLight
+      collection: KoboldYips
+    KoboldYap: # HardLight
+      collection: KoboldYaps
+
+- type: emoteSounds
+  id: FemaleReptilian
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/Voice/Reptilian/reptilian_scream.ogg
+    Laugh:
+      path: /Audio/Animals/lizard_happy.ogg
+    Hiss: # Imp
+      collection: ReptilianHiss # Imp
+    MonkeyScreeches: # Frontier
+      collection: MonkeyScreeches # Frontier
+    Honk:
+      collection: BikeHorn
+    Whistle:
+      collection: Whistles
+    Crying:
+      collection: FemaleCry
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+    Purr: # RMC14
+      path: /Audio/_RMC14/Voice/Reptilian/lizard_purr.ogg
+      params:
+        variation: 0.125
+        volume: -5
+    KoboldYip: # HardLight
+      collection: KoboldYips
+    KoboldYap: # HardLight
+      collection: KoboldYaps
+
+- type: emoteSounds
+  id: MaleSlime
+  sounds:
+    Squish:
+      collection: Squishes
+    Bubble: # Imp
+      collection: Bubbles # Imp
+    Pop: # Imp
+      collection: Pops # Imp
+    Scream:
+      collection: MaleScreams
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: BikeHorn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+  params:
+    variation: 0.125
+
+- type: emoteSounds
+  id: FemaleSlime
+  sounds:
+    Squish:
+      collection: Squishes
+    Bubble: # Imp
+      collection: Bubbles # Imp
+    Pop: # Imp
+      collection: Pops # Imp
+    Scream:
+      collection: FemaleScreams
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Honk:
+      collection: CluwneHorn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+  params:
+    variation: 0.125
+
+- type: emoteSounds
+  id: UnisexVox
+  sounds:
+    Scream:
+      path: /Audio/Voice/Vox/shriek1.ogg
+    Laugh:
+      path: /Audio/Voice/Vox/vox_laugh.ogg
+    Sneeze:
+      path: /Audio/Voice/Vox/vox_sneeze.ogg
+    Cough:
+      path: /Audio/Voice/Vox/vox_cough.ogg
+    Sigh:
+      path: /Audio/Voice/Vox/vox_sigh.ogg
+    Click:
+      path: /Audio/Voice/Vox/vox_click.ogg
+    #Chitter: # DeltaV - Combined upstream and impstation sounds
+    #  path: /Audio/Voice/Vox/vox_chitter.ogg
+    Honk:
+      collection: BikeHorn
+    Crying:
+      collection: VoxCry # DeltaV - Combined upstream and Imp sounds
+      params: # Imp
+        volume: -7
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Gasp:
+      path: /Audio/Effects/Gasp/vox_gasp.ogg
+    DefaultDeathgasp:
+      path: /Audio/Effects/Gasp/vox_DeathGasp.ogg
+    # Begin Impstation Additions
+    Chitter:
+      collection: VoxChitter # DeltaV - Combined upstream and impstation sounds
+      params:
+        volume: -5
+    Coo:
+      collection: VoxCoo
+      params:
+        volume: -7
+    Hiss:
+      collection: VoxHiss
+      params:
+        volume: -5
+    # End Impstation Additions
+  params:
+    variation: 0.125
+    # We need vox sounds for the other emotes
+
+- type: emoteSounds
+  id: UnisexDiona
+  sounds:
+    Scream:
+      path: /Audio/Voice/Diona/diona_scream.ogg
+    Laugh:
+      collection: DionaLaugh
+    Sneeze:
+      collection: DionaSneeze
+    Chirp:
+      path: /Audio/Animals/nymph_chirp.ogg
+    MonkeyScreeches: # Frontier
+      collection: MonkeyScreeches # Frontier
+    Honk:
+      collection: BikeHorn
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: DeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+  params:
+    variation: 0.125
+
+- type: emoteSounds
+  id: UnisexArachnid
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/Voice/Arachnid/arachnid_scream.ogg
+    Laugh:
+      path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
+    Click:
+      path: /Audio/Voice/Arachnid/arachnid_click.ogg
+    MonkeyScreeches: # Frontier
+      collection: MonkeyScreeches # Frontier
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Honk:
+      collection: BikeHorn
+    # Gasp: # HL: SL sounds
+    #   collection: MaleGasp
+    DefaultDeathgasp:
+      collection: DeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+    #region Starlight
+    Crying:
+      path: /Audio/_Starlight/Voice/Arachnid/arachnid_cry.ogg
+    Cough:
+      path: /Audio/_Starlight/Voice/Arachnid/arachnid_cough.ogg
+    Yawn:
+      path: /Audio/_Starlight/Voice/Arachnid/arachnid_yawn.ogg
+    Sigh:
+      path: /Audio/_Starlight/Voice/Arachnid/arachnid_sigh.ogg
+    Gasp:
+      path: /Audio/_Starlight/Voice/Arachnid/arachnid_gasp.ogg
+    #endregion Starlight
+
+- type: emoteSounds
+  id: UnisexDwarf
+  sounds:
+    Scream:
+      collection: MaleScreams
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Sigh:
+      collection: MaleSigh
+    Honk:
+      collection: BikeHorn
+    Crying:
+      collection: MaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+  params:
+    variation: 0.125
+    pitch: 0.75
+
+- type: emoteSounds
+  id: FemaleDwarf
+  sounds:
+    Scream:
+      collection: FemaleScreams
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    CatMeow:
+      collection: CatMeows
+    CatHisses:
+      collection: CatHisses
+    MonkeyScreeches:
+      collection: MonkeyScreeches
+    RobotBeep:
+      collection: RobotBeeps
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Sigh:
+      collection: FemaleSigh
+    Honk:
+      collection: BikeHorn
+    Crying:
+      collection: FemaleCry
+    Whistle:
+      collection: Whistles
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+  params:
+    variation: 0.125
+    pitch: 0.75
+
+- type: emoteSounds
+  id: UnisexMoth
+  params:
+    variation: 0.125
+  sounds:
+    Buzz:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Scream:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+    Laugh:
+      path: /Audio/Voice/Moth/moth_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+    Squeak:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+    MonkeyScreeches: # Frontier
+      collection: MonkeyScreeches # Frontier
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Honk:
+      collection: BikeHorn
+    # Gasp:
+    #   collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MothDeathGasp
+    Belch: # Frontier
+      collection: Belch # Frontier
+    #region Starlight
+    Crying:
+      path: /Audio/_Starlight/Voice/Moth/moth_cry.ogg
+    Cough:
+      path: /Audio/_Starlight/Voice/Moth/moth_cough.ogg
+    Yawn:
+      path: /Audio/_Starlight/Voice/Moth/moth_yawn.ogg
+    Sigh:
+      path: /Audio/_Starlight/Voice/Moth/moth_sigh.ogg
+    Gasp:
+      path: /Audio/_Starlight/Voice/Moth/moth_gasp.ogg
+    #endregion Starlight
+
+- type: emoteSounds
+  id: UnisexSilicon
+  params:
+    variation: 0.05
+  sounds:
+    Scream:
+      collection: SiliconScreams
+    Beep:
+      path: /Audio/Machines/twobeep.ogg
+    Chime:
+      path: /Audio/Machines/chime.ogg
+    Buzz:
+      path: /Audio/Machines/buzz-sigh.ogg
+    Buzz-Two:
+      path: /Audio/Machines/buzz-two.ogg
+    Honk:
+      path: /Audio/Items/bikehorn.ogg
+    Ping:
+      path: /Audio/Effects/Cargo/ping.ogg
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Bark: # HardLight - JuiceThatMakesYouBark
+      collection: VulpkaninBarks
+    Boop: # Hardlight
+      path: /Audio/_EE/Voice/IPC/beep_500.ogg
+    Whirr: # Hardlight
+      collection: IPCWhirrs
+      params:
+        variation: 0
+
+- type: emoteSounds
+  parent: UnisexSilicon # Hardlight
+  id: UnisexSiliconSyndicate
+  params:
+    variation: 0.05
+  sounds:
+    Scream:
+      collection: SiliconScreams
+    Laugh:
+      path: /Audio/Voice/Silicon/syndieborg_laugh.ogg
+
+- type: emoteSounds
+  id: UnisexSiliconXenoborg
+  params:
+    variation: 0.05
+  sounds:
+    Scream:
+      collection: XenoborgScream
+    Laugh:
+      collection: XenoborgLaugh
+    Beep:
+      collection: XenoborgBeep
+    Chime:
+      collection: XenoborgChime
+    Buzz:
+      collection: XenoborgBuzz
+    Buzz-Two:
+      collection: XenoborgBuzzTwo
+    Honk:
+      collection: XenoborgBikeHorn
+    Ping:
+      collection: XenoborgPing
+
+# Vulp Sounds
+- type: emoteSounds
+  id: MaleVulpkanin
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: MaleLaugh
+    Sneeze:
+      collection: VulpkaninSneeze
+    Cough:
+      collection: MaleCoughs
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: MaleSigh
+    Scream:
+      collection: VulpkaninScreams
+    Growl:
+      collection: Growl # Starlight
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: Bark # Starlight
+    Whine:
+      collection: VulpkaninWhines
+    Crying:
+      collection: MaleCry
+    Howl:
+      path: /Audio/_Starlight/Effects/howl.ogg # Starlight
+    Yip:
+      path: /Audio/_Starlight/Effects/yip.ogg # Starlight
+    # Starlight start
+    Yawn:
+      collection: MaleYawn
+    Snore:
+      collection: Snores
+    Purr: # Hardlight
+      collection: FelinidPurrs
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+    Awoo:
+      path: /Audio/_Starlight/Effects/howl.ogg # Starlight
+    # Starlight end
+    Yap: # Floof
+      collection: VulpkaninYaps
+    Gekker: # Floof
+      collection: VulpkaninGekkers
+    Pout: # HardLight
+      collection: Whine # Starlight
+
+- type: emoteSounds
+  id: FemaleVulpkanin
+  params:
+    variation: 0.125
+  sounds:
+    Laugh:
+      collection: FemaleLaugh
+    Sneeze:
+      collection: VulpkaninSneeze
+    Cough:
+      collection: FemaleCoughs
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: FemaleSigh
+    Scream:
+      collection: VulpkaninScreams
+    Purr: # Hardlight
+      collection: FelinidPurrs
+    Growl:
+      collection: Growl # Starlight
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: Bark # Starlight
+    Whine:
+      collection: VulpkaninWhines
+    Crying:
+      collection: FemaleCry
+    Howl:
+      path: /Audio/_Starlight/Effects/howl.ogg # Starlight
+    Yip:
+      path: /Audio/_Starlight/Effects/yip.ogg # Starlight
+    # Startlight start
+    Yawn:
+      collection: FemaleYawn
+    Snore:
+      collection: Snores
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+    # Starlight end
+    Yap: # Floof
+      collection: VulpkaninYaps
+    Gekker: # Floof
+      collection: VulpkaninGekkers
+    Pout: # HardLight
+      collection: Whine # Starlight
+
+# body emotes
+- type: emoteSounds
+  id: GeneralBodyEmotes
+  sounds:
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+    Crack: # Imp
+      collection: Cracks # Imp
+
+- type: emoteSounds
+  id: DionaBodyEmotes
+  sounds:
+    Clap:
+      path: /Audio/Voice/Diona/diona_clap.ogg
+    # TODO: Replace this with a similar wood themed single clap
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      path: /Audio/Voice/Diona/diona_snap.ogg
+      params:
+        volume: -10
+    Salute:
+      path: /Audio/Voice/Diona/diona_salute.ogg
+      params:
+       volume: -5
+    Crack: # Imp
+      collection: Cracks # Imp
+
+- type: emoteSounds
+  id: ReptilianBodyEmotes
+  sounds:
+    Thump:
+      path: /Audio/Voice/Reptilian/reptilian_tailthump.ogg
+      params:
+        variation: 0.125
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+    Crack: # Imp
+      collection: Cracks # Imp
+    RMCReptileRattle: # RMC14
+      path: /Audio/_RMC14/Voice/Reptilian/lizard_rattle.ogg
+      params:
+        variation: 0.125
+        volume: -1
+
+- type: emoteSounds
+  id: MothBodyEmotes
+  sounds:
+    Flap:
+      path: /Audio/Voice/Moth/moth_flap.ogg
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+
+# mobs
+- type: emoteSounds
+  id: Zombie
+  sound:
+    collection: ZombieScreams
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Skeleton
+  sound:
+    path: /Audio/Voice/Skeleton/skeleton_scream.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Mouse
+  sound:
+    path: /Audio/Animals/mouse_squeak.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Cluwne
+  sound:
+    collection: CluwneScreams
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Bear
+  sound:
+    path: /Audio/Animals/bear.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Cerberus
+  sound:
+    path: /Audio/Animals/cerberus.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Kangaroo
+  sound:
+    path: /Audio/Animals/kangaroo_grunt.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Nymph
+  sounds:
+    Chirp:
+      path: /Audio/Animals/nymph_chirp.ogg
+
+- type: emoteSounds
+  id: Parrot
+  sound:
+    path: /Audio/Animals/parrot_raught.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Goat
+  sound:
+    path: /Audio/Animals/goat_bah.ogg
+    params:
+      variation: 0.125
+
+- type: emoteSounds
+  id: Scurret
+  params:
+    variation: 0.125
+  sounds:
+    Thump:
+      path: /Audio/Effects/soft_thump.ogg
+      params:
+        variation: 0.125
+    Clap:
+      collection: Claps
+    ClapSingle:
+      collection: ClapSingle
+    Snap:
+      collection: Snaps
+      params:
+        volume: -6
+    Salute:
+      collection: Salutes
+    Laugh:
+      collection: WawaLaugh
+    Sneeze:
+      collection: WawaSneeze
+    Cough:
+      collection: MaleCoughs
+    Whistle:
+      collection: Whistles
+    Sigh:
+      collection: WawaSigh
+    Scream:
+      collection: WawaScream
+    Yawn:
+      collection: WawaYawn
+    Crying:
+      collection: WawaCry
+    Snore:
+      collection: Snores
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: WawaDeath

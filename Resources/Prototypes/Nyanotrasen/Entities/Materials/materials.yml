@@ -1,0 +1,91 @@
+- type: entity
+  parent: MaterialBase
+  id: MaterialBluespace
+  suffix: Full
+  name: bluespace crystal
+  components:
+  - type: Sprite
+    sprite: _HL/Nyanotrasen/Objects/Materials/materials.rsi
+    layers:
+      - state: bluespace_3
+        map: ["base"]
+  - type: Appearance
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Bluespace: 100
+  - type: Tag
+    tags:
+      - BluespaceCrystal
+      - RawMaterial
+  - type: TriggerOnUse
+  - type: TriggerOnActivate
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Effects/Lightning/lightningbolt.ogg
+  - type: SpawnOnTrigger
+    proto: EffectFlashBluespace
+    mapCoords: true
+  - type: BluespacePulseOnTrigger
+    radius: 8
+  - type: UseDelay
+    delay: 5
+  - type: Stack
+    stackType: Bluespace
+    baseLayer: base
+    layerStates:
+      - bluespace
+      - bluespace_2
+      - bluespace_3
+    count: 5
+  - type: Item
+    size: Tiny
+
+- type: entity
+  parent: MaterialBluespace
+  id: MaterialBluespace1
+  suffix: 1
+  components:
+  - type: Sprite
+    layers:
+    - state: bluespace
+      map: ["base"]
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MaterialBluespace
+  id: MaterialBluespace3
+  suffix: 3
+  components:
+  - type: Sprite
+    layers:
+    - state: bluespace_2
+      map: ["base"]
+  - type: Stack
+    count: 3
+
+- type: entity
+  parent: MaterialBluespace
+  id: MaterialBluespace5
+  suffix: 5
+  components:
+  - type: Sprite
+    layers:
+    - state: bluespace_3
+      map: ["base"]
+  - type: Stack
+    count: 5
+
+- type: entity
+  parent: BaseItem
+  id: HideMothroach
+  name: mothroach hide
+  description: A thin layer of mothroach hide.
+  components:
+  - type: Sprite
+    sprite: Nyanotrasen/Objects/Materials/mothroach.rsi
+    state: mothroachhide
+  - type: Tag
+    tags:
+      - MothroachHide

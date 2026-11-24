@@ -1,0 +1,278 @@
+- type: loadout
+  id: ContractorClearNFPDA
+  price: 0
+  equipment:
+    id: ClearNFPDA
+    
+- type: loadout
+  id: ContractorSalvagePDA
+  price: 250
+  equipment:
+    id: ContractorSalvagePDA
+    
+- type: loadout
+  id: ContractorResearchAssistantPDA
+  price: 250
+  equipment:
+    id: ContractorResearchAssistantPDA
+    
+- type: loadout
+  id: ContractorCargoPDA
+  price: 250
+  equipment:
+    id: ContractorCargoPDA
+    
+- type: loadout
+  id: ContractorMedicalInternPDA
+  price: 250
+  equipment:
+    id: ContractorMedicalInternPDA
+        
+- type: loadout
+  id: ContractorTechnicalAssistantPDA
+  price: 250
+  equipment:
+    id: ContractorTechnicalAssistantPDA
+
+- type: loadout
+  id: ContractorServiceWorkerPDA
+  price: 250
+  equipment:
+    id: ContractorServiceWorkerPDA
+
+#T1
+- type: loadout
+  id: ContractorBartenderPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorBartenderPDA
+
+- type: loadout
+  id: ContractorChefPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorChefPDA
+
+- type: loadout
+  id: ContractorBotanistPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorBotanistPDA
+
+- type: loadout
+  id: ContractorChaplainPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorChaplainPDA
+
+- type: loadout
+  id: ContractorLibrarianPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorLibrarianPDA
+
+- type: loadout
+  id: ContractorMedicalPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorMedicalPDA
+
+- type: loadout
+  id: ContractorParamedicPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorParamedicPDA
+
+- type: loadout
+  id: ContractorPsychologistPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorPsychologistPDA
+
+- type: loadout
+  id: ContractorChemistryPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorChemistryPDA
+
+- type: loadout
+  id: ContractorSciencePDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorSciencePDA
+
+- type: loadout
+  id: ContractorReporterPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorReporterPDA
+
+- type: loadout
+  id: ContractorZookeeperPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorZookeeperPDA
+
+- type: loadout
+  id: ContractorEngineerPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorEngineerPDA
+
+- type: loadout
+  id: ContractorAtmosPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT1
+  price: 500
+  equipment:
+    id: ContractorAtmosPDA
+
+#T2
+- type: loadout
+  id: ContractorCaptainPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorCaptainPDA
+
+- type: loadout
+  id: ContractorQuartermasterPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorQuartermasterPDA
+
+- type: loadout
+  id: ContractorSeniorResearcherPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorSeniorResearcherPDA
+
+- type: loadout
+  id: ContractorRnDPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorRnDPDA
+
+- type: loadout
+  id: ContractorSeniorPhysicianPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorSeniorPhysicianPDA
+
+- type: loadout
+  id: ContractorCMOPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorCMOPDA
+
+- type: loadout
+  id: ContractorSeniorEngineerPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorSeniorEngineerPDA
+
+- type: loadout
+  id: ContractorCEPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorCEPDA
+
+- type: loadout
+  id: ContractorBoxerPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorBoxerPDA
+
+- type: loadout
+  id: ContractorMimePDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT2
+  price: 750
+  equipment:
+    id: ContractorMimePDA
+
+#T3
+- type: loadout
+  id: ContractorClownPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1500
+  equipment:
+    id: ContractorClownPDA
+
+- type: loadout
+  id: ContractorMusicianPDA
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: ContractorT3
+  price: 1500
+  equipment:
+    id: ContractorMusicianPDA

@@ -1,0 +1,20 @@
+- type: entity
+  parent: ClothingShoesBase
+  id: KneeBoots
+  name: knee boots
+  components:
+  - type: Sprite
+    sprite: _HL/Clothing/Shoes/knee_boots.rsi
+  - type: Clothing
+    sprite: _HL/Clothing/Shoes/knee_boots.rsi
+
+- type: entity
+  parent: ClothingShoesBootsJack
+  id: ToelessJackboots
+  name: toeless jackboots
+  description: Not Space-OSHA compliant.
+  components:
+  - type: Sprite
+    sprite: _HL/Clothing/Shoes/toeless_jackboots.rsi
+  - type: Clothing
+    sprite: _HL/Clothing/Shoes/toeless_jackboots.rsi

@@ -1,0 +1,6 @@
+- type: loadout
+  id: ContractorSpectralLocator
+  price: 2000
+  storage:
+    back:
+    - SpectralLocator

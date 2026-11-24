@@ -1,0 +1,48 @@
+// DeltaV
+using Content.Shared._Shitmed.Targeting;  // Shitmed Change
+using Content.Shared.FixedPoint; // Starlight
+using Robust.Shared.Serialization;
+
+namespace Content.Shared.MedicalScanner;
+
+/// <summary>
+///     On interacting with an entity retrieves the entity UID for use with getting the current damage of the mob.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
+{
+    public readonly NetEntity? TargetEntity;
+    public float Temperature;
+    public float BloodLevel;
+    public bool? ScanMode;
+    public bool? Bleeding;
+    public Dictionary<TargetBodyPart, TargetIntegrity>? Body; // Shitmed Change
+    public NetEntity? Part; // Shitmed Change
+    public bool? Unrevivable;
+    public bool? Uncloneable; // DeltaV
+    public List<(string ReagentId, FixedPoint2 Quantity)>? MetabolizingReagents; // Starlight - list of metabolizing reagents inside scanned user
+
+    public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, bool? uncloneable, Dictionary<TargetBodyPart, TargetIntegrity>? body, NetEntity? part = null, List<(string ReagentId, FixedPoint2 Quantity)>? metabolizingReagents = null) // Starlight - added metabolizingReagents parameter // Shitmed Change
+    {
+        TargetEntity = targetEntity;
+        Temperature = temperature;
+        BloodLevel = bloodLevel;
+        ScanMode = scanMode;
+        Bleeding = bleeding;
+        Body = body; // Shitmed Change
+        Part = part; // Shitmed Change
+        Unrevivable = unrevivable;
+        Uncloneable = uncloneable; // DeltaV
+        MetabolizingReagents = metabolizingReagents;
+    }
+}
+
+// Shitmed Change Start
+[Serializable, NetSerializable]
+public sealed class HealthAnalyzerPartMessage(NetEntity? owner, TargetBodyPart? bodyPart) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity? Owner = owner;
+    public readonly TargetBodyPart? BodyPart = bodyPart;
+
+}
+// Shitmed Change End

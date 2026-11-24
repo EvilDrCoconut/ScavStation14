@@ -1,0 +1,159 @@
+# SPDX-FileCopyrightText: 2024 Dvir
+# SPDX-FileCopyrightText: 2024 ErhardSteinhauer
+# SPDX-FileCopyrightText: 2024 Errant
+# SPDX-FileCopyrightText: 2024 Whatstone
+# SPDX-FileCopyrightText: 2025 Ark
+# SPDX-FileCopyrightText: 2025 Redrover1760
+# SPDX-FileCopyrightText: 2025 SuperJoelDood
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: Species
+  name: guide-entry-species
+  text: "/ServerInfo/Guidebook/Mobs/Species.xml"
+  children:
+    - Arachnid
+    - Diona # Note: Frontier changes inside
+    - Dwarf # Note: Frontier changes inside
+    - Human
+    - Moth
+    - Reptilian
+    - SlimePerson
+    - Vox
+    - Vulpkanin
+    - IPC
+    - Goblin # Frontier
+    - Sheleg # Frontier
+    - Harpy # DeltaV
+    - Felinid # DeltaV
+    - Felionoid # Starlight
+    - Oni # DeltaV
+    - Chitinid # DeltaV
+    - Rodentia # DeltaV
+    - Feroxi # Flooftier
+    - Resomi
+    - Protogen # FarHorizons
+    - Shadekin
+    - Avali
+    - Kitsune # DeltaV
+    - Skrell
+    - Synth # HardLight
+    - Thaven # Impstation
+    - Tajaran  # Floof - Tajaran Update b7660b9
+
+- type: guideEntry
+  id: Arachnid
+  name: species-name-arachnid
+  text: "/ServerInfo/Guidebook/Mobs/Arachnid.xml"
+
+- type: guideEntry
+  id: Diona
+  name: species-name-diona
+  text: "/ServerInfo/_NF/Guidebook/Mobs/Diona.xml" # Frontier: moved to _NF folder
+
+- type: guideEntry
+  id: Dwarf
+  name: species-name-dwarf
+  text: "/ServerInfo/_NF/Guidebook/Mobs/Dwarf.xml" # Frontier: moved to _NF folder
+
+- type: guideEntry
+  id: Human
+  name: species-name-human
+  text: "/ServerInfo/Guidebook/Mobs/Human.xml"
+
+- type: guideEntry
+  id: Moth
+  name: species-name-moth
+  text: "/ServerInfo/Guidebook/Mobs/Moth.xml"
+
+- type: guideEntry
+  id: Reptilian
+  name: species-name-reptilian
+  text: "/ServerInfo/Guidebook/Mobs/Reptilian.xml"
+
+- type: guideEntry
+  id: SlimePerson
+  name: species-name-slime
+  text: "/ServerInfo/Guidebook/Mobs/SlimePerson.xml"
+
+- type: guideEntry
+  id: Vulpkanin
+  name: species-name-vulpkanin
+  text: "/ServerInfo/Guidebook/Mobs/Vulpkanin.xml"
+
+- type: guideEntry
+  id: IPC
+  name: species-name-ipc
+  text: "/ServerInfo/Guidebook/Mobs/IPCs.xml"
+
+# DeltaV
+
+- type: guideEntry
+  id: Kitsune
+  name: species-name-kitsune
+  text: "/ServerInfo/Guidebook/Mobs/_DV/Kitsune.xml" # DeltaV
+
+- type: guideEntry
+  id: Chitinid
+  name: species-name-chitinid
+  text: "/ServerInfo/Guidebook/Mobs/_DV/Chitinid.xml" # DeltaV
+
+# Goobstation
+- type: guideEntry
+  id: Vox
+  name: species-name-vox
+  text: "/ServerInfo/Guidebook/Mobs/Vox.xml"
+
+- type: guideEntry
+  id: Resomi
+  name: species-name-resomi
+  text: "/ServerInfo/Guidebook/Mobs/Resomi.xml"
+
+- type: guideEntry
+  id: Harpy
+  name: species-name-harpy
+  text: "/ServerInfo/Guidebook/Mobs/_DV/Harpy.xml" # DeltaV
+
+- type: guideEntry # Floof - Tajaran Update b7660b9
+  id: Tajaran
+  name: species-name-tajaran
+  text: "/ServerInfo/Guidebook/Mobs/Tajaran.xml"
+
+- type: guideEntry
+  id: Rodentia
+  name: species-name-rodentia
+  text: "/ServerInfo/Guidebook/Mobs/_DV/Rodentia.xml" # DeltaV
+
+- type: guideEntry
+  id: Avali
+  name: species-name-avali
+  text: "/ServerInfo/Guidebook/Mobs/Avali.xml"
+
+- type: guideEntry
+  id: Shadekin
+  name: species-name-shadekin
+  text: "/ServerInfo/Guidebook/Mobs/Shadekin.xml"
+
+- type: guideEntry
+  id: Skrell
+  name: species-name-skrell
+  text: "/ServerInfo/Guidebook/Mobs/Skrell.xml"
+
+- type: guideEntry # HardLight
+  id: Synth
+  name: species-name-synth
+  text: "/ServerInfo/_HL/Guidebook/Mobs/Synth.xml"
+
+  # Impstation
+- type: guideEntry
+  id: Thaven
+  name: species-name-thaven
+  text: "/ServerInfo/_Impstation/Guidebook/Mobs/Thaven.xml"
+
+  # Starlight
+- type: guideEntry
+  id: Felionoid
+  name: species-name-felionoid
+  text: "/ServerInfo/_StarLight/Guidebook/Mobs/Felionoid.xml"
+

@@ -1,0 +1,17 @@
+- type: stack
+  id: FrontierUplinkCoin
+  name: stack-frontier-uplink-coin
+  icon: _NF/Objects/Specific/Security/frontieruplinkcoin.rsi
+  spawn: FrontierUplinkCoin1
+
+- type: stack
+  id: Doubloon
+  name: stack-doubloon
+  icon: _NF/Objects/Specific/Pirate/pirate_doubloon.rsi
+  spawn: Doubloon1
+
+- type: stack
+  id: MercCoin
+  name: stack-merccoin
+  icon: _NF/Objects/Specific/Mercenary/merc_coin.rsi
+  spawn: MercCoin1

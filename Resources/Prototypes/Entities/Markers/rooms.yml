@@ -1,0 +1,24 @@
+- type: entity
+  id: BaseRoomMarker
+  name: room spawner
+  parent: MarkerBase
+  components:
+  - type: RoomFill
+  - type: Sprite
+    layers:
+      - state: red
+      - sprite: Mobs/Aliens/elemental.rsi
+        state: alive
+
+- type: entity
+  id: RoomGridSpawnAreaMarker
+  name: room grid area marker
+  parent: MarkerBase
+  components:
+  - type: RoomGridSpawnArea
+    area_group: RoomSpawnA
+    width: 7
+    height: 7
+  - type: Sprite
+    layers:
+      - state: blue

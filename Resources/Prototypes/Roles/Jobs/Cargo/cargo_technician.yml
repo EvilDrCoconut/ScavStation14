@@ -1,0 +1,32 @@
+- type: job
+  id: CargoTechnician
+  name: job-name-cargotech
+  description: job-description-cargotech
+  playTimeTracker: JobCargoTechnician
+  setPreference: true # Frontier
+  startingGear: CargoTechGear
+  icon: "JobIconCargoTechnician"
+  supervisors: job-supervisors-qm
+  access:
+  - Cargo
+  - Maintenance
+  extendedAccess:
+  - Salvage
+  - Cargo
+  # - Orders # Frontier: Removed because seems deprecated
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: BoxingDay
+    prototype: BoxCardboard
+
+- type: startingGear
+  id: CargoTechGear
+  equipment:
+    id: CargoPDA
+    ears: ClothingHeadsetCargo
+    pocket1: AppraisalTool
+  # storage:
+  #   back:
+  #   - Stuff

@@ -1,0 +1,31 @@
+- type: job
+  id: StationEngineer
+  name: job-name-engineer
+  description: job-description-engineer
+  playTimeTracker: JobStationEngineer
+  setPreference: true
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Engineering
+      time: 9000 # 2.5 hrs
+  weight: 20 # HardLight
+  startingGear: StationEngineerGear
+  icon: "JobIconStationEngineer"
+  supervisors: job-supervisors-ce
+  access:
+  - Maintenance
+  - Engineering
+  - External
+  - Atmospherics
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+
+- type: startingGear
+  id: StationEngineerGear
+  equipment:
+    # eyes: ClothingEyesGlassesMeson # HardLight: Add departmental NF-style loadouts
+    belt: ClothingBeltUtilityEngineering # Frontier: Moved to locker
+    ears: ClothingHeadsetEngineering
+  # storage:
+  #   back:
+  #   - Stuff

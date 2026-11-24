@@ -1,0 +1,100 @@
+- type: entity
+  id: BaseCartridge57x28mm
+  name: cartridge (57x28mm FMJ)
+  parent: [ BaseCartridge, BaseC1Contraband ] # Frontier: BaseSecurityContraband<BaseC1Contraband
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - Cartridge57x28mmFMJ
+  - type: CartridgeAmmo
+    proto: Bullet57x28mmFMJ
+    deleteOnSpawn: true
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 1
+
+- type: entity
+  id: Cartridge57x28mmFMJ
+  name: cartridge (57x28mm FMJ)
+  parent: BaseCartridge57x28mm
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet57x28mmFMJ
+
+- type: entity
+  id: Cartridge57x28mmPractice
+  name: cartridge (57x28mm practice)
+  parent: BaseCartridge57x28mm
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet57x28mmPractice
+  -  type: Sprite
+     layers:
+       - state: base
+         map: [ "enum.AmmoVisualLayers.Base" ]
+       - state: tip
+         color: "#dbdbdb"
+
+- type: entity
+  id: Cartridge57x28mmIncendiary
+  name: cartridge (57x28mm incendiary)
+  parent: BaseCartridge57x28mm
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet57x28mmIncendiary
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        color: "#ff6e52"
+
+- type: entity
+  id: Cartridge57x28mmUranium
+  name: cartridge (57x28mm uranium)
+  parent: BaseCartridge57x28mm
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet57x28mmUranium
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        color: "#65fe08"
+
+# Upstream
+- type: entity
+  id: Cartridge57x28mmRubber
+  name: cartridge (57x28mm rubber)
+  parent: BaseCartridge57x28mm
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet57x28mmRubber
+  - type: Sprite
+    layers:
+      - state: base
+        map: [ "enum.AmmoVisualLayers.Base" ]
+      - state: tip
+        color: "#43c4f7"
+
+# Frontier
+- type: entity
+  id: Cartridge57x28mmEmp
+  name: cartridge (57x28mm emp)
+  parent: BaseCartridge57x28mm
+  components:
+  - type: CartridgeAmmo
+    proto: Bullet57x28mmEmp
+  - type: EmpDescription
+    range: 0.3
+    energyConsumption: 2700000
+    disableDuration: 10

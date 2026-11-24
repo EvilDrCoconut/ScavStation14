@@ -1,0 +1,46 @@
+- type: job
+  id: StationTrafficController
+  name: job-name-stc
+  description: job-description-stc
+  playTimeTracker: JobStc
+  startingGear: StcGear
+  alwaysUseSpawner: false # HardLight: true<false
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 72000 # 20 hrs
+    - !type:RoleTimeRequirement
+      role: JobSecurityOfficer # HardLight: JobSecurityGuard<JobSecurityOfficer
+      time: 10800 # 3 hrs
+  canBeAntag: false
+  icon: "JobIconStc"
+  supervisors: job-supervisors-sr # HardLight: -captain<-sr
+  weight: 0 # HardLight: 160<0
+  # displayWeight: 50 # Second from the top
+  setPreference: true
+  access:
+  - Command # HardLight
+  - Service
+  - Maintenance
+  - External
+  - Brig # HardLight
+  - Frontier
+  - StationTrafficController
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:GiveItemOnHolidaySpecial
+    holiday: FrontierBirthday
+    prototype: FrontierBirthdayGift
+
+- type: startingGear
+  id: StcGear
+  equipment:
+    id: StcPDA
+    pocket2: NFHyperlinkBookCommandSOP # HardLight
+  storage:
+    back:
+    - Flash
+    - RubberStampStc
+    - BoxFolderStc
+    - ShipVoucherFrontierStc
+    - EncryptionKeyTraffic

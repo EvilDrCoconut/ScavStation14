@@ -1,0 +1,42 @@
+- type: job
+  id: MailCarrier
+  name: job-name-mail-carrier
+  description: job-description-mail-carrier
+  startingGear: MailCarrierGear
+  alwaysUseSpawner: false # HardLight: true<false
+  playTimeTracker: JobMailCarrier
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 10800
+  canBeAntag: false
+  weight: -10 # HardLight: 90<-10
+  icon: "JobIconMailCarrier"
+  supervisors: job-supervisors-sr
+  access:
+  - External # Frontier
+  - Maintenance
+  - Service
+  - Cargo
+  - Mail # Frontier
+  - Frontier # Frontier
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
+  - !type:GiveItemOnHolidaySpecial # Frontier
+    holiday: FrontierBirthday # Frontier
+    prototype: FrontierBirthdayGift # Frontier
+
+- type: startingGear
+  id: MailCarrierGear
+  equipment:
+    head: ClothingHeadMailCarrier
+    eyes: ClothingEyesHudMail
+    id: CourierPDA
+    # ears: ClothingHeadsetService # Frontier: ClothingHeadsetCargo<ClothingHeadsetService
+    belt: NFMailBag
+  storage:
+    back:
+    - EncryptionKeyService # Frontier
+    - HandheldCrewMonitor # Frontier
+    - ShipVoucherFrontierMailCarrier # Frontier
+    - MailMetricsCartridge # Frontier

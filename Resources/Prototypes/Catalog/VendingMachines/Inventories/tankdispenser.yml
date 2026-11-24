@@ -1,0 +1,28 @@
+- type: vendingMachineInventory
+  id: TankDispenserEVAInventory
+  startingInventory:
+#    EmergencyOxygenTankFilled: 5 # Frontier
+#    ExtendedEmergencyOxygenTankFilled: 5 # Frontier
+#    AirTankFilled: 10 # Frontier
+#    DoubleEmergencyAirTankFilled: 10 # Frontier
+    NFTankO2N2EqualFilled: 10 # Frontier
+    DoubleEmergencyTankO2N2EqualFilled: 10 # Frontier
+    OxygenTankFilled: 10
+    DoubleEmergencyOxygenTankFilled: 10
+#    EmergencyNitrogenTankFilled: 5 # Frontier
+#    ExtendedEmergencyNitrogenTankFilled: 5 # Frontier
+    NitrogenTankFilled: 10
+    DoubleEmergencyNitrogenTankFilled: 10
+    WaterVaporTankFilled: 10 # Floof - Feroxi Port
+    DoubleEmergencyWaterVaporTankFilled: 10 # Flooftier
+
+- type: vendingMachineInventory
+  id: TankDispenserEngineeringInventory
+  startingInventory:
+    PlasmaTankFilled: 10
+    NitrogenTankFilled: 10
+    OxygenTankFilled: 10
+  emaggedInventory:
+    DoubleEmergencyAirTankFilled: 1
+    DoubleEmergencyOxygenTankFilled: 1
+    DoubleEmergencyNitrogenTankFilled: 1

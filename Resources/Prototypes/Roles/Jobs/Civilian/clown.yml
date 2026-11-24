@@ -1,0 +1,49 @@
+- type: job
+  id: Clown
+  name: job-name-clown
+  description: job-description-clown
+  playTimeTracker: JobClown
+  setPreference: true
+  requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 10800
+  weight: -40 # HardLight
+  startingGear: ClownGear
+  icon: "JobIconClown"
+  access:
+  - Theatre
+  - Maintenance
+  # - Clown # Isn't this called Theatre?
+  accessGroups: # Frontier
+  - GeneralAccess # Frontier
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Clumsy
+      gunShootFailDamage:
+        types: # Literally just picked semi random valus. I tested this once and tweaked it.
+          Blunt: 5
+          Piercing: 4
+        groups:
+          Burn: 3
+      catchingFailDamage:
+        types:
+          Blunt: 1
+    - type: SleepEmitSound
+      snore: /Audio/Voice/Misc/silly_snore.ogg
+      interval: 10
+  - !type:AddImplantSpecial
+    implants: [ SadTromboneImplant ]
+
+- type: startingGear
+  id: ClownGear
+  equipment:
+    # mask: ClothingMaskClown # HardLight: Add NF-style departmental loadouts
+    pocket1: BikeHorn
+    pocket2: ClownRecorder
+    id: ClownPDA
+    ears: ClothingHeadsetService
+  storage:
+    back:
+    - RubberStampClown
+    - CrayonRainbow

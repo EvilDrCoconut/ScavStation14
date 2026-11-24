@@ -1,0 +1,5 @@
+- type: loadout
+  id: KneeBoots
+  price: 600
+  equipment:
+    shoes: KneeBoots

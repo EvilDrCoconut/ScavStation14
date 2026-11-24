@@ -1,0 +1,26 @@
+- type: vendingMachineInventory
+  id: CentDrobeInventory
+  startingInventory:
+    ClothingShoesBootsLaceup: 3
+    ClothingShoesBootsJack: 3
+    ClothingHandsGlovesCombat: 3
+    ClothingEyesGlassesSunglasses: 3
+    ClothingUniformJumpsuitCentcomOfficer: 3
+    ClothingUniformJumpsuitCentcomOfficial: 3
+    ClothingUniformJumpsuitCentcomAgent: 3
+    ClothingUniformJumpsuitCentcomFormal: 3
+    ClothingUniformJumpskirtCentcomFormalDress: 3
+    ClothingHeadHatCentcom: 3
+    ClothingHeadHatCentcomcap: 3
+    ClothingMaskGasCentcom: 3
+    #ClothingHeadsetColCom: 3
+    ClothingOuterWinterCentcom: 3
+    ClothingOuterCoatExpensive: 1
+    ClothingNeckScarfStripedCentcom: 3
+    ClothingNeckCloakCentcom: 3
+    ClothingNeckCollarCC: 3 # Floofstation - Collar addition
+    ClothingHandsCCWarmers: 3
+    ClothingUnderSocksCC: 3
+  contrabandInventory:
+    ToyFigurineCaptain: 1
+    ToyFigurineHeadOfPersonnel: 1

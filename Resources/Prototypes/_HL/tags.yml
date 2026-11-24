@@ -1,0 +1,398 @@
+#region .25 caseless
+- type: Tag
+  id: HLMagazineCaselessRifle
+
+- type: Tag
+  id: HLMagazineCaselessRifleShort
+
+- type: Tag
+  id: HLMagazinePistolCaselessRifle
+
+- type: Tag
+  id: Admin
+
+- type: Tag
+  id: DartGunAmmo
+
+#region Docking Tags
+- type: Tag
+  id: SecDock
+
+- type: Tag
+  id: RegularDock
+
+- type: Tag
+  id: MediDock
+
+- type: Tag
+  id: MercDock
+
+- type: Tag
+  id: NFCartridgePistol45
+
+- type: Tag
+  id: NFSpeedLoaderPistol45
+
+- type: Tag
+  id: ResinStructures
+
+- type: Tag
+  id: NFMagazineRifle20
+
+- type: Tag
+  id: NFCartridgeRifle25
+
+- type: Tag
+  id: MagazinePistolSubMachineGun
+
+- type: Tag
+  id: NFMagazinePistol45
+
+- type: Tag
+  id: NFCartridgeGrenade40mm
+
+- type: Tag
+  id: NFCartridgeGrenade40mmFlash
+
+- type: Tag
+  id: AIShipWeapon
+
+- type: Tag
+  id: NFCartridgeGrenade40mmEmp
+
+- type: Tag
+  id: NFSpeedLoaderPistol35
+
+- type: Tag
+  id: NFMagazineSubMachineGunTopMountedPistol35
+
+- type: Tag
+  id: NFMagazineSubMachineGunPistol45
+
+- type: Tag
+  id: SpeedLoaderRifleHeavy
+
+- type: Tag
+  id: NFMagazinePistol35
+
+- type: Tag
+  id: NFMagazineHighCapacityPistol35
+
+- type: Tag
+  id: NFCartridgePistol35
+
+- type: Tag
+  id: ShellShotgun
+
+- type: Tag
+  id: NFMagazineSubMachineGunPistol35
+
+- type: Tag
+  id: NFMagazineClipRifle20
+
+- type: Tag
+  id: NFCartridgeRifle20
+
+- type: Tag
+  id: NFMagazineRifle30
+
+- type: Tag
+  id: NFMagazineLowCapacityRifle30
+
+- type: Tag
+  id: NFCartridgeRifle30
+
+- type: Tag
+  id: NFMagazineDrumRifle20
+
+- type: Tag
+  id: NFCartridgeRifle60
+
+- type: Tag
+  id: NFMagazineSubMachineGunnTopMountedPistol35
+
+- type: Tag
+  id: MagazineShotgun
+
+- type: Tag
+  id: NFMagazineBoxRifle30
+
+- type: Tag
+  id: NFCartridgeRifle10
+
+- type: Tag
+  id: NFCartridgeRif25
+
+- type: Tag
+  id: BulletRocketEmp
+
+- type: Tag
+  id: BulletCannonBallEmp
+
+- type: Tag
+  id: CartridgeMagnum
+
+- type: Tag
+  id: MagazineMagnum
+
+- type: Tag
+  id: MagazineMagnumSubMachineGun
+
+- type: Tag
+  id: MagazineGrenade
+
+- type: Tag
+  id: MagazinePistolSubMachineGunTopMounted
+
+- type: Tag
+  id: CartridgePistol
+
+- type: Tag
+  id: MagazinePistol
+
+- type: Tag
+  id: MagazinePistolHighCapacity
+
+- type: Tag
+  id: MagazinePistolSubMachineGunn
+
+- type: Tag
+  id: MagazineLightRifleBox
+
+- type: Tag
+  id: CartridgeLightRifle
+
+- type: Tag
+  id: MagazineLightRifle
+
+- type: Tag
+  id: MagazineLightRiflePan
+
+- type: Tag
+  id: CartridgeCaselessRifle
+
+- type: Tag
+  id: MagazineCaselessRifle
+
+- type: Tag
+  id: MagazinePistolCaselessRifle
+
+- type: Tag
+  id: CartridgeRifle
+
+- type: Tag
+  id: MagazineRifle
+
+- type: Tag
+  id: ShellShotgunLight
+
+- type: Tag
+  id: CartridgeAntiMateriel
+
+- type: Tag
+  id: CartridgeHeavyRifle
+
+- type: Tag
+  id: SpeedLoaderMagnum
+
+- type: Tag
+  id: SpeedLoaderPistol
+
+- type: Tag
+  id: CartridgeGrenade40mm
+
+- type: Tag
+  id: CartridgeGrenade4mmFlash
+
+- type: Tag
+  id: CartridgeGrenade4mEmp
+
+- type: Tag
+  id: NFCartridgeGrenade40m
+
+- type: Tag
+  id: NFCartridgeGrenad40mmFlash
+
+- type: Tag
+  id: NFCartridgeGrena40mmEmp
+
+- type: Tag
+  id: NFCartridgeRifl60
+
+- type: Tag
+  id: MagazineNovaliteC1
+
+- type: Tag
+  id: NFCartridgePist35
+
+- type: Tag
+  id: NFSpeedLoadePistol35
+
+- type: Tag
+  id: NFCartridgePi45
+
+- type: Tag
+  id: NFSpeedLoadPistol45
+
+- type: Tag
+  id: NFCartridgeRi20
+
+- type: Tag
+  id: NFMagazineRi20
+
+- type: Tag
+  id: NFCartridgeRi30
+
+- type: Tag
+  id: NFMagazineBoRifle30
+
+- type: Tag
+  id: NFCartridgeRi25
+
+- type: Tag
+  id: NFMagazineCrifle20
+
+- type: Tag
+  id: NFMagazineDrRifle20
+
+- type: Tag
+  id: NFCartridgeGr40mm
+
+- type: Tag
+  id: NFCartridgeGr4mmFlash
+
+- type: Tag
+  id: NFCartridgeGr4mEmp
+
+- type: Tag
+  id: NFCartridgePi35
+
+- type: Tag
+  id: NFMagazinePi35
+
+- type: Tag
+  id: NFMagazineHiCaPistol35
+
+- type: Tag
+  id: NFMagazineSuMaGunPistol35
+
+## Removed duplicate tags; canonical tags live in _Mono/tags.yml
+
+- type: Tag
+  id: MagazineAMR
+
+- type: Tag
+  id: CartridgeAntiMaterielBig
+
+- type: Tag
+  id: Abyssal
+
+- type: Tag
+  id: Fungal
+
+
+# Vending machines
+
+- type: Tag
+  id: SecurityVend
+
+
+# fun / plushies!
+- type: Tag
+  id: PlushieStoneRengault
+
+- type: Tag
+  id: PlushieNirouJol
+
+- type: Tag
+  id: SpeedLoaderBulletFoam
+
+# Batteries
+- type: Tag
+  id: PowerCellHigh
+
+#Borgs
+- type: Tag
+  id: BorgWearable
+
+# Peregrine
+- type: Tag
+  id: MagazineRailgunTag
+
+#bolts
+- type: Tag
+  id: Boltcart
+
+- type: Tag
+  id: Magazine75Bolt
+
+#riotgun
+- type: Tag
+  id: MagazineRiotGun
+
+- type: Tag
+  id: GrenadeRiotGun
+
+#tider anvil
+
+- type: Tag
+  id: TiderAnvilParts
+
+- type: Tag
+  id: UnFlatpackable
+
+# syndie tools
+
+- type: Tag
+  id: Syndie_Powerdrill
+
+- type: Tag
+  id: Syndie_JawsOfLife
+
+- type: Tag
+  id: Syndie_Multitool
+
+# ESAR-550
+- type: Tag
+  id: MagazineEsar550Tag
+
+# Random Stuff
+
+- type: Tag
+  id: GaslockFrameMachineCircuitBoard
+
+- type: Tag
+  id: Cartridge25x59HE
+
+- type: Tag
+  id: DinoFang
+
+- type: Tag
+  id: VinylSleeve
+
+# Forged Rifle Mag
+- type: Tag
+  id: ForgedRifleMagazine
+
+- type: Tag
+  id: Pouch
+
+- type: Tag
+  id: Bunnysuit
+
+- type: Tag
+  id: Medipen
+
+- type: Tag
+  id: CCSabre
+
+# HL: Mark Laser Weapons for bounties
+- type: Tag
+  id: LaserWeapon
+
+# Ratvar
+- type: Tag
+  id: RatvarCard
+
+- type: Tag
+  id: Synth

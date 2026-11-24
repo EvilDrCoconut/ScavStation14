@@ -1,0 +1,159 @@
+# SPDX-FileCopyrightText: 2024 Fansana <116083121+Fansana@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2024 SleepyScarecrow <sharedjunkemail69@gmail.com>
+# SPDX-FileCopyrightText: 2024 neuPanda <chriseparton@gmail.com>
+# SPDX-FileCopyrightText: 2025 Rosycup <178287475+Rosycup@users.noreply.github.com>
+# SPDX-FileCopyrightText: 2025 sleepyyapril <123355664+sleepyyapril@users.noreply.github.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later AND MIT
+
+reagent-name-7deadlysins = 7 deadly sins
+reagent-desc-7deadlysins = A vile concoction of liqour and various other ingredients, all coming together into something that has the stench of death.
+
+
+reagent-name-anisette = anisette
+reagent-desc-anisette = Liquor made of anise and sugar, typically used as a sweeter form of absinthe.
+
+reagent-name-appleberryfizz = appleberry fizz
+reagent-desc-appleberryfizz = A sweet, delightful little drink.
+
+
+
+
+
+reagent-name-cafedecacao = cafe de cacao
+reagent-desc-cafedecacao = Almost like a mocha, except with alcohol.
+
+reagent-name-calicosunrise = calico sunrise
+reagent-desc-calicosunrise = A sweet, fruity beverage that feels like watching the sun rise up over the horizon.
+
+reagent-name-cremedecacao = crème de cacao
+reagent-desc-cremedecacao = A spiked hot chocolate, satisfying to anyone caught out in the snow.
+
+reagent-name-darkoasis = dark oasis
+reagent-desc-darkoasis = The darker it looks the sweeter it tastes.
+
+reagent-name-deadmansdraught = dead man's draught
+reagent-desc-deadmansdraught = One of those everything-at-the-bar blends, something that will make some of the strongest stomachs turn.
+
+
+reagent-name-dirtywastelander = dirty wastelander
+reagent-desc-dirtywastelander = The last option for some tired people trapped out on the wasteland planets.
+
+
+reagent-name-dragonsblood = dragon's blood
+reagent-desc-dragonsblood = Legend says this is what gives the space dragons their firey mouth.
+
+reagent-name-dragonsbreath = dragon's breath
+reagent-desc-dragonsbreath = A picante drink, burning all the way down like taking a breath of pure plasma fire.
+
+
+
+reagent-name-eminence = eminence
+reagent-desc-eminence = Said to be the god's own recipe; Ratvar npprcg nyy pensg, Znl Ratvar Fnir Ibhe Fbhy.
+
+reagent-name-goldbloomspecial = goldbloom special
+reagent-desc-goldbloomspecial = The tried and true method coined by a pair of brothers to get through those long, dreary shifts.
+
+reagent-name-grandnavy = grand navy
+reagent-desc-grandnavy = The inventor of this drink said they came from the place called 'The War Seas', maybe they were going crazy.
+
+reagent-name-heartbreakmountain = heartbreak mountain
+reagent-desc-heartbreakmountain = A mix of incredible carbonation, designed to make your mouth forget whatever was in it previously.
+
+reagent-name-holyvice = holy vice
+reagent-desc-holyvice = Despite seeming somewhat contrary, the ingredients of this cocktail mix nicely.
+
+
+reagent-name-koboldkooler = kobold kooler
+reagent-desc-koboldkooler = A cool, soothing drink for the cold-blooded amongst the crew.
+
+
+reagent-name-lamplight = lamplight
+reagent-desc-lamplight = This drink is known to have a very particular allure to the moffic crew. Non-Moths report nothing out of the ordinary, though.
+
+reagent-name-lemonpopsicle = lemon popsicle
+reagent-desc-lemonpopsicle = An on-the-wagon cocktail, for those who just adore sour things. It is tradition to rim the glass with citric acid.
+
+reagent-name-loverskiss = lovers kiss
+reagent-desc-loverskiss = A simple, quick spin on some wine, pleasant and fruity.
+
+reagent-name-mariejulep = marie julep
+reagent-desc-mariejulep = A minty, sweet cocktail. For those who can't stomach their absinthe.
+
+
+reagent-name-sweetbloodshot = sweet blood shot
+reagent-desc-sweetbloodshot = A very, very fruity shot.
+
+reagent-name-numberone = number one
+reagent-desc-numberone = The perfect drink to help ensure that YOU stay on top of your game this shift! (And get heart disease).
+
+reagent-name-slimeshine = slime shine
+reagent-desc-slimeshine = A drink made for the slime personnel on board. Not meeting the criteria may include a trip to the Medical Bay.
+
+
+reagent-name-pomonade = pomonade
+reagent-desc-pomonade = A spin on a classic lemonade, with a sweeter side.
+
+reagent-name-pompassion = pom passion
+reagent-desc-pompassion = An incredibly fruity drink, the smell so strong it could be a perfume.
+
+reagent-name-pomtwist = pom twist
+reagent-desc-pomtwist = A citrus heavy beverage, sour enough to drink as slowly as you would a real cocktail.
+
+reagent-name-prairieoyster = prairie oyster
+reagent-desc-prairieoyster = A supposed hangover cure traditional among space cowboys. Best consumed with your nose plugged and your face towards the ceiling.
+
+reagent-name-prisonwine = prison wine
+reagent-desc-prisonwine = A quickly thrown together mixture of grapes and sugar in soda water. Probably wouldn't actually turn into wine, but you can put it in your loo nonetheless.
+
+
+
+
+reagent-name-salvagersdelight = salvager's delight
+reagent-desc-salvagersdelight = Said to have originated as a hazing ritual among deep-space salvagers, this vile concoction can only be stomached by true sons of Salvonia.
+
+
+
+
+reagent-name-slimesdelight = slime's delight
+reagent-desc-slimesdelight = A somewhat gross drink for many people to imagine consuming. Most end up ordering something else.
+
+
+
+reagent-name-syndicatesoverseer = syndicate's overseer
+reagent-desc-syndicatesoverseer = This drink is menacing, you don't even know if you should be drinking this or not.
+
+reagent-name-triplecitrus = triple citrus
+reagent-desc-triplecitrus = Triple the citrus, triple the fun.
+
+reagent-name-voltage = voltage
+reagent-desc-voltage = A strong, electric drink, overloading the senses in both sweetness and strength.
+
+reagent-name-wakeupjuice = wake up juice
+reagent-desc-wakeupjuice = A drink that'll bring your cloudy mind right back to the thinking about the future.
+
+
+
+
+reagent-name-the-cute-captain = The Cute Captain
+reagent-desc-the-cute-captain = Light blue liquid with a sweet floral scent and a hint of pomegranate
+
+reagent-name-axels-ale = Axel's Ale
+reagent-desc-axels-ale = Red like the color of a setting sun on a beach
+
+reagent-name-jenn-tonic = Jenn in Tonic
+reagent-desc-jenn-tonic = Light golden and bubbly, what could go wrong?
+
+reagent-name-hallelujah = Hallelujah
+reagent-desc-hallelujah = Exactly what you need.
+
+reagent-name-syndicate-eggnog = Syndicate Eggnog
+reagent-desc-syndicate-eggnog = creamy, pale yellow and topped with a sprinkle of cinnamon and strongly alcoholic.
+
+
+
+reagent-name-millermargarita = Miller Margarita
+reagent-desc-millermargarita = A self-made spin on a classic by a popular bartender, emphasis on "self-made".
+
+reagent-name-harpysnowfall = Harpy's Snowfall
+reagent-desc-harpysnowfall = A chilled drink with a splash of booze, preferred by harpies on a hot day.

@@ -1,0 +1,22 @@
+"Map":
+- changed-files:
+  - any-glob-to-any-file: "Resources/Maps/**/*.yml"
+
+"No C#":
+- changed-files:
+  - all-globs-to-all-files: "!**/*.cs"
+
+"Docs":
+- changed-files:
+  - any-glob-to-any-file:
+    - "**/*.xml"
+    - "**/*.md"
+
+"No YML":
+- all:
+  - changed-files:
+    - all-globs-to-all-files: "!**/*.yml"
+
+"DB Migration":
+- changed-files:
+  - any-glob-to-any-file: "Content.Server.Database/Migrations/**/*.cs"

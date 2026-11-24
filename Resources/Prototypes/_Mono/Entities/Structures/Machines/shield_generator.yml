@@ -1,0 +1,469 @@
+# SPDX-FileCopyrightText: 2025 Ark
+# SPDX-FileCopyrightText: 2025 Redrover1760
+# SPDX-FileCopyrightText: 2025 ark1368
+# SPDX-FileCopyrightText: 2025 kasature90
+# SPDX-FileCopyrightText: 2025 starch
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Base
+- type: entity
+  id: ShieldGeneratorBase
+  parent: [ BaseMachinePowered, ConstructibleMachine ] #HL
+  name: Shield Generator
+  abstract: true
+  components:
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -5
+    range: 30
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/anomaly_generator.ogg
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF3333"
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+    snapCardinals: true
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194 # oxygen
+          - 0 # nitrogen
+          - 0 # carbon dioxide
+          - 6 # plasma
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 600
+  - type: Repairable
+    doAfterDelay: 8
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF3333"
+  - type: AnimationPlayer
+  - type: LitOnPowered
+  - type: PowerSwitch
+  - type: ApcPowerReceiver
+    powerLoad: 60000
+  - type: Appearance
+  - type: ShipShieldEmitter
+    damageLimit: 108000 # Mono: was 60000, scaled with Sentinel rebalance
+    shieldPadding: 50 # old default
+    damageOverloadTimePunishment: 8 # Mono: brief lockout before recharge
+    healPerSecond: 1700 # Mono: ~16s full recharge
+    damageExp: 1.05 # Base is 1.1
+    baseDraw: 40000 # Base is 50000
+    maxDraw: 100000 # Base is 150000
+    unpoweredBonus: 4 # Base is 6
+    shieldColor: "#FF3333"
+    powerUpSound: !type:SoundPathSpecifier
+        path: "/Audio/Effects/teleport_arrival.ogg"
+        params:
+          pitch: 0.5
+    powerDownSound: !type:SoundPathSpecifier
+        path: "/Audio/Effects/teleport_departure.ogg"
+        params:
+          pitch: 0.5
+ # - type: Machine
+    # board removed: machine board prototype not available
+  - type: Construction
+    graph: Machine
+    node: machine
+    # machine board/parts containers removed due to missing machine board prototypes
+  #- type: ContainerContainer
+    # containers removed due to missing machine board prototypes
+  - type: PirateBountyItem
+    id: ShipShield
+
+# POI
+- type: entity
+  id: ShieldGeneratorPOI
+  parent: [ShieldGeneratorBase, BaseC3Contraband]
+  name: FS-421 "Fortress" Outpost Shield Generator
+  description: The Fortress. The latest and greatest in static, large-scale shielding.
+  suffix: POI ONLY
+  components:
+  - type: ShipShieldEmitter
+    shieldPadding: 100 # big shield for stations to let people and ships hide
+    damageLimit: 450000 # Mono: was 250000, scaled with Sentinel rebalance
+    healPerSecond: 5400 # Mono: ~12s full recharge
+    damageExp: 1
+    baseDraw: 80000
+    maxDraw: 150000
+    unpoweredBonus: 7
+    powerModifier: 0.25
+    damageOverloadTimePunishment: 7 # Mono: brief lockout before recharge
+    shieldColor: "#FF9933"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/fobshield.rsi
+    snapCardinals: true
+    layers:
+    - state: fobshield
+    - state: fobshield_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF9933"
+  - type: Anchorable
+    flags:
+    - Unanchorable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194 # oxygen
+          - 0 # nitrogen
+          - 0 # carbon dioxide
+          - 6 # plasma
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 1000
+  - type: ApcPowerReceiver
+    powerLoad: 80000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF9933"
+  # - type: ContainerContainer #HL start
+    # containers:
+      # machine_board: !type:Container
+      # machine_parts: !type:Container
+  #- type: Machine
+    #board: CapitalShieldBoard #HL end
+
+# TSF capital shield - inbetween POI and MS-500, meant for flyssa
+- type: entity
+  id: ShieldGeneratorTSFCapital
+  parent: ShieldGeneratorBase
+  name: LM-212 "Vanguard" Capital Shield Generator
+  description: A heavy capital shield. Good durability, quick recharge and anti-collison built in one.
+  suffix: TSF CAPITAL ONLY
+  components:
+  - type: ShipShieldEmitter
+    shieldPadding: 75 # bigger shield for carrier with fighters
+    damageLimit: 215000 # Mono: was 120000, scaled with Sentinel rebalance
+    healPerSecond: 3600 # Mono: ~10s full recharge
+    damageExp: 1
+    baseDraw: 60000
+    maxDraw: 100000
+    unpoweredBonus: 6
+    damageOverloadTimePunishment: 6 # Mono: brief lockout before recharge
+    shieldColor: "#FF0A70"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/fobshield.rsi
+    snapCardinals: true
+    layers:
+    - state: fobshield
+    - state: fobshield_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#FF0A70"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194 # oxygen
+          - 0 # nitrogen
+          - 0 # carbon dioxide
+          - 6 # plasma
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 1000
+  - type: ApcPowerReceiver
+    powerLoad: 60000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#FF0A70"
+
+# High-End
+- type: entity
+  id: ShieldGenerator
+  parent: [ShieldGeneratorBase, BaseC2Contraband]
+  name: MS-500 "Titan" Shield Generator
+  description: The Titan. Advanced shielding, with a quick recharge time, and excels against colisions.
+  suffix: ADS ONLY
+  components:
+  - type: ShipShieldEmitter
+    shieldPadding: 45 # just a little tighter
+    damageLimit: 215000 # Mono: was 120000, scaled with Sentinel rebalance
+    healPerSecond: 3600 # Mono: ~10s full recharge
+    damageExp: 1.05 # Base is 1.1
+    baseDraw: 40000 # Base is 50000
+    maxDraw: 100000 # Base is 150000
+    unpoweredBonus: 6 # Base is 6
+    damageOverloadTimePunishment: 6 # Mono: brief lockout before recharge
+    shieldColor: "#FF3333"
+  - type: ShipRepairable
+    repairTime: 30
+    repairCost: 300
+  - type: ShipRepairableRestrict
+    toolWhitelist:
+      tags:
+      - ADSRepairTool
+
+# Medium-End
+- type: entity
+  id: ShieldGeneratorMedium
+  parent: [ShieldGeneratorBase, BaseC2Contraband]
+  name: MS-250 "Aegis" Shield Generator
+  description: The Aegis. Advanced shielding, with a long recharge time, with very high durability.
+  suffix: ADS ONLY, SCI VOUCHER SHIPS ONLY
+  components:
+  - type: ShipShieldEmitter
+    shieldPadding: 15 # very tight shield
+    damageLimit: 168000 # Mono: was 95000, scaled with Sentinel rebalance
+    healPerSecond: 2400 # Mono: ~14s full recharge
+    damageExp: 1.05 # Base is 1.1
+    baseDraw: 30000 # Base is 50000
+    maxDraw: 75000 # Base is 150000
+    unpoweredBonus: 5 # Mono: was 4
+    damageOverloadTimePunishment: 7 # Mono: brief lockout before recharge
+    shieldColor: "#9933FF"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#9933FF"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194 # oxygen
+          - 0 # nitrogen
+          - 0 # carbon dioxide
+          - 6 # plasma
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 750
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 400
+  - type: ApcPowerReceiver
+    powerLoad: 40000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#9933FF"
+ # - type: Machine
+    # board removed: machine board prototype not available
+  - type: Construction
+    graph: Machine
+    node: machine
+    # machine board/parts containers removed due to missing machine board prototypes
+  #- type: ContainerContainer
+    # containers removed due to missing machine board prototypes
+  - type: PirateBountyItem
+    id: ShipShield
+  - type: ContainerContainer #HL start
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Machine
+    board: MediumShieldBoard #HL end
+
+# Low-End
+- type: entity
+  id: ShieldGeneratorSmall
+  parent: [ShieldGeneratorBase, BaseC2Contraband]
+  name: MS-100 "Sentinel" Shield Generator
+  description: The Sentinel. A good, reliable shield.
+  components:
+  - type: ShipShieldEmitter
+    shieldPadding: 30 # tighter shield
+    damageLimit: 120000 # Mono: tuned so lbyte (2k DPS) takes ~60s to break
+    healPerSecond: 1333 # Mono: ~18s full recharge
+    damageExp: 1.05 # Mono
+    baseDraw: 20000
+    maxDraw: 60000
+    unpoweredBonus: 5 # Mono
+    damageOverloadTimePunishment: 9 # Mono: brief lockout before recharge
+    shieldColor: "#3399FF"
+  - type: Sprite
+    sprite: _Mono/Structures/ShuttleComponents/shield.rsi
+    snapCardinals: true
+    layers:
+    - state: control
+    - state: control_on
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      visible: false
+      color: "#3399FF"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:ExplodeBehavior
+      - !type:SpawnGasBehavior
+        gasMixture:
+          volume: 1000
+          moles:
+          - 194 # oxygen
+          - 0 # nitrogen
+          - 0 # carbon dioxide
+          - 6 # plasma
+          temperature: 752.48
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 4000
+    intensitySlope: 4
+    totalIntensity: 300
+  - type: ApcPowerReceiver
+    powerLoad: 20000
+  - type: PointLight
+    enabled: false
+    castShadows: true
+    radius: 2
+    energy: 1.5
+    color: "#3399FF"
+  #- type: Machine
+    # board removed: machine board prototype not available
+  - type: Construction
+    graph: Machine
+    node: machine
+    # machine board/parts containers removed due to missing machine board prototypes
+  #- type: ContainerContainer
+    # containers removed due to missing machine board prototypes
+  - type: PirateBountyItem
+    id: ShipShield
+  - type: ContainerContainer #HL start
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Machine
+    board: LightShieldBoard #HL end

@@ -1,0 +1,13 @@
+﻿name: CRLF Check
+on:
+- pull_request
+
+jobs:
+  build:
+    name: CRLF Check
+    if: forgejo.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - name: Check for CRLF
+      run: Tools/check_crlf.py

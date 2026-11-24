@@ -1,0 +1,20 @@
+- type: construction
+  id: ConstructionComputerTabletop
+  graph: ComputerTabletop
+  startNode: start
+  targetNode: tabletop computer
+  category: construction-category-machines
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: ConstructionComputerWallmount
+  graph: ComputerWallmount
+  startNode: start
+  targetNode: wallmount computer
+  category: construction-category-machines
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+  - !type:WallmountCondition {}

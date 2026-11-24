@@ -1,0 +1,164 @@
+# The mercenary techfab made into packs.
+# TODO: Reorganize these into common packs.
+
+- type: latheRecipePack
+  id: NFMercenaryTechfabDeprecatedStatic
+  recipes:
+# Shared lathe recipes
+## Basic tools
+  - Wirecutter
+  - Screwdriver
+  - Welder
+  - Wrench
+  - CrowbarGreen
+  - Multitool
+  - FlashlightLantern
+  - AppraisalTool
+  - HandLabeler
+  - Signaller
+  - ClothingMaskWeldingGas
+## Basic storage
+  - ToolboxArtisticNF
+  - ToolboxElectricalNF
+  - ToolboxMechanicalNF
+  - ToolboxEmergencyNF
+## Basic parts
+  - CableStack
+  - LightTube
+  - LedLightTube
+  - SodiumLightTube
+  - ExteriorLightTube
+  - LightBulb
+  - LedLightBulb
+  - SodiumLightBulb
+  - ExteriorLightBulb
+  - ConveyorBeltAssembly
+  - PowerCellSmall
+  - PowerCellMedium
+## Basic electronics
+  - SignalTimerElectronics
+  - CellRechargerCircuitboard
+  - BorgChargerCircuitboard
+  - WeaponCapacitorRechargerCircuitboard
+  - AirTank
+# Mercenary techfab
+## Clothing / Armor
+  - NFRiotShield
+  - ClothingNeckIFFNeutral
+  - ClothingNeckIFFGreen
+  - ClothingNeckIFFRed
+  - ClothingNeckIFFBlue
+  - ClothingNeckIFFOrange
+  - ClothingNeckIFFPurple
+  - ClothingHeadHelmetMercenary
+  - ClothingHeadHelmetBasic
+  - ClothingOuterVestWebMercenary
+  - ClothingOuterVestWebMercenaryBlack
+  - ClothingBeltMercenaryWebbing
+  - ClothingBeltMilitaryWebbing
+  - ClothingHandsMercenaryGlovesCombat
+  - ClothingHandsGlovesCombat
+  - ClothingShoesBootsMercenary
+  - ClothingShoesBootsCombat
+  - ClothingShoesBootsJack
+  - ClothingEyesGlassesMercenary
+  - ClothingEyesGlassesSunglasses
+  - ClothingMaskGasMercenary
+  - ClothingMaskBreathMedicalSecurity
+  - ClothingMaskGasSecurity
+  - ClothingBeltBandolier
+## EVA / Hardsuits
+  - ClothingOuterEVASuitMercenary
+  - ClothingOuterEVASuitPrivateSec
+## Storage
+  - MedkitCombat
+  - WeaponCaseShort
+  - WeaponCaseLong
+  - WeaponCaseHeavy
+  - WeaponCaseShortAmmo
+  - WeaponCaseShortExplosives
+## Weapons
+  - NFCombatKnife
+  - NFWeaponEnergyPistolLaserSvalinn # After the changes made to windows shouldn't be that much of an issue now if it's widely available
+  - NFWeaponEnergyPistolLaser # After the changes made to windows shouldn't be that much of an issue now if it's widely available
+  - NFWeaponRevolverArgenti
+  - WeaponPistolMk58
+  - WeaponShotgunDoubleBarreled # Hardlight change
+  - WeaponRifleNovaliteC1 # Hardlight change
+  - WeaponRifleGestio   # Hardlight change
+  - BaseBallBatNF
+  - CrossbowModern
+  - WeaponPistolPollock
+  ## Cyborg Modules
+  # - BorgModuleMercenary # mono
+
+- type: latheRecipePack
+  id: NFMercenaryTechfabDynamicDeprecated
+  recipes:
+# Shared lathe recipes
+## Advanced tools
+  - WelderExperimental
+  - JawsOfLife
+  - PowerDrill
+  - JetpackVoid
+  - PowerCellHigh
+  # - PowerCellHyperNF
+  - PowerCellMicroreactor
+# Mercenary techfab
+## Armor
+  - NFTelescopicShield
+  - ClothingOuterArmorBulletproofNF
+  - ClothingOuterCoatBHTrench
+  - ClothingOuterArmorPunkRandomized
+  - ClothingOuterArmorPunkRed
+  - ClothingOuterArmorPunkGreen
+  - ClothingOuterArmorPunkOrange
+  - ClothingOuterArmorElitePunkRandomized
+  - ClothingBeltPunkRandomized
+  - ClothingShoesBootsPunkRandomized
+  - ClothingEyesPunkGoggles
+  - ClothingEyesPunkInfoShades
+  - ClothingMaskPunkHalf
+  - ClothingUniformRandomPunkTanktop
+  - ClothingUniformRandomPunkTanktopShorts
+  - ClothingUniformRandomPunkCroptop
+  - ClothingUniformRandomPunkCroptopShorts
+  - ClothingOuterCoatLettermanRandomized
+  - ClothingOuterCoatBomberRandomized
+## EVA / Hardsuits
+  - ClothingOuterHardsuitCap
+  - ClothingOuterHardsuitMercenary
+  - ClothingOuterHardsuitPrivateSecurity
+  - ClothingOuterHardsuitScaf
+  - ClothingShoesBootsMagSecurity
+  - ClothingShoesBootsMagMercenary
+## Utilities
+  - NFForensicPad
+  - ClothingEyesHudBountyHunter
+  - ClothingEyesPunkInfoShades
+  - PinpointerUniversalNF
+  - NFHandcuffs
+  - NFPortableRecharger
+  - SignalTrigger
+  - TimerTrigger
+  - VoiceTrigger
+  - TurboItemRechargerCircuitboard
+  - ClothingBackpackHolding
+  - ClothingBackpackSatchelHolding
+  - ClothingBackpackDuffelHolding
+  - ClothingBackpackMessengerHolding
+  - FlashlightSecliteNF
+  - ClothingBackpackTactical #HL
+  - ClothingBackpackExplorer #HL
+  - ClothingRucksack #HL
+## Weapons
+  - WeaponGrapplingGun
+  - BolaNF
+  - FlashPayload
+  - ChemicalPayload
+## Ammo boxes
+
+- type: latheRecipePack
+  id: NFMercenaryTechfabDeprecatedEmag
+  recipes:
+  - Wirecutter

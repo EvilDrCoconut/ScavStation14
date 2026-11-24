@@ -1,0 +1,7 @@
+- type: entity
+  save: false
+  name: Urist McBeeper
+  parent: BaseMobSynth
+  id: MobSynth
+  components:
+  - type: PotentialPsionic #Nyano - Summary: makes potentially psionic.
